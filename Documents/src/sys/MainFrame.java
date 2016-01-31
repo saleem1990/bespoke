@@ -8,6 +8,11 @@ package sys;
 import inventory.ReceivingStock;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import menu.NewRecord;
+import menu.Pharmacy;
+import menu.Reports;
+import menu.Settings;
+import menu.Warehouse;
 
 /**
  *
@@ -18,11 +23,19 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    
-    public MainFrame(java.sql.Connection connectDB, String[] domains ) {
+    public static java.sql.Connection connectDB;
+    public static Object[] privileges;
+    public static String username;
+
+    public MainFrame(java.sql.Connection connDB, String user) {
         this.setExtendedState(MAXIMIZED_BOTH);
+        connectDB = connDB;
+
+        username = user;
         initComponents();
-       // MainFrame.medicdspane hospmain = new javax.swing.JDesktopPane();
+
+        userbt.setLabel(username);
+        // MainFrame.medicdspane hospmain = new javax.swing.JDesktopPane();
     }
 
     /**
@@ -39,15 +52,14 @@ public class MainFrame extends javax.swing.JFrame {
         jToolBar2 = new javax.swing.JToolBar();
         jPanel2 = new javax.swing.JPanel();
         jToolBar3 = new javax.swing.JToolBar();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        New_Recordbtin = new javax.swing.JButton();
+        Warehousebtin = new javax.swing.JButton();
+        Pharmacybtin = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
+        userbt = new javax.swing.JButton();
+        Reportsbtin = new javax.swing.JButton();
+        Settingsbtin = new javax.swing.JButton();
         medicdspane = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,58 +78,95 @@ public class MainFrame extends javax.swing.JFrame {
         jToolBar3.setBorder(null);
         jToolBar3.setRollover(true);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/new.png"))); // NOI18N
-        jButton2.setToolTipText("Add new record (item, supplier,etc)");
-        jButton2.setBorder(null);
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        New_Recordbtin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/new.png"))); // NOI18N
+        New_Recordbtin.setText("New Record");
+        New_Recordbtin.setToolTipText("Add new record (item, supplier,etc)");
+        New_Recordbtin.setBorder(null);
+        New_Recordbtin.setFocusable(false);
+        New_Recordbtin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        New_Recordbtin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        New_Recordbtin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                New_RecordbtinActionPerformed(evt);
             }
         });
-        jToolBar3.add(jButton2);
+        jToolBar3.add(New_Recordbtin);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/inventory.jpeg"))); // NOI18N
-        jButton3.setToolTipText("inventory transactions (receiving,transfer, stock returns etc)");
-        jButton3.setBorder(null);
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar3.add(jButton3);
+        Warehousebtin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/inventory.jpeg"))); // NOI18N
+        Warehousebtin.setText("Warehouse");
+        Warehousebtin.setToolTipText("inventory transactions (receiving,transfer, stock returns etc)");
+        Warehousebtin.setBorder(null);
+        Warehousebtin.setFocusable(false);
+        Warehousebtin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Warehousebtin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Warehousebtin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WarehousebtinActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(Warehousebtin);
+        Warehousebtin.getAccessibleContext().setAccessibleName("transactionsbtin");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pharmacy sale.png"))); // NOI18N
-        jButton4.setToolTipText("Pharmacy sales (POS, credit sales, dispensing and invoicing)");
-        jButton4.setBorder(null);
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar3.add(jButton4);
+        Pharmacybtin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pharmacy sale.png"))); // NOI18N
+        Pharmacybtin.setText("Pharmacy");
+        Pharmacybtin.setToolTipText("Pharmacy sales (POS, credit sales, dispensing and invoicing)");
+        Pharmacybtin.setBorder(null);
+        Pharmacybtin.setFocusable(false);
+        Pharmacybtin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Pharmacybtin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Pharmacybtin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PharmacybtinActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(Pharmacybtin);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Bespoke Inventory System v1.0");
-        jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        jPanel1.add(jLabel1, gridBagConstraints);
+
+        userbt.setBackground(new java.awt.Color(255, 255, 255));
+        userbt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/userbg.png"))); // NOI18N
+        userbt.setBorder(null);
+        userbt.setFocusable(false);
+        userbt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        userbt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(userbt, new java.awt.GridBagConstraints());
 
         jToolBar3.add(jPanel1);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/inventory report.jpeg"))); // NOI18N
-        jButton1.setToolTipText("All inventory reports");
-        jButton1.setBorder(null);
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar3.add(jButton1);
+        Reportsbtin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/inventory report.jpeg"))); // NOI18N
+        Reportsbtin.setText("Reports");
+        Reportsbtin.setToolTipText("All inventory reports");
+        Reportsbtin.setBorder(null);
+        Reportsbtin.setFocusable(false);
+        Reportsbtin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Reportsbtin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Reportsbtin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReportsbtinActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(Reportsbtin);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/config.jpeg"))); // NOI18N
-        jButton5.setToolTipText("System Settings");
-        jButton5.setBorder(null);
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar3.add(jButton5);
+        Settingsbtin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/config.jpeg"))); // NOI18N
+        Settingsbtin.setText("Settings");
+        Settingsbtin.setToolTipText("System Settings");
+        Settingsbtin.setBorder(null);
+        Settingsbtin.setFocusable(false);
+        Settingsbtin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Settingsbtin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Settingsbtin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SettingsbtinActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(Settingsbtin);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -126,22 +175,6 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2.add(jToolBar3, gridBagConstraints);
 
         jToolBar2.add(jPanel2);
-
-        jPanel3.setLayout(new java.awt.GridBagLayout());
-
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/userbg.png"))); // NOI18N
-        jButton6.setBorder(null);
-        jButton6.setFocusable(false);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel3.add(jButton6, gridBagConstraints);
-
-        jToolBar2.add(jPanel3);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -178,21 +211,59 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_medicdspaneFocusGained
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void New_RecordbtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_New_RecordbtinActionPerformed
         // TODO add your handling code here:
-        ReceivingStock comp = new ReceivingStock();
-         medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
-         comp.setVisible(true);
-         comp.setSize(medicdspane.getSize());
-        
-        //MenuCanvas cv = new MenuCanvas();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        NewRecord comp = new NewRecord(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_New_RecordbtinActionPerformed
+
+    private void WarehousebtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WarehousebtinActionPerformed
+        // TODO add your handling code here:
+
+        Warehouse comp = new Warehouse(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+
+    }//GEN-LAST:event_WarehousebtinActionPerformed
+
+    private void PharmacybtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PharmacybtinActionPerformed
+        // TODO add your handling code here:
+        Pharmacy comp = new Pharmacy(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_PharmacybtinActionPerformed
+
+    private void ReportsbtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportsbtinActionPerformed
+        // TODO add your handling code here:
+        Reports comp = new Reports(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_ReportsbtinActionPerformed
+
+    private void SettingsbtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsbtinActionPerformed
+        // TODO add your handling code here:
+        Settings comp = new Settings(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_SettingsbtinActionPerformed
+
+    public static void actions(String var_name) {
+        System.err.println(var_name + " Done");
+
+    }
 
     public static Vector AllocatedDomains(String username) {
         Vector domains = new Vector();
 
         return domains;
     }
+
     /**
      * @param args the command line arguments
      */
@@ -223,25 +294,24 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainFrame(connectDB, username).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    public static javax.swing.JButton New_Recordbtin;
+    public static javax.swing.JButton Pharmacybtin;
+    public static javax.swing.JButton Reportsbtin;
+    public static javax.swing.JButton Settingsbtin;
+    public static javax.swing.JButton Warehousebtin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JToolBar jToolBar3;
     private javax.swing.JPanel mainPanel;
     public static javax.swing.JDesktopPane medicdspane;
+    private javax.swing.JButton userbt;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package sys;
 
 import java.io.FileNotFoundException;
 import java.sql.Connection;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,6 +26,8 @@ public class LoginDialog extends javax.swing.JDialog {
     private org.netbeans.lib.sql.PasswordInfo pwdInfo;
     java.sql.Connection connDB = null;
     org.netbeans.lib.sql.pool.PooledConnectionSource pconnDB = null;
+    public static Object[] domains;
+    public static Vector rights = new Vector();
 
     /**
      * Creates new form LoginDialog
@@ -75,6 +78,15 @@ public class LoginDialog extends javax.swing.JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(jLabel2, gridBagConstraints);
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -106,7 +118,7 @@ public class LoginDialog extends javax.swing.JDialog {
         gridBagConstraints.weighty = 0.5;
         getContentPane().add(jButton2, gridBagConstraints);
 
-        closeBtn.setText("Close");
+        closeBtn.setText("Clear");
         closeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeBtnActionPerformed(evt);
@@ -117,6 +129,12 @@ public class LoginDialog extends javax.swing.JDialog {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.weighty = 0.5;
         getContentPane().add(closeBtn, gridBagConstraints);
+
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -243,39 +261,9 @@ public class LoginDialog extends javax.swing.JDialog {
                     }
                     System.out.println("Created statement");
 
-                    java.sql.ResultSet reSet = resStatement.executeQuery("select menu_item from secure_password where login_name ='" + userName + "'");
-
-                    System.out.println("selected");
-
-                    while (reSet.next()) {
-
-                        java.lang.reflect.Field[] field;
-
-                        try {
-
-                            java.lang.Class cl = Class.forName("com.afrisoftech.hospital.HospitalMain");
-
-                            field = cl.getDeclaredFields();
-
-                            System.out.println("Class loaded");
-
-                            for (int j = 0; j < field.length; j++) {
-
-                                if (field[j].getName().endsWith("mnit")) {
-
-                                    System.out.println(field[j]);
-                                }
-
-                            }
-
-                        } catch (java.lang.Exception Exc) {
-
-                            Exc.printStackTrace();
-
-                            System.out.println("Error");
-                        }
-
-                    }
+                    MainFrame ws = new MainFrame(connDB, userName);
+                    ws.setVisible(true);
+                    this.dispose();
 
                 } else {
 
@@ -339,7 +327,6 @@ public class LoginDialog extends javax.swing.JDialog {
             }
         }
 
-        
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -365,12 +352,37 @@ public class LoginDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         int exitOption = JOptionPane.showConfirmDialog(this, "Sure to abort?", "Select either", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
         if (exitOption == 0) {
-            JOptionPane.showMessageDialog(this, "Rolling back login..");
+            JOptionPane.showMessageDialog(this, "Rolling back login..Done");
 
             closeBtn.doClick();
 
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
+        // TODO add your handling code here:
+        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
+
+            //            this.toBack();
+            jButton1.doClick();
+
+        }
+    }//GEN-LAST:event_jPasswordField1KeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
+
+            //            this.toBack();
+            jButton1.doClick();
+
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
 
     /**
      * @param args the command line arguments

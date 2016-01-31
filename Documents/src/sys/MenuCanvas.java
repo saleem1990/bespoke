@@ -5,6 +5,8 @@
  */
 package sys;
 
+import java.awt.Color;
+import java.awt.GridBagConstraints;
 import java.util.Vector;
 import javax.swing.JButton;
 
@@ -18,14 +20,28 @@ public class MenuCanvas extends javax.swing.JPanel {
      * Creates new form MenuCanvas
      */
     Vector rights = null;
+    Object[] fields = null;
 
     public MenuCanvas(java.util.Vector Domains) {
         rights = Domains;
         initComponents();
-        
-        JButton jbutton1 = new JButton();
-        
-        
+
+        fields = rights.toArray();
+
+        for (int i = 0; i < fields.length; i++) {
+
+            JButton jbutton1 = new JButton();
+            jbutton1.setBackground(Color.red);
+            jbutton1.setLabel(fields[i].toString());
+            
+            GridBagConstraints gdb = new GridBagConstraints();
+            gdb.gridx=i+1;
+            
+            panel.add(jbutton1,gdb);
+            
+
+        }
+
     }
 
     /**
@@ -36,11 +52,22 @@ public class MenuCanvas extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        panel = new javax.swing.JPanel();
 
         setLayout(new java.awt.GridBagLayout());
+
+        panel.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        add(panel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
 }

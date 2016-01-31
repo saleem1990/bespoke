@@ -105,7 +105,7 @@ public class StoreAllocation extends javax.swing.JInternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
         jPanel2.add(jPanel59, gridBagConstraints);
 
-        storeCmbx.setModel(com.afrisoftech.lib.ComboBoxModel.ComboBoxModel(connectDB, "SELECT '-' UNION SELECT distinct  upper(store_name) as store_name from st_main_stores ORDER BY 1"));
+        storeCmbx.setModel(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "SELECT '-' UNION SELECT distinct  upper(store_name) as store_name from st_main_stores ORDER BY 1"));
         storeCmbx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 storeCmbxActionPerformed(evt);

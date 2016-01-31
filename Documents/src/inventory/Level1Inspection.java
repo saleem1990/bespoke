@@ -6,16 +6,22 @@
 
 package inventory;
 
+import java.sql.Connection;
+
 /**
  *
  * @author System Partners
  */
 public class Level1Inspection extends javax.swing.JInternalFrame {
+   public static Connection connectDB;
+    public static String username;
 
     /**
      * Creates new form Level1Inspection
      */
-    public Level1Inspection() {
+    public Level1Inspection(java.sql.Connection conndb, String user) {
+        connectDB = conndb;
+        username = user;
         initComponents();
     }
 
@@ -57,7 +63,7 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         setTitle("Level 1 Inspection");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LPO Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 204))); // NOI18N
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LPO Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 204))); // NOI18N
         jPanel8.setLayout(new java.awt.GridBagLayout());
 
         orderedItemsTbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -216,7 +222,7 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Received Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Received Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 0, 0))); // NOI18N
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
         grn2PayablesLinkingTable.setModel(new javax.swing.table.DefaultTableModel(

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package inventory;
 
 /**
@@ -15,7 +14,13 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
     /**
      * Creates new form SupplierRegister
      */
-    public SupplierRegister() {
+    String username = null;
+    java.sql.Connection connectDB = null;
+
+    public SupplierRegister(java.sql.Connection conndb, String user) {
+        connectDB = conndb;
+        username = user;
+
         initComponents();
     }
 
@@ -449,12 +454,12 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
                     this.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
 
                     java.sql.PreparedStatement pstmt = connectDB.prepareStatement("UPDATE st_suppliers"
-                        + " SET supplier_name=?, short_name=?, town=?, country=?, district=?, "
-                        + " contact_person=?, tel1=?, tel2=?, fax_no=?, email_address=?, "
-                        + " website=?, postal_address=?, street=?, avenue=?, locality=?, "
-                        + " building_name=?, floor_no=?, category=?, town1=?, pin_no=?, rog_no=?, "
-                        + " gl_code=?, tax_no=?, vat_no=?, bank_name = ?, bank_branch = ?, bank_account_no = ?, bank_transfer_code = ?"
-                        + " WHERE code = '" + jTextField582.getText() + "'");
+                            + " SET supplier_name=?, short_name=?, town=?, country=?, district=?, "
+                            + " contact_person=?, tel1=?, tel2=?, fax_no=?, email_address=?, "
+                            + " website=?, postal_address=?, street=?, avenue=?, locality=?, "
+                            + " building_name=?, floor_no=?, category=?, town1=?, pin_no=?, rog_no=?, "
+                            + " gl_code=?, tax_no=?, vat_no=?, bank_name = ?, bank_branch = ?, bank_account_no = ?, bank_transfer_code = ?"
+                            + " WHERE code = '" + jTextField582.getText() + "'");
 
                     pstmt.setString(1, supplierNametxt.getText());
                     pstmt.setString(2, jTextField5412.getText());
@@ -545,8 +550,7 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
                 GetItemInfo.updateTrail(activity, connectDB);
                 this.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
                 saveData.setLabel("Save");
-            }
-            else {
+            } else {
 
                 //Inserting new details in suppliers list
                 java.sql.PreparedStatement pstmt = connectDB.prepareStatement("INSERT INTO st_suppliers values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
