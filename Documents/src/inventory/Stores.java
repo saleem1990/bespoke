@@ -6,6 +6,10 @@
 
 package inventory;
 
+import java.sql.Connection;
+import static menu.NewRecord.connectDB;
+import static menu.NewRecord.username;
+
 /**
  *
  * @author Wilson Gitau
@@ -15,7 +19,11 @@ public class Stores extends javax.swing.JInternalFrame {
     /**
      * Creates new form Stores
      */
-    public Stores() {
+    public static Connection connectDB;
+    public static String username;
+    public Stores(java.sql.Connection conndb, String user) {
+        connectDB = conndb;
+        username = user;
         initComponents();
     }
 
@@ -40,7 +48,7 @@ public class Stores extends javax.swing.JInternalFrame {
         spacerPanel = new javax.swing.JPanel();
         fieldsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        orderedItemsTbl = new javax.swing.JTable();
         buttonPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         fieldsPanel1 = new javax.swing.JPanel();
@@ -162,18 +170,8 @@ public class Stores extends javax.swing.JInternalFrame {
         fieldsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Data manipulation utility"));
         fieldsPanel.setLayout(new java.awt.GridBagLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        orderedItemsTbl.setModel(dbadmin.TableModel.createTableVectors(connectDB,"select store_id,store_name,store_category from inventory_stores"));
+        jScrollPane1.setViewportView(orderedItemsTbl);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -251,46 +249,77 @@ public class Stores extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newActionActionPerformed
-//        try {
-//
-//            connectDB.setAutoCommit(false);
-//
-//            java.sql.PreparedStatement pstmt = connectDB.prepareStatement("insert into hr.hr_branches (branch_id,geographical_location,branch_name) values(?,upper(?),?)");
-//            pstmt.setObject(1,branchidTxt.getText());
-//            pstmt.setObject(2,geographicallocationCbx.getSelectedItem().toString());
-//            pstmt.setObject(3,branchnameTxt.getText());
-//            // pstmt.setObject(4,continentCbx.getSelectedItem().toString());
-//            pstmt.executeUpdate();
-//            connectDB.commit();
-//            connectDB.setAutoCommit(true);
-//
-//            javax.swing.JOptionPane.showMessageDialog(this, "Data saved successfully","Confirmation Message",javax.swing.JOptionPane.INFORMATION_MESSAGE);
-//
-//        }   catch(java.sql.SQLException sq){
-//            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
-//            try {
-//                connectDB.rollback();
-//            }catch (java.sql.SQLException sql){
-//                javax.swing.JOptionPane.showMessageDialog(this,sql.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
-//            }
-  //      }// TODO add your handling code here:
-    }//GEN-LAST:event_newActionActionPerformed
+        try {
 
-    private void updateActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateActionActionPerformed
+            connectDB.setAutoCommit(false);
+
+            java.sql.PreparedStatement pstmt = connectDB.prepareStatement("insert into inventory_stores (store_name,store_category) values(?,?)");
+            pstmt.setObject(1,branchidTxt1.getText());
+            pstmt.setObject(2,geographicallocationCbx1.getSelectedItem().toString());
+            pstmt.executeUpdate();
+            connectDB.commit();
+            connectDB.setAutoCommit(true);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Data saved successfully","Confirmation Message",javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            clearAction.doClick();
+            orderedItemsTbl.setModel(dbadmin.TableModel.createTableVectors(connectDB,"select store_id,store_name,store_category from inventory_stores"));
+        }   catch(java.sql.SQLException sq){
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
+            try {
+                connectDB.rollback();
+            }catch (java.sql.SQLException sql){
+                javax.swing.JOptionPane.showMessageDialog(this,sql.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_newActionActionPerformed
 
     private void deleteActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionActionPerformed
         // TODO add your handling code here:
+         try{
+            connectDB.setAutoCommit(false);
+            java.sql.PreparedStatement pstmt31 = connectDB.prepareStatement("DELETE from inventory_stores WHERE store_id = '"+orderedItemsTbl.getModel().getValueAt(orderedItemsTbl.getSelectedRow(),0).toString()+"'");
+            pstmt31.executeUpdate();
+            javax.swing.JOptionPane.showMessageDialog(this, "Data Deleted successfully","Confirmation Message",javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            connectDB.commit();
+            connectDB.setAutoCommit(true);
+            
+        }catch(java.sql.SQLException sq){
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
+            try {
+                connectDB.rollback();
+            }catch (java.sql.SQLException sql){
+                javax.swing.JOptionPane.showMessageDialog(this,sql.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+            
+        }
     }//GEN-LAST:event_deleteActionActionPerformed
 
     private void clearActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionActionPerformed
         // TODO add your handling code here:
+        geographicallocationCbx1.setSelectedIndex(0);
+        branchidTxt1.setText("");
+         for (int k = 0; k <orderedItemsTbl.getRowCount(); k++) {
+            for (int r = 0; r < orderedItemsTbl.getColumnCount(); r++) {
+                orderedItemsTbl.getModel().setValueAt(null, k, r);
+            }
+        }
     }//GEN-LAST:event_clearActionActionPerformed
 
     private void geographicallocationCbx1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_geographicallocationCbx1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_geographicallocationCbx1ActionPerformed
+
+    private void updateActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionActionPerformed
+        // TODO add your handling code here:
+        for (int k = 0; k < orderedItemsTbl.getRowCount(); k++ ) {
+            for (int r = 0; r < orderedItemsTbl.getColumnCount(); r++ ) {
+                orderedItemsTbl.getModel().setValueAt(null,k,r);
+            }
+        }
+        int i = 0;
+        orderedItemsTbl.setModel(dbadmin.TableModel.createTableVectors(connectDB,"select store_id,store_name,store_category from inventory_stores"));
+        
+    }//GEN-LAST:event_updateActionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -308,9 +337,9 @@ public class Stores extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel labelPanel;
     private javax.swing.JButton newAction;
+    private javax.swing.JTable orderedItemsTbl;
     private javax.swing.JPanel spacerPanel;
     private javax.swing.JButton updateAction;
     // End of variables declaration//GEN-END:variables

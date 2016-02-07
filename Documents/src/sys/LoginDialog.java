@@ -225,7 +225,7 @@ public class LoginDialog extends javax.swing.JDialog {
 
     public void logOn2System() throws FileNotFoundException {
 
-        //       com.afrisoftech.hospital.HospitalMain secureHospitalInst = null;
+        //       hospital.HospitalMain secureHospitalInst = null;
         java.awt.Toolkit.getDefaultToolkit().beep();
 
         userName = this.jTextField1.getText().toLowerCase();

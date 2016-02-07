@@ -5,9 +5,14 @@
  */
 package inventory;
 
-
+import com.l2fprod.common.swing.renderer.DefaultCellRenderer;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import kiwi.ui.DateTableCellRenderer;
+import sms.SendSms;
 
 /**
  *
@@ -15,16 +20,18 @@ import javax.swing.JOptionPane;
  */
 public class ReceivingStock extends javax.swing.JInternalFrame {
 
-    private javax.swing.JComboBox cmbox = new javax.swing.JComboBox();
-    private javax.swing.JComboBox cmbox2;
+    String username = null;
+    java.sql.Connection connectDB = null;
     int measure = 0;
+    JComboBox quartercbx = new javax.swing.JComboBox();
+
     /**
      * Creates new form companyprflintfr
      */
- 
-
-    public ReceivingStock() {
-
+    public ReceivingStock(java.sql.Connection conndb, String user) {
+        connectDB = conndb;
+        username = user;
+        initComponents();
     }
 
     /**
@@ -40,18 +47,19 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         jSearchPanel2 = new javax.swing.JPanel();
         jTextField113 = new javax.swing.JTextField();
         jSearchScrollPane2 = new javax.swing.JScrollPane();
-        jSearchTable2 = new com.afrisoftech.dbadmin.JTable();
+        jSearchTable2 = new dbadmin.JTable();
         jButton52 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        txtSupplierCode = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel12 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtSupplier = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        dnoteNo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
         jPanel41 = new javax.swing.JPanel();
@@ -60,13 +68,14 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         jTextField6 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        receivedby = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        deliveredBytxt = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        datePicker1 = new dbadmin.DatePicker();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -158,6 +167,8 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         gridBagConstraints.weighty = 1.0;
         jSearchDialog2.getContentPane().add(jSearchPanel2, gridBagConstraints);
 
+        txtSupplierCode.setText("jTextField1");
+
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -211,16 +222,16 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 0);
         jPanel1.add(jLabel8, gridBagConstraints);
 
-        jTextField8.setEditable(false);
+        txtSupplier.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel1.add(jTextField8, gridBagConstraints);
+        jPanel1.add(txtSupplier, gridBagConstraints);
 
-        jLabel7.setText("Store/Dept.");
+        jLabel7.setText("Store");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -246,7 +257,7 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel1.add(jTextField9, gridBagConstraints);
+        jPanel1.add(dnoteNo, gridBagConstraints);
 
         jLabel4.setText("Delivery Date");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -258,7 +269,7 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 0);
         jPanel1.add(jLabel4, gridBagConstraints);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
+        jComboBox2.setModel(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "Select '-' union select store_name from inventory_stores order by 1"));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -340,8 +351,6 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 0);
         jPanel1.add(jLabel14, gridBagConstraints);
-
-        jTextField11.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -349,7 +358,7 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel1.add(jTextField11, gridBagConstraints);
+        jPanel1.add(receivedby, gridBagConstraints);
 
         jLabel15.setText("Delivered By");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -367,19 +376,21 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 10);
-        jPanel1.add(jTextField5, gridBagConstraints);
+        jPanel1.add(deliveredBytxt, gridBagConstraints);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Orders");
+        jRadioButton1.setText("LPO");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.weightx = 1.0;
         jPanel5.add(jRadioButton1, gridBagConstraints);
 
+        buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Direct Purchases");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -392,6 +403,7 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         jPanel5.add(jRadioButton3, gridBagConstraints);
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Donations");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
@@ -406,6 +418,10 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
         jPanel1.add(jPanel5, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        jPanel1.add(datePicker1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -658,14 +674,14 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Item Code", "Desc", "Strength", "Qty Ordered", "Undelivered Qty", "Unit Pack", "Qty Received", "Unit Price", "Value", "Batch No.", "Expiry Date", "Units of Issue", "Cummulative qty"
+                "Item Code", "Desc", "Strength", "Qty Ordered", "Undelivered Qty", "LPO Units", "Received Units", "Qty Received", "Unit Price", "Value", "Batch No.", "Expiry Date", "Small_Unit qty"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, true, true, true, true, true, true, false, false
+                false, false, false, false, false, false, true, true, true, true, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -687,11 +703,12 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
             }
         });
         */
-        javax.swing.table.TableColumn dateEditor = jTable1.getColumnModel().getColumn(13);
+        javax.swing.table.TableColumn dateEditor = jTable1.getColumnModel().getColumn(11);
         //com.afrisoftech.lib.DateCellEditor dateCellEditor = new com.afrisoftech.lib.DateCellEditor(new org.jdesktop.swingx.JXDatePicker(), jTable1);
-        com.afrisoftech.lib.DateCellEditor dateCellEditor = new com.afrisoftech.lib.DateCellEditor(new com.afrisoftech.lib.DatePicker(), jTable1);
+        dbadmin.DateCellEditor dateCellEditor = new dbadmin.DateCellEditor(new dbadmin.DatePicker(), jTable1);
         dateEditor.setCellEditor(dateCellEditor);
         //jTable1.setRowHeight(30);
+        this.jTable1.getColumnModel().getColumn(6).setCellEditor(new javax.swing.DefaultCellEditor(new javax.swing.JComboBox(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "SELECT '-' union select smallest_unit from inventory_items union select bulk_unit from inventory_bulk_breaking order by 1"))));
         javax.swing.table.DefaultTableCellRenderer cellRenderer = new javax.swing.table.DefaultTableCellRenderer();
         cellRenderer.setHorizontalAlignment(cellRenderer.TRAILING);
         dateEditor.setCellRenderer(cellRenderer);
@@ -703,6 +720,9 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTable1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTable1KeyTyped(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -761,14 +781,14 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         jButton3.setMnemonic('l');
         jButton3.setText("Clear");
         jButton3.setToolTipText("click to clear fields");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -820,11 +840,19 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         getContentPane().add(jPanel4, gridBagConstraints);
 
-        setBounds(0, 0, 1000, 459);
+        setBounds(0, 0, 619, 393);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-     
+        try {
+            java.sql.PreparedStatement pstmt = connectDB.prepareStatement("SELECT store_id from inventory_stores where store_name='" + jComboBox2.getSelectedItem().toString() + "'");
+            java.sql.ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                jTextField6.setText(rs.getString("store_id"));
+            }
+        } catch (Exception y) {
+
+        }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -848,7 +876,7 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         if (jTextField113.getCaretPosition() < 1) {
             System.out.println("Nothing");
         } else {
-            //jSearchTable2.setModel(com.afrisoftech.dbadmin.TableModel.createTableVectors(connectDB, "SELECT distinct order_no,supplier from st_orders WHERE order_no ILIKE '%" + jTextField113.getText() + "%' order by order_no"));
+            jSearchTable2.setModel(dbadmin.TableModel.createTableVectors(connectDB, "SELECT distinct order_no from inventory_lpo WHERE order_no ILIKE '%" + jTextField113.getText() + "%' and balance>0 order by order_no"));
 
             jSearchTable2.setShowHorizontalLines(false);
             jSearchScrollPane2.setViewportView(jSearchTable2);
@@ -857,7 +885,6 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField113CaretUpdate
 
     private void jSearchTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSearchTable2MouseClicked
-        
 
         for (int k = 0; k < jTable1.getRowCount(); k++) {
             for (int r = 0; r < jTable1.getColumnCount(); r++) {
@@ -865,12 +892,47 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
             }
         }
 
-        jTextField8.setText(jSearchTable2.getValueAt(jSearchTable2.getSelectedRow(), 1).toString());
         orderNotxt.setText(jSearchTable2.getValueAt(jSearchTable2.getSelectedRow(), 0).toString());
+        try {
+            java.sql.PreparedStatement pstmt = connectDB.prepareStatement("SELECT * from inventory_lpo where order_no='" + jSearchTable2.getValueAt(jSearchTable2.getSelectedRow(), 0).toString() + "' AND balance!=0");
+            java.sql.ResultSet rs = pstmt.executeQuery();
+            int i = 0;
+            String suppliercode = "";
+            while (rs.next()) {
+                suppliercode = rs.getString("supplier");
+                txtSupplierCode.setText(suppliercode);
+                //item
+                java.sql.PreparedStatement pstmtItem = connectDB.prepareStatement("SELECT * from inventory_items where item_code='" + rs.getString("item_code") + "'");
+                java.sql.ResultSet rsitem = pstmtItem.executeQuery();
+                if (rsitem.next()) {
+
+                    //this.jTable1.getColumnModel().getColumn(6).setCellEditor(new javax.swing.DefaultCellEditor(new javax.swing.JComboBox(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "SELECT '-' union select smallest_unit from inventory_items where item_code='"+rsitem.getString("item_code")+"' union select bulk_unit from inventory_bulk_breaking where item_code='"+rsitem.getString("item_code")+"' order by 1"))));
+                    //this.jTable1.setValueAt(new javax.swing.JComboBox(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "SELECT '-' union select smallest_unit from inventory_items where item_code='"+rsitem.getString("item_code")+"' union select bulk_unit from inventory_bulk_breaking where item_code='"+rsitem.getString("item_code")+"' order by 1")),i,6);
+                    jTable1.setValueAt(rsitem.getString("item_code"), i, 0);
+                    jTable1.setValueAt(rsitem.getString("item_name"), i, 1);
+                    jTable1.setValueAt(rsitem.getString("strength"), i, 2);
+                    jTable1.setValueAt(Double.parseDouble(rs.getString("quantity")), i, 3);
+                    jTable1.setValueAt(Double.parseDouble(rs.getString("balance")), i, 4);
+                    jTable1.setValueAt(rs.getString("units"), i, 5);
+                }
+                //item end 
+                i = i + 1;
+            }
+
+            //supplier
+            java.sql.PreparedStatement pstmtSupplier = connectDB.prepareStatement("SELECT * from inventory_suppliers where supplier_code='" + suppliercode + "'");
+            java.sql.ResultSet rssupplier = pstmtSupplier.executeQuery();
+            if (rssupplier.next()) {
+                txtSupplier.setText(rssupplier.getString("supplier_name"));
+            }
+            //supplier end
+        } catch (Exception y) {
+
+        }
 
         jSearchDialog2.dispose();
 
-       
+
     }//GEN-LAST:event_jSearchTable2MouseClicked
     private void cmbox51ActionPerformed(java.awt.event.ActionEvent evt) {
 
@@ -911,95 +973,85 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
             }
         }
 
-       
-
         // Add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+    private void notification(String item_code, String name, String store, String qty) {
+        try {
+            connectDB.setAutoCommit(false);
+            java.sql.PreparedStatement pstmt = connectDB.prepareStatement("SELECT * from alerts_setting where alert_type='receiving' and reference='" + item_code + "' and status=false");
+            java.sql.ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                java.sql.PreparedStatement pstmts = connectDB.prepareStatement("SELECT first_name,phone_no,now() from secure_password where login_name='" + rs.getString("username") + "'");
+                java.sql.ResultSet rst = pstmts.executeQuery();
+                while (rst.next()) {
+                    String message = "Hello " + rst.getString(1) + ",\n" + name + " has arrived at " + store + ".\nQty:" + qty + "\nArrival date:" + rst.getString(3) + ".\n\nCourtesy of Bespoke Inventory System";
+                   
+                    new SendSms(rst.getString(2), message);
 
+                }
+                java.sql.PreparedStatement pstmt31 = connectDB.prepareStatement("update alerts_setting set status=true WHERE alert_type='receiving' and reference='" + item_code + "' and username='" + rs.getString("username") + "'");
+                pstmt31.executeUpdate();
+            }
+
+            connectDB.commit();
+            connectDB.setAutoCommit(true);
+        } catch (java.sql.SQLException sq) {
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            try {
+                connectDB.rollback();
+            } catch (java.sql.SQLException sql) {
+                javax.swing.JOptionPane.showMessageDialog(this, sql.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+    }
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         double resFloat = 0.00;
-        double resVal = 0.00;
+        double cummulative_items = 0.00;
         double total = 0.00;
-        double total1 = 0.00;
-        double discount1 = 0.00;
-        double vat = 0.00;
-        double VatAmt = 0.00;
+
         double qty = 0.00;
-        double floatCol3 = 0.00;
-        double units = 1.00;
+        double unitValue = 0.00;
+        double bulk_unit = 0.00;
 
-        double totalSum = 0.00;
-        if (jTable1.getValueAt(jTable1.getSelectedRow(), jTable1.getSelectedColumn()) != null) {
-
-            if (jTable1.getValueAt(jTable1.getSelectedRow(), 5) != null) {
-                qty = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());// conversion;
-
-                floatCol3 = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString());
-
-                //            if (jTable1.getValueAt(jTable1.getSelectedRow(), 3) != null) {
-                total = qty * floatCol3;
-                //                jTable1.setValueAt(new java.lang.Float(total), jTable1.getSelectedRow(), 7);
-
-                if (jTable1.getValueAt(jTable1.getSelectedRow(), 7) != null) {
-                    discount1 = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString());
-                    resVal = total * discount1 / 100;
-                    // total = ((qty * floatCol3) - ((qty * floatCol3)*discount1/100));
-                    // resVal = (qty * floatCol3)*discount1/100;
-                    jTable1.setValueAt(new java.lang.Float(resVal), jTable1.getSelectedRow(), 8);
-                    jTable1.setValueAt(new java.lang.Float(total - resVal), jTable1.getSelectedRow(), 11);
-//                    this.tableModelTableChanged1();
-                    if (jTable1.getValueAt(jTable1.getSelectedRow(), 9) != null) {
-                        vat = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 9).toString());
-                        // total = (((total) + ((qty * floatCol3)*vat/100)) - ((qty * floatCol3)*discount1/100));
-
-                        VatAmt = (total - resVal) * vat / 100;
-                        jTable1.setValueAt(new java.lang.Float(VatAmt), jTable1.getSelectedRow(), 10);
-                        jTable1.setValueAt(new java.lang.Float(resVal), jTable1.getSelectedRow(), 8);
-
-                        jTable1.setValueAt(new java.lang.Float((total - resVal) + VatAmt), jTable1.getSelectedRow(), 11);
-
-                      //  jTable1.setValueAt(issuingUnits, jTable1.getSelectedRow(), 15);
-                        jTable1.setValueAt(new java.lang.Float(qty), jTable1.getSelectedRow(), 16);
-
-                        //jTable1.setValueAt(new java.lang.Float(resVal), jTable1.getSelectedRow(), 5);
-                    }
-
-                } else if (jTable1.getValueAt(jTable1.getSelectedRow(), 9) != null) {
-                    vat = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 9).toString());
-
-                    total1 = ((qty * floatCol3));
-
-                    total = ((qty * floatCol3) + ((qty * floatCol3) * vat / 100));
-                    VatAmt = ((qty * floatCol3) * vat / 100);
-                    jTable1.setValueAt(new java.lang.Float(VatAmt), jTable1.getSelectedRow(), 10);
-
-                    //this.jTextField1.setText(java.lang.String.valueOf(VatAmt));
-                    jTable1.setValueAt(new java.lang.Float(total), jTable1.getSelectedRow(), 11);
-                    
-
-//                    jTable1.setValueAt(issuingUnits, jTable1.getSelectedRow(), 15);
-                    jTable1.setValueAt(new java.lang.Float(qty), jTable1.getSelectedRow(), 16);
-
-                } else {
-                    jTable1.setValueAt(new java.lang.Float(total), jTable1.getSelectedRow(), 11);
-                }
-
-//                this.tableModelTableChanged();
-
-                for (int i = 0; i < jTable1.getRowCount(); i++) {
-
-                    if (jTable1.getModel().getValueAt(i, 5) != null) {//toString().compareToIgnoreCase(null) {
-
-                        resFloat = resFloat + Double.parseDouble(jTable1.getValueAt(i, 11).toString());
-
-                    }
-                }
-
-                //  this.tableModelTableChanged();
-            }
-//            jTable1.setValueAt(issuingUnits, jTable1.getSelectedRow(), 15);
-            jTable1.setValueAt(new java.lang.Float(qty), jTable1.getSelectedRow(), 16);
+        if (jTable1.getValueAt(jTable1.getSelectedRow(), 7) != null && jTable1.getValueAt(jTable1.getSelectedRow(), 8) != null) {
+            qty = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString());// conversion;
+            unitValue = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 8).toString());
+            total = qty * unitValue;
+            jTable1.setValueAt(total, jTable1.getSelectedRow(), 9);
         }
+        if (jTable1.getValueAt(jTable1.getSelectedRow(), 6) != null && jTable1.getValueAt(jTable1.getSelectedRow(), 7) != null) {
+            double bulk_qty = 0;
+            try {
+
+                java.sql.PreparedStatement pstmtSupplier = connectDB.prepareStatement("SELECT * from inventory_bulk_breaking where item_code='" + jTable1.getValueAt(jTable1.getSelectedRow(), 0) + "' and bulk_unit='" + jTable1.getValueAt(jTable1.getSelectedRow(), 6) + "'");
+                java.sql.ResultSet rssupplier = pstmtSupplier.executeQuery();
+                if (rssupplier.next()) {
+                    bulk_qty = rssupplier.getDouble("qty");
+                } else {
+                    bulk_qty = 1;
+                }
+            } catch (Exception y) {
+
+            }
+            bulk_unit = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString());
+            cummulative_items = bulk_qty * bulk_unit;
+            if (cummulative_items > Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString())) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Cannot Receive more than ordered", "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            } else {
+                jTable1.setValueAt(cummulative_items, jTable1.getSelectedRow(), 12);
+            }
+
+        }
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+
+            if (jTable1.getModel().getValueAt(i, 9) != null) {//toString().compareToIgnoreCase(null) {
+
+                resFloat = resFloat + Double.parseDouble(jTable1.getValueAt(i, 9).toString());
+            }
+        }
+        jTextField2.setText(Double.toString(resFloat));
+
 
     }//GEN-LAST:event_jTable1KeyReleased
 
@@ -1010,18 +1062,172 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
             }
         }
 
-        jTextField8.setText("");
-        jTextField5.setText("");
-        jTextField9.setText("");
-        jTextField11.setText("");
+        txtSupplier.setText("");
+        deliveredBytxt.setText("");
+        dnoteNo.setText("");
+        receivedby.setText("");
 
         jTextField2.setText("0.00");
         orderNotxt.setText("");
         // Add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+    private void updateOrders(String item_code, String order_no, double balance) {
+        try {
+            connectDB.setAutoCommit(false);
+            java.sql.PreparedStatement pstmt31 = connectDB.prepareStatement("update inventory_lpo set balance='" + balance + "' WHERE order_no = '" + order_no + "' AND item_code='" + item_code + "'");
+            pstmt31.executeUpdate();
 
+            connectDB.commit();
+            connectDB.setAutoCommit(true);
+        } catch (java.sql.SQLException sq) {
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            try {
+                connectDB.rollback();
+            } catch (java.sql.SQLException sql) {
+                javax.swing.JOptionPane.showMessageDialog(this, sql.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        try {
+
+            connectDB.setAutoCommit(false);
+            connectDB.commit();
+            connectDB.setAutoCommit(true);
+            //top
+            String transNo = null;
+            Boolean SavePoint = false;
+            Date today = null;
+            try {
+                //date
+                java.sql.Statement pst22 = connectDB.createStatement();
+                java.sql.ResultSet rs22 = pst22.executeQuery("select now()::date");
+                while (rs22.next()) {
+                    today = rs22.getDate(1);
+                }
+
+            } catch (Exception e) {
+
+            }
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                if (jTable1.getModel().getValueAt(i, 0) != null) {
+
+                    try {
+                        java.sql.PreparedStatement pstmts = connectDB.prepareStatement("insert into inventory_receiving("
+                                + "item_code,bulk_units,bulk_units_qty,unit_price,"
+                                + "small_unit_price,qty_in,qty_out,supplier_code,"
+                                + "d_note,invoice_no,transaction_no,batch_no,"
+                                + "expiry_date,order_no,delivered_by,store_code,"
+                                + "trans_type,credit,debit,delivery_date,receivedby)values("
+                                + "?,?,?,?,"
+                                + "?,?,?,?,"
+                                + "?,?,?,?,"
+                                + "?,?,?,?,"
+                                + "?,?,?,?,?)");
+                        pstmts.setObject(1, jTable1.getValueAt(i, 0).toString());
+                        if (receivedby.getText().equals("") || deliveredBytxt.getText().equals("") || jTextField6.getText().equals("") || jTable1.getValueAt(i, 10) == null || dnoteNo.getText().equals("") || jTable1.getValueAt(i, 6) == null || jTable1.getValueAt(i, 7) == null || jTable1.getValueAt(i, 8) == null) {
+                            SavePoint = false;
+                            javax.swing.JOptionPane.showMessageDialog(this, "Some item entries Missing", "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+
+                        } else {
+                            SavePoint = true;
+                            pstmts.setObject(2, jTable1.getValueAt(i, 6).toString());
+                            pstmts.setObject(3, Double.parseDouble(jTable1.getValueAt(i, 7).toString()));
+                            pstmts.setObject(4, Double.parseDouble(jTable1.getValueAt(i, 8).toString()));
+                            pstmts.setObject(9, dnoteNo.getText());
+                            pstmts.setObject(12, jTable1.getValueAt(i, 10));
+                            pstmts.setObject(15, deliveredBytxt.getText());
+                            pstmts.setObject(21, receivedby.getText());
+                            pstmts.setObject(16, Integer.parseInt(jTextField6.getText()));
+                            pstmts.setObject(5, Double.parseDouble(jTable1.getValueAt(i, 9).toString()) / Double.parseDouble(jTable1.getValueAt(i, 12).toString()));
+                            pstmts.setDouble(6, Double.parseDouble(jTable1.getValueAt(i, 12).toString()));
+                        }
+
+                        pstmts.setDouble(7, 0.0);
+                        pstmts.setObject(8, txtSupplierCode.getText());
+                        pstmts.setObject(10, "");
+                        java.sql.Date expiryDate = null;
+                        if (jTable1.getValueAt(i, 11) != null && SavePoint == true) {
+                            java.sql.Statement pst22 = connectDB.createStatement();
+                            java.sql.ResultSet rs22 = pst22.executeQuery("select '" + jTable1.getValueAt(i, 11).toString() + "'::date");
+                            while (rs22.next()) {
+
+                                expiryDate = rs22.getDate(1);
+                                if (expiryDate.before(today) || expiryDate.equals(today)) {
+                                    SavePoint = false;
+                                    javax.swing.JOptionPane.showMessageDialog(this, "Please Enter correct Expiry date", "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+                                } else {
+                                    pstmts.setDate(13, expiryDate);
+                                }
+                            }
+                        } else {
+                            SavePoint = false;
+                            javax.swing.JOptionPane.showMessageDialog(this, "You Must Enter Expiry date", "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        }
+
+                        pstmts.setObject(14, orderNotxt.getText());
+                        pstmts.setObject(17, "Receiving");
+                        pstmts.setObject(18, 0.00);
+                        if (SavePoint == false && (jTable1.getValueAt(i, 9) == null || Double.parseDouble(jTable1.getValueAt(i, 9).toString()) == 0)) {
+                            javax.swing.JOptionPane.showMessageDialog(this, "item value cannot be zero", "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+                            SavePoint = false;
+                        } else {
+                            pstmts.setObject(19, Double.parseDouble(jTable1.getValueAt(i, 9).toString()));
+                        }
+
+                        pstmts.setDate(20, dbadmin.SQLDateFormat.getSQLDate(datePicker1.getDate()));
+                        if (SavePoint != false) {
+                            //transno
+                            java.sql.Statement pss = connectDB.createStatement();
+
+                            java.sql.ResultSet rsts = pss.executeQuery("select lpad(nextval('transactions')::text,5,0::TEXT)");
+                            while (rsts.next()) {
+
+                                transNo = rsts.getObject(1).toString();
+                            }
+
+                            pstmts.setObject(11, transNo);
+                            pstmts.executeUpdate();
+                            updateOrders(jTable1.getValueAt(i, 0).toString(), orderNotxt.getText(), (Double.parseDouble(jTable1.getValueAt(i, 4).toString()) - Double.parseDouble(jTable1.getValueAt(i, 12).toString())));
+                            notification(jTable1.getValueAt(i, 0).toString(), jTable1.getValueAt(i, 1).toString().concat(" " + jTable1.getValueAt(i, 2).toString()), jComboBox2.getSelectedItem().toString(), jTable1.getValueAt(i, 12).toString().concat(" " + jTable1.getValueAt(i, 5).toString()));
+                            /**
+                             * Here we start inserting Grn Table
+                             */
+                            java.sql.PreparedStatement pstmt = connectDB.prepareStatement("insert into inventory_inspection (lpono,delivery_note,item_code) values(?,?,?)");
+                            pstmt.setObject(1, orderNotxt.getText());
+                            pstmt.setObject(2, dnoteNo.getText());
+                            pstmt.setObject(3, jTable1.getValueAt(i, 0));
+                            pstmt.executeUpdate();
+                            /**
+                             * Here we finish inserting Grn Table
+                             */
+                        }
+
+                    } catch (java.sql.SQLException sq) {
+                        sq.printStackTrace();
+                        javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+
+                    }
+                }
+            }
+            if (SavePoint == false || jTable1.getValueAt(0, 0) == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Double Check Your Entries", "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            } else if (SavePoint == true) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Transaction successfully done", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                jButton3.doClick();
+            }
+            //top
+        } catch (Exception sq) {
+            sq.printStackTrace();
+
+            try {
+                connectDB.rollback();
+            } catch (java.sql.SQLException sql) {
+                sql.printStackTrace();
+            }
+        }
+
         // Add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1042,16 +1248,17 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
         if (jTable1.getSelectedColumn() == 13) {
 
         }
-        
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
+    private void jTable1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1KeyTyped
 
-
- 
     /*
      * public void tableModelTableChanged1(javax.swing.event.TableModelEvent
      * evt) {
@@ -1082,10 +1289,6 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
      * }
      * // jTextField31.setText(java.lang.String.valueOf(resFloat)); }
      */
-
-    
-
-  
     /*
      * public void tableModelTableChanged() { System.out.println("Calculating
      * totals for table 11 and 2."); // double resFloat = 0.00; double resFloat
@@ -1135,6 +1338,9 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private dbadmin.DatePicker datePicker1;
+    private javax.swing.JTextField deliveredBytxt;
+    private javax.swing.JTextField dnoteNo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     public javax.swing.JButton jButton4;
@@ -1169,14 +1375,13 @@ public class ReceivingStock extends javax.swing.JInternalFrame {
     private javax.swing.JTable jSearchTable2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField113;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JTextField orderNotxt;
+    private javax.swing.JTextField receivedby;
     private javax.swing.JButton searchButton;
+    private javax.swing.JTextField txtSupplier;
+    private javax.swing.JTextField txtSupplierCode;
     // End of variables declaration//GEN-END:variables
 }

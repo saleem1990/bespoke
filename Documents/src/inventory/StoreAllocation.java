@@ -666,7 +666,7 @@ public class StoreAllocation extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 //        storeGLtxt.setText(null);
 //        ClearTable.clearthisTable(moduleTbl);
-//        storeCmbx.setModel(com.afrisoftech.lib.ComboBoxModel.ComboBoxModel(connectDB, "SELECT '-' UNION SELECT distinct  upper(store_name) as store_name from st_main_stores ORDER BY 1"));
+//        storeCmbx.setModel(lib.ComboBoxModel.ComboBoxModel(connectDB, "SELECT '-' UNION SELECT distinct  upper(store_name) as store_name from st_main_stores ORDER BY 1"));
 //        activityChbx.doClick();
     }//GEN-LAST:event_centralStoresCmbxActionPerformed
 
@@ -674,8 +674,8 @@ public class StoreAllocation extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 //        storeGLtxt.setText(null);
 //        ClearTable.clearthisTable(moduleTbl);
-//        // storeCmbx.setModel(com.afrisoftech.lib.ComboBoxModel.ComboBoxModel(connectDB, "SELECT  '-' UNION SELECT  distinct  initcap(department_name) from pb_departments WHERE department_name IN(select store_name from st_stores) and department_name not IN(select store_name from st_main_stores)  ORDER BY 1"));
-//        storeCmbx.setModel(com.afrisoftech.lib.ComboBoxModel.ComboBoxModel(connectDB, "SELECT  '-' UNION SELECT  distinct  initcap(department_name) from pb_departments WHERE department_name not IN(select store_name from st_main_stores) UNION SELECT distinct initcap(store_name) from st_stores ORDER BY 1"));
+//        // storeCmbx.setModel(lib.ComboBoxModel.ComboBoxModel(connectDB, "SELECT  '-' UNION SELECT  distinct  initcap(department_name) from pb_departments WHERE department_name IN(select store_name from st_stores) and department_name not IN(select store_name from st_main_stores)  ORDER BY 1"));
+//        storeCmbx.setModel(lib.ComboBoxModel.ComboBoxModel(connectDB, "SELECT  '-' UNION SELECT  distinct  initcap(department_name) from pb_departments WHERE department_name not IN(select store_name from st_main_stores) UNION SELECT distinct initcap(store_name) from st_stores ORDER BY 1"));
 //        activityChbx.doClick();
     }//GEN-LAST:event_substoreCmbxActionPerformed
 

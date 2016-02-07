@@ -8,14 +8,18 @@ package inventory;
 
 /**
  *
- * @author System Partners
+ * @author Wilson Gitau
  */
 public class CloseSupplier extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CloseSupplier
      */
-    public CloseSupplier() {
+      String username = null;
+    java.sql.Connection connectDB = null;
+    public CloseSupplier(java.sql.Connection conndb, String user) {
+        connectDB = conndb;
+        username = user;
         initComponents();
     }
 
@@ -29,21 +33,109 @@ public class CloseSupplier extends javax.swing.JInternalFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel582 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jTextField36 = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
+        searchsupplier = new javax.swing.JDialog();
+        jSearchPanel1 = new javax.swing.JPanel();
+        jTextField1111 = new javax.swing.JTextField();
+        jSearchScrollPane1 = new javax.swing.JScrollPane();
+        jSearchTable1 = new dbadmin.JTable();
+        jButton91 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        authorised = new javax.swing.JTextField();
         jCheckBox3 = new javax.swing.JCheckBox();
         jSeparator1 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        reason = new javax.swing.JTextField();
         jCheckBox4 = new javax.swing.JCheckBox();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel61 = new javax.swing.JPanel();
+        supplietTxt = new javax.swing.JTextField();
+        searchButton1 = new javax.swing.JButton();
+        SupplierCodeTxt = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        clearbtn = new javax.swing.JButton();
+
+        searchsupplier.setModal(true);
+        searchsupplier.setUndecorated(true);
+        searchsupplier.getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        jSearchPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jSearchPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jTextField1111.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextField1111CaretUpdate(evt);
+            }
+        });
+        jTextField1111.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1111ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 10.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 100);
+        jSearchPanel1.add(jTextField1111, gridBagConstraints);
+
+        jSearchTable1.setShowHorizontalLines(false);
+        /*    try {
+            searchRowSet.setCommand("select product,selling_price,gl_code FROM st_stock_prices WHERE department = 'Pharmacy' order by product");
+            searchRowSet.setConnectionSource(pConnDB);
+
+            searchRowSet.execute();
+
+            // crset2.setExecuteOnLoad(true);
+            jSearchTable.setModel(new org.netbeans.lib.sql.models.TableModel(searchRowSet, new org.netbeans.lib.sql.models.TableModel.Column[] {
+                new org.netbeans.lib.sql.models.TableModel.Column("product", "Description", false),
+                new org.netbeans.lib.sql.models.TableModel.Column("selling_price", "Amount", false),
+                new org.netbeans.lib.sql.models.TableModel.Column("gl_code", "Gl_code", false)
+
+            }));
+            // jSearchScrollPane.setViewportView(jSearchTable);
+
+        } catch(java.sql.SQLException sqlex){
+            javax.swing.JOptionPane.showMessageDialog(this,sqlex.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
+
+            System.out.println(sqlex.getMessage());
+        }
+        */
+        jSearchTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jSearchTable1MouseClicked(evt);
+            }
+        });
+        jSearchScrollPane1.setViewportView(jSearchTable1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 20.0;
+        jSearchPanel1.add(jSearchScrollPane1, gridBagConstraints);
+
+        jButton91.setText("Dispose");
+        jButton91.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton91ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jSearchPanel1.add(jButton91, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        searchsupplier.getContentPane().add(jSearchPanel1, gridBagConstraints);
 
         setClosable(true);
         setIconifiable(true);
@@ -52,92 +144,30 @@ public class CloseSupplier extends javax.swing.JInternalFrame {
         setTitle("Activate/Suspend Supplier");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jLabel582.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel582.setText("Suppliers's Name");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 0);
-        getContentPane().add(jLabel582, gridBagConstraints);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setLayout(new java.awt.GridBagLayout());
-
-        jTextField36.setEditable(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel2.add(jTextField36, gridBagConstraints);
-
-        searchButton.setToolTipText("Search");
-        searchButton.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        searchButton.setMaximumSize(new java.awt.Dimension(74, 53));
-        searchButton.setMinimumSize(new java.awt.Dimension(74, 53));
-        searchButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel2.add(searchButton, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        getContentPane().add(jPanel2, gridBagConstraints);
-
         jLabel2.setText("Reason");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         getContentPane().add(jLabel2, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        getContentPane().add(jTextField2, gridBagConstraints);
-
-        jLabel1.setText("Supplier Code");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
-        getContentPane().add(jLabel1, gridBagConstraints);
-
-        jTextField1.setEditable(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        getContentPane().add(jTextField1, gridBagConstraints);
+        getContentPane().add(authorised, gridBagConstraints);
 
         jCheckBox3.setBackground(new java.awt.Color(51, 255, 51));
+        buttonGroup1.add(jCheckBox3);
         jCheckBox3.setForeground(new java.awt.Color(51, 0, 255));
         jCheckBox3.setText("Suspend");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(jCheckBox3, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
@@ -152,228 +182,232 @@ public class CloseSupplier extends javax.swing.JInternalFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(jButton2, gridBagConstraints);
 
-        jButton4.setMnemonic('C');
-        jButton4.setText("Close");
-        jButton4.setToolTipText("Click here to close window");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
-            }
-        });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        getContentPane().add(jButton4, gridBagConstraints);
-
         jLabel3.setText("Authorised By");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
         getContentPane().add(jLabel3, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        getContentPane().add(jTextField3, gridBagConstraints);
+        getContentPane().add(reason, gridBagConstraints);
 
         jCheckBox4.setBackground(new java.awt.Color(51, 255, 51));
+        buttonGroup1.add(jCheckBox4);
         jCheckBox4.setForeground(new java.awt.Color(51, 0, 255));
         jCheckBox4.setText("Activate");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(jCheckBox4, gridBagConstraints);
 
+        jLabel9.setText("Supplier");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 0);
+        getContentPane().add(jLabel9, gridBagConstraints);
+
+        jPanel61.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel61.setMinimumSize(new java.awt.Dimension(82, 37));
+        jPanel61.setLayout(new java.awt.GridBagLayout());
+
+        supplietTxt.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel61.add(supplietTxt, gridBagConstraints);
+
+        searchButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kiwi/images/date.gif"))); // NOI18N
+        searchButton1.setToolTipText("Search");
+        searchButton1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        searchButton1.setMaximumSize(new java.awt.Dimension(74, 53));
+        searchButton1.setMinimumSize(new java.awt.Dimension(74, 53));
+        searchButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        searchButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        jPanel61.add(searchButton1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        getContentPane().add(jPanel61, gridBagConstraints);
+
+        SupplierCodeTxt.setEditable(false);
+        SupplierCodeTxt.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        SupplierCodeTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SupplierCodeTxtActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
+        getContentPane().add(SupplierCodeTxt, gridBagConstraints);
+
+        jLabel10.setText("Supplier Code");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 0);
+        getContentPane().add(jLabel10, gridBagConstraints);
+
+        clearbtn.setText("Clear");
+        clearbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearbtnActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        getContentPane().add(clearbtn, gridBagConstraints);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        searchButtonClicked();        // Add your handling code here:
-    }//GEN-LAST:event_searchButtonActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String selectedchkbx;
-        if (this.jCheckBox3.isSelected()){
+        
 
             try {
-                java.sql.PreparedStatement pstmt = connectDB.prepareStatement("begin work; update st_suppliers set closed = 'false',date_closed = current_date,closed_by =current_user,authorised_by = '"+jTextField2.getText()+"' where code ='"+jTextField1.getText()+"' and supplier_name = '"+jTextField36.getText()+"';commit work");
-
-                //  java.sql.PreparedStatement pstmt = connectDB.prepareStatement ("begin work; update pb_doctors_list set status = 'Suspended' where staff_no ='"+jTextField1.getText()+"';commit work");
-                //java.sql.PreparedStatement pstmt = con.prepareStatement ("begin work; update shares_receiptsb set deposit = (deposit + '"+jTextField3.getText()+"' + '"+jTextField12.getText()+"') where code = '"+jComboBox1.getSelectedItem()+"'and deposit = '"+jCheckBox1.getText().toString()+"';commit work");
-                pstmt.executeUpdate();
-                jLabel4.setForeground(java.awt.Color.red);
-                jLabel4.setText("Account Suspended");
+                
+                
+                 java.sql.PreparedStatement pstmts = connectDB.prepareStatement("insert into inventory_supplier_account (supplier_code,action,reason,authorising_officer)values(?,?,?,?)");
+                 pstmts.setObject(1, SupplierCodeTxt.getText());
+                 if(jCheckBox3.isSelected()){
+                     java.sql.PreparedStatement pstmt = connectDB.prepareStatement("update inventory_suppliers set status = 'true' where supplier_code='"+SupplierCodeTxt.getText()+"'");
+                     pstmt.executeUpdate();
+                    pstmts.setObject(2, "Suspend"); 
+                 }else if(jCheckBox4.isSelected()){
+                     pstmts.setObject(2, "Activate");
+                     java.sql.PreparedStatement pstmt = connectDB.prepareStatement("update inventory_suppliers set status = 'false' where supplier_code='"+SupplierCodeTxt.getText()+"'");
+                        pstmt.executeUpdate();
+                 }
+                 pstmts.setObject(3, reason.getText());
+                 pstmts.setObject(4, authorised.getText());
+                 pstmts.executeUpdate();
+                 javax.swing.JOptionPane.showMessageDialog(this, "Transaction successfully done", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                 clearbtn.doClick();
             }   catch(java.sql.SQLException sq){
-                System.out.println(sq.getMessage());
+                sq.printStackTrace();
                 javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
 
             }
 
-        } else{
-            try {
-                java.sql.PreparedStatement pstmt = connectDB.prepareStatement("begin work; update st_suppliers set closed = 'true',date_closed = current_date,closed_by =current_user,authorised_by = '"+jTextField2.getText()+"' where code ='"+jTextField1.getText()+"' and supplier_name = '"+jTextField36.getText()+"';commit work");
-                //java.sql.PreparedStatement pstmt = con.prepareStatement ("begin work; update shares_receiptsb set deposit = (deposit + '"+jTextField3.getText()+"' + '"+jTextField12.getText()+"') where code = '"+jComboBox1.getSelectedItem()+"'and deposit = '"+jCheckBox1.getText().toString()+"';commit work");
-                pstmt.executeUpdate();
-                jLabel4.setForeground(java.awt.Color.magenta);
-                jLabel4.setText("Account Closed");
-            }   catch(java.sql.SQLException sq){
-                System.out.println(sq.getMessage());
-                javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
-
-            }
-        }
-        /*
-        } else{
-            if (this.jCheckBox2.isSelected()){
-
-                try {
-                    java.sql.PreparedStatement pstmt = connectDB.prepareStatement ("begin work; update pb_doctors_list set status = 'Suspended' where staff_no ='"+jTextField1.getText()+"';commit work");
-                    //java.sql.PreparedStatement pstmt = con.prepareStatement ("begin work; update shares_receiptsb set deposit = (deposit + '"+jTextField3.getText()+"' + '"+jTextField12.getText()+"') where code = '"+jComboBox1.getSelectedItem()+"'and deposit = '"+jCheckBox1.getText().toString()+"';commit work");
-                    pstmt.executeUpdate();
-                    jLabel4.setForeground(java.awt.Color.red);
-                    jLabel4.setText("Account Suspended");
-                }   catch(java.sql.SQLException sq){
-                    System.out.println(sq.getMessage());
-                    javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
-
-                }
-
-            } else{
-                if (this.jCheckBox3.isSelected()){
-
-                    try {
-                        java.sql.PreparedStatement pstmt = connectDB.prepareStatement ("begin work; update pb_doctors_list set status = '"+jCheckBox3.getText()+"' where staff_no ='"+jTextField1.getText()+"';commit work");
-                        //java.sql.PreparedStatement pstmt = con.prepareStatement ("begin work; update shares_receiptsb set deposit = (deposit + '"+jTextField3.getText()+"' + '"+jTextField12.getText()+"') where code = '"+jComboBox1.getSelectedItem()+"'and deposit = '"+jCheckBox1.getText().toString()+"';commit work");
-                        pstmt.executeUpdate();
-                        jLabel4.setForeground(java.awt.Color.blue);
-                        jLabel4.setText("Account Activated");
-                    }   catch(java.sql.SQLException sq){
-                        System.out.println(sq.getMessage());
-                        javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
-
-                    }
-
-                }
-            }
-        }
-        */
-
-        /*else{
-            if (this.jCheckBox4.isSelected()){
-
-                try {
-                    java.sql.PreparedStatement pstmt = connectDB.prepareStatement ("begin work; update ac_scheme_providers set charge_interest = true where scheme_manager ='"+jTextField36.getText()+"';commit work");
-                    //java.sql.PreparedStatement pstmt = con.prepareStatement ("begin work; update shares_receiptsb set deposit = (deposit + '"+jTextField3.getText()+"' + '"+jTextField12.getText()+"') where code = '"+jComboBox1.getSelectedItem()+"'and deposit = '"+jCheckBox1.getText().toString()+"';commit work");
-                    pstmt.executeUpdate();
-                    jLabel4.setForeground(java.awt.Color.red);
-                    jLabel4.setText("Interest Chargeable");
-                }   catch(java.sql.SQLException sq){
-                    System.out.println(sq.getMessage());
-                    javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
-
-                }
-
-            } else{
-                if (this.jCheckBox41.isSelected()){
-
-                    try {
-                        java.sql.PreparedStatement pstmt = connectDB.prepareStatement ("begin work; update ac_schemes set charge_interest = false where scheme_manager ='"+jTextField36.getText()+"';commit work");
-                        //java.sql.PreparedStatement pstmt = con.prepareStatement ("begin work; update shares_receiptsb set deposit = (deposit + '"+jTextField3.getText()+"' + '"+jTextField12.getText()+"') where code = '"+jComboBox1.getSelectedItem()+"'and deposit = '"+jCheckBox1.getText().toString()+"';commit work");
-                        pstmt.executeUpdate();
-                        jLabel4.setForeground(java.awt.Color.blue);
-                        jLabel4.setText("Interest Not Chargeable");
-                    }   catch(java.sql.SQLException sq){
-                        System.out.println(sq.getMessage());
-                        javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
-
-                    }
-
-                }
-            }
-        }
-        }
-        }
-
-        java.util.Calendar calendar = java.util.Calendar.getInstance();
-
-        long dateNow = calendar.getTimeInMillis();
-
-        java.sql.Date datenowSql= new java.sql.Date(dateNow);
-
-        System.out.println(datenowSql.toString());
-
-        java.sql.Connection con;
-        /*
-        try {
-            java.sql.PreparedStatement pstmt = connectDB.prepareStatement ("begin work; update depreciation_method set depreciation_method = '"+selectedchkbx+"';commit work");
-            //java.sql.PreparedStatement pstmt = con.prepareStatement ("begin work; update shares_receiptsb set deposit = (deposit + '"+jTextField3.getText()+"' + '"+jTextField12.getText()+"') where code = '"+jComboBox1.getSelectedItem()+"'and deposit = '"+jCheckBox1.getText().toString()+"';commit work");
-            pstmt.executeUpdate();
-            jLabel4.setForeground(java.awt.Color.blue);
-            jLabel4.setText("Insert successful");
-        }   catch(java.sql.SQLException sq){
-            System.out.println(sq.getMessage());
-            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
-
-        }
-
-        /*
-        try {
-            java.sql.PreparedStatement pstmt = connectDB.prepareStatement("insert into depreciation_methods values(initcap(?))");
-            pstmt.setString(1,selectedchkbx);
-            pstmt.executeUpdate();
-            jLabel4.setForeground(java.awt.Color.blue);
-            jLabel4.setText("Insert successful");
-        }   catch(java.sql.SQLException sq){
-            System.out.println(sq.getMessage());
-            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
-
-            jLabel4.setForeground(java.awt.Color.red);
-            // jLabel4.setText("Sorry. Another Branch Code already exists");
-        }
-        */
+   
         // Add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        // Add your handling code here:
-    }//GEN-LAST:event_jButton4MouseClicked
+    private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        this.setVisible(false);// Add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        searchButtonClicked();
+
+        // Add your handling code here:
+    }//GEN-LAST:event_searchButton1ActionPerformed
+   private void searchButtonClicked() {
+
+        System.out.println("Showing dialog");
+
+        // java.awt.Point point = this.jComboBox1311.getLocationOnScreen();
+        java.awt.Point point = this.supplietTxt.getLocationOnScreen();
+
+        searchsupplier.setSize(700, 200);
+
+        searchsupplier.setLocation(point);
+
+        searchsupplier.setVisible(true);
+
+    }
+    private void jTextField1111CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField1111CaretUpdate
+        jSearchTable1.setModel(dbadmin.TableModel.createTableVectors(connectDB, "SELECT supplier_code,supplier_name FROM inventory_suppliers WHERE supplier_name ILIKE '%" + jTextField1111.getText() + "%' ORDER BY supplier_name"));
+        jSearchScrollPane1.setViewportView(jSearchTable1);
+        // Add your handling code here:
+    }//GEN-LAST:event_jTextField1111CaretUpdate
+
+    private void jTextField1111ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1111ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1111ActionPerformed
+
+    private void jSearchTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSearchTable1MouseClicked
+
+        supplietTxt.setText(jSearchTable1.getValueAt(jSearchTable1.getSelectedRow(), 1).toString());
+        SupplierCodeTxt.setText(jSearchTable1.getValueAt(jSearchTable1.getSelectedRow(), 0).toString());
+
+        searchsupplier.dispose();
+        // Add your handling code here:
+    }//GEN-LAST:event_jSearchTable1MouseClicked
+
+    private void jButton91ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton91ActionPerformed
+        this.searchsupplier.dispose();        // Add your handling code here:
+    }//GEN-LAST:event_jButton91ActionPerformed
+
+    private void SupplierCodeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SupplierCodeTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SupplierCodeTxtActionPerformed
+
+    private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
+        // TODO add your handling code here:
+        reason.setText("");
+        supplietTxt.setText("");
+        SupplierCodeTxt.setText("");
+        jCheckBox3.setSelected(false);
+        jCheckBox4.setSelected(false);
+        authorised.setText("");
+    }//GEN-LAST:event_clearbtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField SupplierCodeTxt;
+    private javax.swing.JTextField authorised;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton clearbtn;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton91;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel582;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel61;
+    private javax.swing.JPanel jSearchPanel1;
+    private javax.swing.JScrollPane jSearchScrollPane1;
+    private javax.swing.JTable jSearchTable1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField36;
-    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField jTextField1111;
+    private javax.swing.JTextField reason;
+    private javax.swing.JButton searchButton1;
+    private javax.swing.JDialog searchsupplier;
+    private javax.swing.JTextField supplietTxt;
     // End of variables declaration//GEN-END:variables
 }

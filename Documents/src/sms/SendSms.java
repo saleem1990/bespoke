@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sms;
 
 /**
@@ -11,35 +10,56 @@ package sms;
  * @author Wilson Gitau
  */
 import org.json.*;
+import java.sql.Connection;
+
 public class SendSms {
 
-  public SendSms(String recipients,String message)
-    {       String answer=null;
-	     // Specify your login credentials
-	     String username = "wndungi";
-	     String apiKey   = "7ac30ce4de2c4cc957d3cde506037531abfbf0b24e8e19e8373a0eda3a215ef4";
-	
-             // Create a new instance of our awesome gateway class
-	     SmsGateway gateway  = new SmsGateway(username, apiKey);
-	
-	     // Thats it, hit send and we'll take care of the rest. Any errors will
-	     // be captured in the Exception class below
-	    try {
-	        JSONArray results = gateway.sendMessage(recipients, message);
-			
-	        for( int i = 0; i < results.length(); ++i ) {
-		          JSONObject result = results.getJSONObject(i);
-                          System.out.println(result.getString("status")+","+result.getString("number") + ","+result.getString("messageId"));
-	    }
-                
-   	}
-   	
-   	catch (Exception e) {
-            System.out.println("Encountered an error while sending " + e.getMessage());
-	    }
-      
-	
-   }
-}
-  
+    public static Connection connectDB;
+    public static String username;
 
+    public SendSms(String recipients, String message) {
+        String answer = null;
+        // Specify your login credentials
+        String username = "wndungi";
+        String apiKey = "7ac30ce4de2c4cc957d3cde506037531abfbf0b24e8e19e8373a0eda3a215ef4";
+
+        // Create a new instance of our awesome gateway class
+        SmsGateway gateway = new SmsGateway(username, apiKey);
+
+	     // Thats it, hit send and we'll take care of the rest. Any errors will
+        // be captured in the Exception class below
+        try {
+            JSONArray results = gateway.sendMessage(recipients, message);
+
+            for (int i = 0; i < results.length(); ++i) {
+                JSONObject result = results.getJSONObject(i);
+              //  System.out.println(result.getString("status") + "," + result.getString("number") + "," + result.getString("messageId"));
+                try {
+
+                    connectDB.setAutoCommit(false);
+                    java.sql.PreparedStatement pstmt = connectDB.prepareStatement("insert into sms (messageId,message_status,number,message) values(?,?,?,?)");
+                    pstmt.setObject(1, result.getString("messageId"));
+                    pstmt.setObject(2, result.getString("status"));
+                    pstmt.setObject(3, result.getString("number"));
+                    pstmt.setObject(4, result.getString("message"));
+                    pstmt.executeUpdate();
+                    connectDB.commit();
+                    connectDB.setAutoCommit(true);
+
+                } catch (Exception sq) {
+                    sq.printStackTrace();
+
+                    try {
+                        connectDB.rollback();
+                    } catch (java.sql.SQLException sql) {
+                        sql.printStackTrace();
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Encountered an error while sending " + e.getMessage());
+        }
+
+    }
+}

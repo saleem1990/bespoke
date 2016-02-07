@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package inventory;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
+import java.sql.ResultSet;
 
 /**
  *
@@ -12,11 +14,17 @@ package inventory;
  */
 public class ItemsRegister extends javax.swing.JInternalFrame {
 
+    String username = null;
+    java.sql.Connection connectDB = null;
+    String target;
     /**
      * Creates new form ItemsRegister
      */
-    public ItemsRegister() {
+    public ItemsRegister(java.sql.Connection conndb, String user) {
+        connectDB = conndb;
+        username = user;
         initComponents();
+        
     }
 
     /**
@@ -29,43 +37,202 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jSearchDialog11 = new javax.swing.JDialog();
+        jSearchPanel1 = new javax.swing.JPanel();
+        jTextField1111 = new javax.swing.JTextField();
+        jSearchScrollPane1 = new javax.swing.JScrollPane();
+        jSearchTable1 = new dbadmin.JTable();
+        jButton91 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         fieldsPanel1 = new javax.swing.JPanel();
         branchidLbl1 = new javax.swing.JLabel();
-        branchidTxt1 = new javax.swing.JTextField();
+        name = new javax.swing.JTextField();
         geographicallocationLbl1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        initials = new javax.swing.JTextField();
+        jButton9 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         buttonPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         fieldsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        labelPanel = new javax.swing.JPanel();
-        imgPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        actionsPanel = new javax.swing.JPanel();
-        newAction = new javax.swing.JButton();
-        updateAction = new javax.swing.JButton();
-        deleteAction = new javax.swing.JButton();
-        clearAction = new javax.swing.JButton();
-        spacerPanel = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jButton18 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        grn2PayablesLinkingTable = new com.afrisoftech.dbadmin.JTable();
+        grn2PayablesLinkingTable = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox4 = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        intials = new javax.swing.JTextField();
+        jPanel13 = new javax.swing.JPanel();
+        jButton8 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        cmbSource = new javax.swing.JComboBox();
+        lblSource = new javax.swing.JLabel();
+        cmbTarget = new javax.swing.JComboBox();
+        listRbtn = new javax.swing.JRadioButton();
+        storeRbtn = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        grn2PayablesLinkingTable1 = new com.afrisoftech.dbadmin.JTable();
+        grn2PayablesLinkingTable1 = new dbadmin.JTable();
+        jPanel17 = new javax.swing.JPanel();
+        jButton21 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        cmbulk = new javax.swing.JComboBox();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        qty = new javax.swing.JTextField();
+        txtsmall = new javax.swing.JTextField();
+        jPanel61 = new javax.swing.JPanel();
+        itemName = new javax.swing.JTextField();
+        searchButton1 = new javax.swing.JButton();
+        jPanel15 = new javax.swing.JPanel();
+        jButton20 = new javax.swing.JButton();
+        jButton22 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtcode = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtcategory = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtstrength1 = new javax.swing.JTextField();
+        jPanel9 = new javax.swing.JPanel();
+        buttonPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        fieldsPanel2 = new javax.swing.JPanel();
+        branchidLbl2 = new javax.swing.JLabel();
+        markupclass = new javax.swing.JTextField();
+        geographicallocationLbl2 = new javax.swing.JLabel();
+        mark = new javax.swing.JTextField();
+        jButton13 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        fieldsPanel3 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jPanel14 = new javax.swing.JPanel();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        fieldsPanel4 = new javax.swing.JPanel();
+        branchidLbl3 = new javax.swing.JLabel();
+        unit = new javax.swing.JTextField();
+        jButton19 = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        fieldsPanel5 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jPanel16 = new javax.swing.JPanel();
+        jButton7 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jButton25 = new javax.swing.JButton();
+
+        jSearchDialog11.setModal(true);
+        jSearchDialog11.setUndecorated(true);
+        jSearchDialog11.getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        jSearchPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jSearchPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jTextField1111.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextField1111CaretUpdate(evt);
+            }
+        });
+        jTextField1111.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1111ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 10.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 100);
+        jSearchPanel1.add(jTextField1111, gridBagConstraints);
+
+        jSearchTable1.setShowHorizontalLines(false);
+        /*    try {
+            searchRowSet.setCommand("select product,selling_price,gl_code FROM st_stock_prices WHERE department = 'Pharmacy' order by product");
+            searchRowSet.setConnectionSource(pConnDB);
+
+            searchRowSet.execute();
+
+            // crset2.setExecuteOnLoad(true);
+            jSearchTable.setModel(new org.netbeans.lib.sql.models.TableModel(searchRowSet, new org.netbeans.lib.sql.models.TableModel.Column[] {
+                new org.netbeans.lib.sql.models.TableModel.Column("product", "Description", false),
+                new org.netbeans.lib.sql.models.TableModel.Column("selling_price", "Amount", false),
+                new org.netbeans.lib.sql.models.TableModel.Column("gl_code", "Gl_code", false)
+
+            }));
+            // jSearchScrollPane.setViewportView(jSearchTable);
+
+        } catch(java.sql.SQLException sqlex){
+            javax.swing.JOptionPane.showMessageDialog(this,sqlex.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
+
+            System.out.println(sqlex.getMessage());
+        }
+        */
+        jSearchTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jSearchTable1MouseClicked(evt);
+            }
+        });
+        jSearchScrollPane1.setViewportView(jSearchTable1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 20.0;
+        jSearchPanel1.add(jSearchScrollPane1, gridBagConstraints);
+
+        jButton91.setText("Dispose");
+        jButton91.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton91ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jSearchPanel1.add(jButton91, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jSearchDialog11.getContentPane().add(jSearchPanel1, gridBagConstraints);
 
         setClosable(true);
         setIconifiable(true);
@@ -87,7 +254,7 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        fieldsPanel1.add(branchidTxt1, gridBagConstraints);
+        fieldsPanel1.add(name, gridBagConstraints);
 
         geographicallocationLbl1.setText("Category Initials:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -99,14 +266,37 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        fieldsPanel1.add(jTextField1, gridBagConstraints);
+        fieldsPanel1.add(initials, gridBagConstraints);
+
+        jButton9.setMnemonic('s');
+        jButton9.setText("Record Entry");
+        jButton9.setToolTipText("click to store data");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        fieldsPanel1.add(jButton9, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        fieldsPanel1.add(jSeparator1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 5.0;
-        gridBagConstraints.weighty = 20.0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         jPanel1.add(fieldsPanel1, gridBagConstraints);
 
         buttonPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -119,24 +309,13 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 5.0;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.weightx = 1.0;
         jPanel1.add(buttonPanel, gridBagConstraints);
 
         fieldsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Data manipulation utility"));
         fieldsPanel.setLayout(new java.awt.GridBagLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable1.setModel(dbadmin.TableModel.createTableVectors(connectDB,"select category_id,category_name from inventory_items_category order by 2"));
         jScrollPane1.setViewportView(jTable1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -149,111 +328,90 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 5.0;
-        gridBagConstraints.weighty = 20.0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 4.0;
         jPanel1.add(fieldsPanel, gridBagConstraints);
 
-        labelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        labelPanel.setLayout(new java.awt.GridBagLayout());
+        jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel12.setLayout(new java.awt.GridBagLayout());
 
-        imgPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        imgPanel.setLayout(new java.awt.GridBagLayout());
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        imgPanel.add(jLabel2, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        labelPanel.add(imgPanel, gridBagConstraints);
-
-        actionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions"));
-        actionsPanel.setLayout(new java.awt.GridBagLayout());
-
-        newAction.setMnemonic('w');
-        newAction.setText("Save Record");
-        newAction.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setMnemonic('s');
+        jButton4.setText("Delete");
+        jButton4.setToolTipText("click to store data");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newActionActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 17;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        actionsPanel.add(newAction, gridBagConstraints);
+        jPanel12.add(jButton4, gridBagConstraints);
 
-        updateAction.setMnemonic('U');
-        updateAction.setText("Edit");
-        updateAction.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setMnemonic('r');
+        jButton6.setText("Remove Row");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateActionActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 17;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        actionsPanel.add(updateAction, gridBagConstraints);
+        jPanel12.add(jButton6, gridBagConstraints);
 
-        deleteAction.setMnemonic('D');
-        deleteAction.setText("Delete");
-        deleteAction.addActionListener(new java.awt.event.ActionListener() {
+        jButton5.setMnemonic('l');
+        jButton5.setText("Clear");
+        jButton5.setToolTipText("click to clear fields");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteActionActionPerformed(evt);
+                jButton5ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 17;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        actionsPanel.add(deleteAction, gridBagConstraints);
+        jPanel12.add(jButton5, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 200.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel12.add(jLabel13, gridBagConstraints);
 
-        clearAction.setMnemonic('C');
-        clearAction.setText("Clear");
-        clearAction.addActionListener(new java.awt.event.ActionListener() {
+        jButton18.setMnemonic('s');
+        jButton18.setText("Update Records");
+        jButton18.setToolTipText("click to store data");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearActionActionPerformed(evt);
+                jButton18ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 17;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        actionsPanel.add(clearAction, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 5.0;
-        actionsPanel.add(spacerPanel, gridBagConstraints);
+        jPanel12.add(jButton18, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 20.0;
-        labelPanel.add(actionsPanel, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel1.add(labelPanel, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel1.add(jPanel12, gridBagConstraints);
 
         jTabbedPane1.addTab("Stock Categories", jPanel1);
 
@@ -264,37 +422,24 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
 
         grn2PayablesLinkingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Item Name ", "Strength", "Re-Order Level", "Min Stock", "Max Stock", "Markup"
+                "Item Name ", "Strength", "Smallest Unit", "Re-Order Level", "Min Stock", "Max Stock", "Markup"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         grn2PayablesLinkingTable.setGridColor(new java.awt.Color(204, 204, 255));
+        this.grn2PayablesLinkingTable.getColumnModel().getColumn(6).setCellEditor(new javax.swing.DefaultCellEditor(new javax.swing.JComboBox(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "select '-' UNION select mark_up_class from inventory_mark_up order by 1"))));
+        this.grn2PayablesLinkingTable.getColumnModel().getColumn(2).setCellEditor(new javax.swing.DefaultCellEditor(new javax.swing.JComboBox(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "Select '-' union select unit from inventory_item_units order by 1"))));
         //this.procurementPlanTbl.getColumnModel().getColumn(i).setCellEditor(new javax.swing.DefaultCellEditor((javax.swing.JComboBox)new com.afrisoftech.lib.DatePicker()));
         grn2PayablesLinkingTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -343,17 +488,42 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select Warehouse", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 0, 51))); // NOI18N
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
-        jLabel3.setText("Warehouse Name:");
+        jLabel3.setText("Item Category");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
         jPanel4.add(jLabel3, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setModel(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "Select '-' union select category_name from inventory_items_category order by 1"));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jComboBox1, gridBagConstraints);
+        gridBagConstraints.weightx = 1.0;
+        jPanel4.add(jComboBox4, gridBagConstraints);
+
+        jLabel6.setText("Category Initials");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        jPanel4.add(jLabel6, gridBagConstraints);
+
+        intials.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        jPanel4.add(intials, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -364,7 +534,77 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel2.add(jPanel4, gridBagConstraints);
 
+        jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel13.setLayout(new java.awt.GridBagLayout());
+
+        jButton8.setMnemonic('s');
+        jButton8.setText("Record Entry");
+        jButton8.setToolTipText("click to store data");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel13.add(jButton8, gridBagConstraints);
+
+        jButton10.setMnemonic('r');
+        jButton10.setText("Remove Row");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        jPanel13.add(jButton10, gridBagConstraints);
+
+        jButton11.setMnemonic('l');
+        jButton11.setText("Clear");
+        jButton11.setToolTipText("click to clear fields");
+        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton11MouseClicked(evt);
+            }
+        });
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel13.add(jButton11, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 200.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel13.add(jLabel14, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel2.add(jPanel13, gridBagConstraints);
+
         jTabbedPane1.addTab("Stock Items", jPanel2);
+
+        jPanel3.setLayout(new java.awt.GridBagLayout());
 
         /*        javax.swing.SpinnerDateModel spinerDate = new javax.swing.SpinnerDateModel();
         dateSpinner = new javax.swing.JSpinner(spinerDate);
@@ -382,35 +622,114 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select Warehouse", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 0, 51))); // NOI18N
         jPanel6.setLayout(new java.awt.GridBagLayout());
 
-        jLabel4.setText("Duplicate to Store");
+        jLabel4.setText("Target Store");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel6.add(jLabel4, gridBagConstraints);
+
+        cmbSource.setEnabled(false);
+        cmbSource.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSourceActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel6.add(cmbSource, gridBagConstraints);
+
+        lblSource.setText("Source Store:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel6.add(lblSource, gridBagConstraints);
+
+        cmbTarget.setModel(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "Select '-' union select concat(store_name,' - ',store_id) from inventory_stores order by 1"));
+        cmbTarget.setEnabled(false);
+        cmbTarget.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTargetActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel6.add(cmbTarget, gridBagConstraints);
+
+        buttonGroup1.add(listRbtn);
+        listRbtn.setText("From Item List");
+        listRbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listRbtnActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.weightx = 1.0;
-        jPanel6.add(jLabel4, gridBagConstraints);
+        gridBagConstraints.weighty = 1.0;
+        jPanel6.add(listRbtn, gridBagConstraints);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        jPanel6.add(jComboBox2, gridBagConstraints);
-
-        jLabel5.setText("Source Store:");
+        buttonGroup1.add(storeRbtn);
+        storeRbtn.setText("From one store to another");
+        storeRbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                storeRbtnActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.weightx = 1.0;
-        jPanel6.add(jLabel5, gridBagConstraints);
+        gridBagConstraints.weighty = 1.0;
+        jPanel6.add(storeRbtn, gridBagConstraints);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jButton1.setText("Populate");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        jPanel6.add(jComboBox3, gridBagConstraints);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.weighty = 1.0;
+        jPanel6.add(jButton1, gridBagConstraints);
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Received Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
+        jCheckBox1.setText("Tick All");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        jPanel6.add(jCheckBox1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel3.add(jPanel6, gridBagConstraints);
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
         jPanel7.setLayout(new java.awt.GridBagLayout());
 
         grn2PayablesLinkingTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -468,32 +787,633 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel7.add(jScrollPane3, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 657, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 6, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 7, Short.MAX_VALUE)))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 25, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 25, Short.MAX_VALUE)))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 4.0;
+        jPanel3.add(jPanel7, gridBagConstraints);
+
+        jPanel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel17.setLayout(new java.awt.GridBagLayout());
+
+        jButton21.setMnemonic('s');
+        jButton21.setText("Save");
+        jButton21.setToolTipText("click to store data");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel17.add(jButton21, gridBagConstraints);
+
+        jButton23.setMnemonic('l');
+        jButton23.setText("Clear");
+        jButton23.setToolTipText("click to clear fields");
+        jButton23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton23MouseClicked(evt);
+            }
+        });
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel17.add(jButton23, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 200.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel17.add(jLabel20, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel3.add(jPanel17, gridBagConstraints);
 
         jTabbedPane1.addTab("Add Items To Store", jPanel3);
+
+        jPanel8.setLayout(new java.awt.GridBagLayout());
+
+        /*        javax.swing.SpinnerDateModel spinerDate = new javax.swing.SpinnerDateModel();
+        dateSpinner = new javax.swing.JSpinner(spinerDate);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 30);
+        jPanel1.add(dateSpinner, gridBagConstraints);
+
+        */
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Define Bulk units", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 0, 51))); // NOI18N
+        jPanel11.setLayout(new java.awt.GridBagLayout());
+
+        jLabel8.setText("Qty of Smallest Unit in Single bulk");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(jLabel8, gridBagConstraints);
+
+        cmbulk.setModel(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "Select '-' union select unit from inventory_item_units order by 1"));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(cmbulk, gridBagConstraints);
+
+        jLabel9.setText("Item_code");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(jLabel9, gridBagConstraints);
+
+        jLabel10.setText("Strength");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(jLabel10, gridBagConstraints);
+
+        jLabel11.setText("Bulk Unit");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(jLabel11, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(qty, gridBagConstraints);
+
+        txtsmall.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(txtsmall, gridBagConstraints);
+
+        jPanel61.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel61.setMinimumSize(new java.awt.Dimension(82, 37));
+        jPanel61.setLayout(new java.awt.GridBagLayout());
+
+        itemName.setEditable(false);
+        itemName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemNameActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel61.add(itemName, gridBagConstraints);
+
+        searchButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kiwi/images/date.gif"))); // NOI18N
+        searchButton1.setToolTipText("Search");
+        searchButton1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        searchButton1.setMaximumSize(new java.awt.Dimension(74, 53));
+        searchButton1.setMinimumSize(new java.awt.Dimension(74, 53));
+        searchButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        searchButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        jPanel61.add(searchButton1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(jPanel61, gridBagConstraints);
+
+        jPanel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel15.setLayout(new java.awt.GridBagLayout());
+
+        jButton20.setMnemonic('s');
+        jButton20.setText("Record Entry");
+        jButton20.setToolTipText("click to store data");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel15.add(jButton20, gridBagConstraints);
+
+        jButton22.setMnemonic('l');
+        jButton22.setText("Clear");
+        jButton22.setToolTipText("click to clear fields");
+        jButton22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton22MouseClicked(evt);
+            }
+        });
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel15.add(jButton22, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 200.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel15.add(jLabel16, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel11.add(jPanel15, gridBagConstraints);
+
+        jLabel12.setText("Smallest Unit");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(jLabel12, gridBagConstraints);
+
+        txtcode.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(txtcode, gridBagConstraints);
+
+        jLabel18.setText("Category");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(jLabel18, gridBagConstraints);
+
+        txtcategory.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(txtcategory, gridBagConstraints);
+
+        jLabel19.setText("Item");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(jLabel19, gridBagConstraints);
+
+        txtstrength1.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel11.add(txtstrength1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel8.add(jPanel11, gridBagConstraints);
+
+        jTabbedPane1.addTab("Breaking Of Bulk", jPanel8);
+
+        jPanel9.setLayout(new java.awt.GridBagLayout());
+
+        buttonPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        buttonPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jLabel2.setText("Mark Up Classes");
+        buttonPanel1.add(jLabel2, new java.awt.GridBagConstraints());
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        jPanel9.add(buttonPanel1, gridBagConstraints);
+
+        fieldsPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Data manipulation utility"));
+        fieldsPanel2.setLayout(new java.awt.GridBagLayout());
+
+        branchidLbl2.setText("Mark up Class");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        fieldsPanel2.add(branchidLbl2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        fieldsPanel2.add(markupclass, gridBagConstraints);
+
+        geographicallocationLbl2.setText("Markup value");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        fieldsPanel2.add(geographicallocationLbl2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        fieldsPanel2.add(mark, gridBagConstraints);
+
+        jButton13.setMnemonic('s');
+        jButton13.setText("Record Entry");
+        jButton13.setToolTipText("click to store data");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        fieldsPanel2.add(jButton13, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        fieldsPanel2.add(jSeparator2, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel9.add(fieldsPanel2, gridBagConstraints);
+
+        fieldsPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Data manipulation utility"));
+        fieldsPanel3.setLayout(new java.awt.GridBagLayout());
+
+        jTable2.setModel(dbadmin.TableModel.createTableVectors(connectDB,"select mark_up_class,mark from inventory_mark_up order by 1"));
+        jScrollPane4.setViewportView(jTable2);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        fieldsPanel3.add(jScrollPane4, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 4.0;
+        jPanel9.add(fieldsPanel3, gridBagConstraints);
+
+        jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.setLayout(new java.awt.GridBagLayout());
+
+        jButton14.setMnemonic('s');
+        jButton14.setText("Record Entry");
+        jButton14.setToolTipText("click to store data");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel14.add(jButton14, gridBagConstraints);
+
+        jButton15.setMnemonic('r');
+        jButton15.setText("Remove Row");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        jPanel14.add(jButton15, gridBagConstraints);
+
+        jButton16.setMnemonic('l');
+        jButton16.setText("Clear");
+        jButton16.setToolTipText("click to clear fields");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+        jButton16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton16MouseClicked(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel14.add(jButton16, gridBagConstraints);
+
+        jButton17.setMnemonic('C');
+        jButton17.setText("Close");
+        jButton17.setToolTipText("Click to close");
+        jButton17.setSelected(true);
+        jButton17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton17MouseClicked(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel14.add(jButton17, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 200.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel14.add(jLabel15, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel9.add(jPanel14, gridBagConstraints);
+
+        jTabbedPane1.addTab("Mark Up Classes", jPanel9);
+
+        jPanel10.setLayout(new java.awt.GridBagLayout());
+
+        jLabel7.setText("Register Item Units");
+        jPanel10.add(jLabel7, new java.awt.GridBagConstraints());
+
+        fieldsPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Data manipulation utility"));
+        fieldsPanel4.setLayout(new java.awt.GridBagLayout());
+
+        branchidLbl3.setText("Unit Name");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        fieldsPanel4.add(branchidLbl3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        fieldsPanel4.add(unit, gridBagConstraints);
+
+        jButton19.setMnemonic('s');
+        jButton19.setText("Record Entry");
+        jButton19.setToolTipText("click to store data");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        fieldsPanel4.add(jButton19, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        fieldsPanel4.add(jSeparator3, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel10.add(fieldsPanel4, gridBagConstraints);
+
+        fieldsPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Data manipulation utility"));
+        fieldsPanel5.setLayout(new java.awt.GridBagLayout());
+
+        jTable3.setModel(dbadmin.TableModel.createTableVectors(connectDB,"select unit,'' as New from inventory_item_units order by 1"));
+        jScrollPane5.setViewportView(jTable3);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        fieldsPanel5.add(jScrollPane5, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 4.0;
+        jPanel10.add(fieldsPanel5, gridBagConstraints);
+
+        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel16.setLayout(new java.awt.GridBagLayout());
+
+        jButton7.setMnemonic('s');
+        jButton7.setText("Delete");
+        jButton7.setToolTipText("click to store data");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        jPanel16.add(jButton7, gridBagConstraints);
+
+        jButton12.setMnemonic('r');
+        jButton12.setText("Remove Row");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        jPanel16.add(jButton12, gridBagConstraints);
+
+        jButton24.setMnemonic('l');
+        jButton24.setText("Clear");
+        jButton24.setToolTipText("click to clear fields");
+        jButton24.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton24MouseClicked(evt);
+            }
+        });
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel16.add(jButton24, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 200.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel16.add(jLabel17, gridBagConstraints);
+
+        jButton25.setMnemonic('s');
+        jButton25.setText("Update Records");
+        jButton25.setToolTipText("click to store data");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.weightx = 1.0;
+        jPanel16.add(jButton25, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
+        jPanel10.add(jPanel16, gridBagConstraints);
+
+        jTabbedPane1.addTab("Items Units", jPanel10);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -504,129 +1424,91 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void newActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newActionActionPerformed
-        //        try {
-            //
-            //            connectDB.setAutoCommit(false);
-            //
-            //            java.sql.PreparedStatement pstmt = connectDB.prepareStatement("insert into hr.hr_branches (branch_id,geographical_location,branch_name) values(?,upper(?),?)");
-            //            pstmt.setObject(1,branchidTxt.getText());
-            //            pstmt.setObject(2,geographicallocationCbx.getSelectedItem().toString());
-            //            pstmt.setObject(3,branchnameTxt.getText());
-            //            // pstmt.setObject(4,continentCbx.getSelectedItem().toString());
-            //            pstmt.executeUpdate();
-            //            connectDB.commit();
-            //            connectDB.setAutoCommit(true);
-            //
-            //            javax.swing.JOptionPane.showMessageDialog(this, "Data saved successfully","Confirmation Message",javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            //
-            //        }   catch(java.sql.SQLException sq){
-            //            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
-            //            try {
-                //                connectDB.rollback();
-                //            }catch (java.sql.SQLException sql){
-                //                javax.swing.JOptionPane.showMessageDialog(this,sql.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
-                //            }
-            //      }// TODO add your handling code here:
-    }//GEN-LAST:event_newActionActionPerformed
-
-    private void updateActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateActionActionPerformed
-
-    private void deleteActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteActionActionPerformed
-
-    private void clearActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clearActionActionPerformed
-
     private void grn2PayablesLinkingTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grn2PayablesLinkingTableMouseClicked
         //        if (grn2PayablesLinkingTable.getSelectedColumn() == 9) // jCheckBox2.setSelected(false);
         //        {
-            //            linkGRNToCreditorBtn.setEnabled(false);
-            //        }
+        //            linkGRNToCreditorBtn.setEnabled(false);
+        //        }
         //        {
-            //            Double totalAmnt = 0.0, qtytotal = 0.0;
-            //            if (Boolean.valueOf(grn2PayablesLinkingTable.getModel().getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 9).toString()) == java.lang.Boolean.TRUE) {
-                //                totalAmnt = 0.0;
-                //                qtytotal = 0.0;
-                //                if (v.contains(grn2PayablesLinkingTable.getSelectedRow())) {
-                    //                    //  v.remove(grn2PayablesLinkingTable.getSelectedRow());
-                    //                } else if (!v.contains(grn2PayablesLinkingTable.getSelectedRow())) {
-                    //                    v.add(grn2PayablesLinkingTable.getSelectedRow());
-                    //                }
-                //            } else if (Boolean.valueOf(grn2PayablesLinkingTable.getModel().getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 9).toString()) == java.lang.Boolean.FALSE) {
-                //                totalAmnt = 0.0;
-                //                qtytotal = 0.0;
-                //                v.remove(grn2PayablesLinkingTable.getSelectedRow());
-                //            }
-            //
-            //            for (int i = 0; i < v.size(); i++) {
-                //                Double total = Double.parseDouble(grn2PayablesLinkingTable.getModel().getValueAt(Integer.parseInt(v.elementAt(i).toString()), 7).toString());
-                //                totalAmnt = totalAmnt + total;
-                //                Double totals = Double.parseDouble(grn2PayablesLinkingTable.getModel().getValueAt(Integer.parseInt(v.elementAt(i).toString()), 6).toString());
-                //                qtytotal = qtytotal + totals;
-                //
-                //            }
-            //
-            //            System.out.println(totalAmnt);
-            //            totalGrnAmountTxt.setText(totalAmnt.toString());
-            //            qtyTtField.setText(qtytotal.toString());
-            //
-            //        }
+        //            Double totalAmnt = 0.0, qtytotal = 0.0;
+        //            if (Boolean.valueOf(grn2PayablesLinkingTable.getModel().getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 9).toString()) == java.lang.Boolean.TRUE) {
+        //                totalAmnt = 0.0;
+        //                qtytotal = 0.0;
+        //                if (v.contains(grn2PayablesLinkingTable.getSelectedRow())) {
+        //                    //  v.remove(grn2PayablesLinkingTable.getSelectedRow());
+        //                } else if (!v.contains(grn2PayablesLinkingTable.getSelectedRow())) {
+        //                    v.add(grn2PayablesLinkingTable.getSelectedRow());
+        //                }
+        //            } else if (Boolean.valueOf(grn2PayablesLinkingTable.getModel().getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 9).toString()) == java.lang.Boolean.FALSE) {
+        //                totalAmnt = 0.0;
+        //                qtytotal = 0.0;
+        //                v.remove(grn2PayablesLinkingTable.getSelectedRow());
+        //            }
+        //
+        //            for (int i = 0; i < v.size(); i++) {
+        //                Double total = Double.parseDouble(grn2PayablesLinkingTable.getModel().getValueAt(Integer.parseInt(v.elementAt(i).toString()), 7).toString());
+        //                totalAmnt = totalAmnt + total;
+        //                Double totals = Double.parseDouble(grn2PayablesLinkingTable.getModel().getValueAt(Integer.parseInt(v.elementAt(i).toString()), 6).toString());
+        //                qtytotal = qtytotal + totals;
+        //
+        //            }
+        //
+        //            System.out.println(totalAmnt);
+        //            totalGrnAmountTxt.setText(totalAmnt.toString());
+        //            qtyTtField.setText(qtytotal.toString());
+        //
+        //        }
     }//GEN-LAST:event_grn2PayablesLinkingTableMouseClicked
 
     private void grn2PayablesLinkingTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grn2PayablesLinkingTableMouseReleased
         //        if (grn2PayablesLinkingTable.getSelectedColumn() == 1) {
-            //
-            //            if (grn2PayablesLinkingTable.getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 1) != null) {
-                //
-                //                java.awt.Point point = this.lpoNumberTxt.getLocationOnScreen();
-                //
-                //                jSearchDialog2.setSize(900, 200);
-                //
-                //                jSearchDialog2.setLocation(point);
-                //
-                //                jSearchDialog2.setVisible(true);
-                //
-                //                orderNumberTxt.grabFocus();
-                //
-                //                orderNumberTxt.setText(grn2PayablesLinkingTable.getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 1).toString());
-                //            }
-            //        }        // TODO add your handling code here:
+        //
+        //            if (grn2PayablesLinkingTable.getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 1) != null) {
+        //
+        //                java.awt.Point point = this.lpoNumberTxt.getLocationOnScreen();
+        //
+        //                jSearchDialog2.setSize(900, 200);
+        //
+        //                jSearchDialog2.setLocation(point);
+        //
+        //                jSearchDialog2.setVisible(true);
+        //
+        //                orderNumberTxt.grabFocus();
+        //
+        //                orderNumberTxt.setText(grn2PayablesLinkingTable.getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 1).toString());
+        //            }
+        //        }        // TODO add your handling code here:
     }//GEN-LAST:event_grn2PayablesLinkingTableMouseReleased
 
     private void grn2PayablesLinkingTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_grn2PayablesLinkingTableKeyReleased
         /*     double resFloat = 0.00;
-        //  double totalSum = 0.00;
-        double floatTotal = java.lang.Double.parseDouble(jTextField1.getText());
+         //  double totalSum = 0.00;
+         double floatTotal = java.lang.Double.parseDouble(jTextField1.getText());
 
-        if (jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4) != null) {
-            double amtToalloc = java.lang.Double.parseDouble(jTextField2.getText());
-            double floatCol2 = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+         if (jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4) != null) {
+         double amtToalloc = java.lang.Double.parseDouble(jTextField2.getText());
+         double floatCol2 = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
 
-            double floatCol3 = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-            double balance = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
+         double floatCol3 = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+         double balance = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
 
-            if (floatCol3 <= amtToalloc && amtToalloc >= 0){
+         if (floatCol3 <= amtToalloc && amtToalloc >= 0){
 
-                double resVal =floatCol2 - floatCol3;
+         double resVal =floatCol2 - floatCol3;
 
-                jTable1.setValueAt(new java.lang.Float(resVal), jTable1.getSelectedRow(), 5);
-            } else
-            if (floatCol3 > amtToalloc && amtToalloc > 0){
-                javax.swing.JOptionPane.showMessageDialog(this,"You cannot allocate amount higher than the amount to allocate","Comfirmation Message!",javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            }
+         jTable1.setValueAt(new java.lang.Float(resVal), jTable1.getSelectedRow(), 5);
+         } else
+         if (floatCol3 > amtToalloc && amtToalloc > 0){
+         javax.swing.JOptionPane.showMessageDialog(this,"You cannot allocate amount higher than the amount to allocate","Comfirmation Message!",javax.swing.JOptionPane.INFORMATION_MESSAGE);
+         }
 
-            this.tableModelTableChanged();
-        }else
-        if (jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4) == null) {
-            jTable1.setValueAt(new java.lang.Double(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString()), jTable1.getSelectedRow(), 5);
-            this.tableModelTableChanged();
-        }
-        */
+         this.tableModelTableChanged();
+         }else
+         if (jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4) == null) {
+         jTable1.setValueAt(new java.lang.Double(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString()), jTable1.getSelectedRow(), 5);
+         this.tableModelTableChanged();
+         }
+         */
         // Add your handling code here:
     }//GEN-LAST:event_grn2PayablesLinkingTableKeyReleased
 
@@ -642,44 +1524,680 @@ public class ItemsRegister extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_grn2PayablesLinkingTable1KeyReleased
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            connectDB.setAutoCommit(false);
+            java.sql.PreparedStatement pstmt31 = connectDB.prepareStatement("DELETE from inventory_items_category WHERE category_id = '" + jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString() + "'");
+            pstmt31.executeUpdate();
+            javax.swing.JOptionPane.showMessageDialog(this, "Data Deleted successfully", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            connectDB.commit();
+            connectDB.setAutoCommit(true);
+            jTable1.setModel(dbadmin.TableModel.createTableVectors(connectDB, "select category_id,category_name from inventory_items_category order by 2"));
+        } catch (java.sql.SQLException sq) {
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            try {
+                connectDB.rollback();
+            } catch (java.sql.SQLException sql) {
+                javax.swing.JOptionPane.showMessageDialog(this, sql.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+        // Add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+        int rows2Delete = jTable1.getSelectedRowCount();
+
+        int[] selectedRows = jTable1.getSelectedRows();
+
+        if (rows2Delete < 1) {
+
+            java.awt.Toolkit.getDefaultToolkit().beep();
+
+            javax.swing.JOptionPane.showMessageDialog(this, "There are no selected rows to delete!");
+
+        } else {
+
+            if (rows2Delete > 1) {
+
+                for (int i = 0; i < selectedRows.length; i++) {
+
+                    javax.swing.table.DefaultTableModel defTableModel = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+
+                    defTableModel.removeRow(selectedRows[i]);
+
+                }
+
+            } else {
+
+                javax.swing.table.DefaultTableModel defTableModel = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+
+                defTableModel.removeRow(jTable1.getSelectedRow());
+            }
+        }
+
+        // Add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        for (int k = 0; k < jTable1.getRowCount(); k++) {
+            for (int r = 0; r < jTable1.getColumnCount(); r++) {
+                jTable1.getModel().setValueAt(null, k, r);
+            }
+        }
+
+        // Add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // Add your handling code here:
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        try {
+            java.sql.PreparedStatement pstmts = connectDB.prepareStatement("insert into inventory_items_category (category_name,category_id)values(?,?)");
+            pstmts.setObject(1, name.getText().toUpperCase());
+            pstmts.setObject(2, initials.getText().toUpperCase());
+            pstmts.executeUpdate();
+            javax.swing.JOptionPane.showMessageDialog(this, "Transaction successfully done", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            name.setText("");
+            initials.setText("");
+            jTable1.setModel(dbadmin.TableModel.createTableVectors(connectDB, "select category_id,category_name from inventory_items_category order by 2"));
+        } catch (java.sql.SQLException sq) {
+            sq.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        String item_no = "";
+        for (int i = 0; i < grn2PayablesLinkingTable.getRowCount(); i++) {
+            System.out.println(grn2PayablesLinkingTable.getModel().getValueAt(i, 0));
+            if (grn2PayablesLinkingTable.getModel().getValueAt(i, 0) != null) {
+
+                try {
+                    java.sql.Statement pss = connectDB.createStatement();
+
+                    java.sql.ResultSet rsts = pss.executeQuery("select '" + intials.getText() + "'||lpad(nextval('Items_seq')::text,3,0::TEXT)");
+                    while (rsts.next()) {
+
+                        item_no = rsts.getObject(1).toString();
+                    }
+
+                    java.sql.PreparedStatement pstmts = connectDB.prepareStatement("insert into inventory_items (item_code,item_name,strength,category,reorder_level,min_stock,max_stock,mark_up,smallest_unit)values(?,?,?,?,?,?,?,?,?)");
+                    pstmts.setObject(1, item_no.toUpperCase());
+                    pstmts.setObject(2, grn2PayablesLinkingTable.getValueAt(i, 0).toString().toUpperCase());
+                    pstmts.setObject(3, grn2PayablesLinkingTable.getValueAt(i, 1).toString().toUpperCase());
+                    pstmts.setObject(4, intials.getText().toUpperCase());
+                    pstmts.setObject(5, grn2PayablesLinkingTable.getValueAt(i, 3));
+                    pstmts.setDouble(6, Double.parseDouble(grn2PayablesLinkingTable.getValueAt(i, 4).toString()));
+                    pstmts.setDouble(7, Double.parseDouble(grn2PayablesLinkingTable.getValueAt(i, 5).toString()));
+                    pstmts.setObject(8, grn2PayablesLinkingTable.getValueAt(i, 6).toString());
+                    pstmts.setObject(9, grn2PayablesLinkingTable.getValueAt(i, 2).toString());
+                    pstmts.executeUpdate();
+
+                } catch (java.sql.SQLException sq) {
+                    sq.printStackTrace();
+                    javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+        }
+        javax.swing.JOptionPane.showMessageDialog(this, "Transaction successfully done", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        jButton11.doClick();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+
+        int rows2Delete = grn2PayablesLinkingTable.getSelectedRowCount();
+
+        int[] selectedRows = grn2PayablesLinkingTable.getSelectedRows();
+
+        if (rows2Delete < 1) {
+
+            java.awt.Toolkit.getDefaultToolkit().beep();
+
+            javax.swing.JOptionPane.showMessageDialog(this, "There are no selected rows to delete!");
+
+        } else {
+
+            if (rows2Delete > 1) {
+
+                for (int i = 0; i < selectedRows.length; i++) {
+
+                    javax.swing.table.DefaultTableModel defTableModel = (javax.swing.table.DefaultTableModel) grn2PayablesLinkingTable.getModel();
+
+                    defTableModel.removeRow(selectedRows[i]);
+
+                }
+
+            } else {
+
+                javax.swing.table.DefaultTableModel defTableModel = (javax.swing.table.DefaultTableModel) grn2PayablesLinkingTable.getModel();
+
+                defTableModel.removeRow(grn2PayablesLinkingTable.getSelectedRow());
+            }
+        }
+
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        for (int k = 0; k < grn2PayablesLinkingTable.getRowCount(); k++) {
+            for (int r = 0; r < grn2PayablesLinkingTable.getColumnCount(); r++) {
+                grn2PayablesLinkingTable.getModel().setValueAt(null, k, r);
+            }
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11MouseClicked
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        try {
+            java.sql.PreparedStatement pstmts = connectDB.prepareStatement("insert into inventory_mark_up (mark_up_class,mark)values(?,?)");
+            pstmts.setObject(1, markupclass.getText().toUpperCase());
+            pstmts.setObject(2, Double.parseDouble(mark.getText()));
+            pstmts.executeUpdate();
+            javax.swing.JOptionPane.showMessageDialog(this, "Transaction successfully done", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            markupclass.setText("");
+            mark.setText("");
+        } catch (java.sql.SQLException sq) {
+            sq.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton16MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton16MouseClicked
+
+    private void jButton17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton17MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17MouseClicked
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            try {
+                connectDB.setAutoCommit(false);
+                java.sql.PreparedStatement pstmt31 = connectDB.prepareStatement("update inventory_items_category set category_name='" + jTable1.getModel().getValueAt(i, 1).toString().toUpperCase() + "' WHERE category_id = '" + jTable1.getModel().getValueAt(i, 0).toString() + "'");
+                pstmt31.executeUpdate();
+
+                connectDB.commit();
+                connectDB.setAutoCommit(true);
+            } catch (java.sql.SQLException sq) {
+                javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+                try {
+                    connectDB.rollback();
+                } catch (java.sql.SQLException sql) {
+                    javax.swing.JOptionPane.showMessageDialog(this, sql.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+        }
+        javax.swing.JOptionPane.showMessageDialog(this, "Data Updated successfully", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        jTable1.setModel(dbadmin.TableModel.createTableVectors(connectDB, "select category_id,category_name from inventory_items_category order by 2"));
+
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+        try {
+            java.sql.PreparedStatement pstmt = connectDB.prepareStatement("SELECT category_id from inventory_items_category where category_name='" + jComboBox4.getSelectedItem().toString() + "'");
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+
+                intials.setText(rs.getString(1));
+            }
+        } catch (Exception y) {
+
+        }
+    }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        // TODO add your handling code here:
+        try {
+            java.sql.PreparedStatement pstmts = connectDB.prepareStatement("insert into inventory_item_units (unit)values(?)");
+            pstmts.setObject(1, unit.getText().toUpperCase());
+            pstmts.executeUpdate();
+            javax.swing.JOptionPane.showMessageDialog(this, "Transaction successfully done", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            unit.setText("");
+            jTable3.setModel(dbadmin.TableModel.createTableVectors(connectDB, "select unit,'' as New from inventory_item_units order by 1"));
+        } catch (java.sql.SQLException sq) {
+            sq.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        try {
+            connectDB.setAutoCommit(false);
+            java.sql.PreparedStatement pstmt31 = connectDB.prepareStatement("DELETE from inventory_item_units WHERE unit = '" + jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0).toString() + "'");
+            pstmt31.executeUpdate();
+            javax.swing.JOptionPane.showMessageDialog(this, "Data Deleted successfully", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            connectDB.commit();
+            connectDB.setAutoCommit(true);
+            jTable3.setModel(dbadmin.TableModel.createTableVectors(connectDB, "select unit,'' as New from inventory_item_units order by 1"));
+        } catch (java.sql.SQLException sq) {
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            try {
+                connectDB.rollback();
+            } catch (java.sql.SQLException sql) {
+                javax.swing.JOptionPane.showMessageDialog(this, sql.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+        int rows2Delete = jTable3.getSelectedRowCount();
+
+        int[] selectedRows = jTable3.getSelectedRows();
+
+        if (rows2Delete < 1) {
+
+            java.awt.Toolkit.getDefaultToolkit().beep();
+
+            javax.swing.JOptionPane.showMessageDialog(this, "There are no selected rows to delete!");
+
+        } else {
+
+            if (rows2Delete > 1) {
+
+                for (int i = 0; i < selectedRows.length; i++) {
+
+                    javax.swing.table.DefaultTableModel defTableModel = (javax.swing.table.DefaultTableModel) jTable3.getModel();
+
+                    defTableModel.removeRow(selectedRows[i]);
+
+                }
+
+            } else {
+
+                javax.swing.table.DefaultTableModel defTableModel = (javax.swing.table.DefaultTableModel) jTable3.getModel();
+
+                defTableModel.removeRow(jTable3.getSelectedRow());
+            }
+        }
+
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton24MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton24MouseClicked
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        // TODO add your handling code here:
+        for (int k = 0; k < jTable3.getRowCount(); k++) {
+            for (int r = 0; r < jTable3.getColumnCount(); r++) {
+                jTable3.getModel().setValueAt(null, k, r);
+            }
+        }
+
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < jTable3.getRowCount(); i++) {
+            if (jTable3.getModel().getValueAt(i, 1).toString().length() > 0) {
+
+                try {
+                    connectDB.setAutoCommit(false);
+                    java.sql.PreparedStatement pstmt31 = connectDB.prepareStatement("update inventory_item_units set unit='" + jTable3.getModel().getValueAt(i, 1).toString().toUpperCase() + "' WHERE unit = '" + jTable3.getModel().getValueAt(i, 0).toString() + "'");
+                    pstmt31.executeUpdate();
+
+                    connectDB.commit();
+                    connectDB.setAutoCommit(true);
+                } catch (java.sql.SQLException sq) {
+                    javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    try {
+                        connectDB.rollback();
+                    } catch (java.sql.SQLException sql) {
+                        javax.swing.JOptionPane.showMessageDialog(this, sql.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+            }
+        }
+        javax.swing.JOptionPane.showMessageDialog(this, "Data Updated successfully", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        jTable3.setModel(dbadmin.TableModel.createTableVectors(connectDB, "select unit,'' as New from inventory_item_units order by 1"));
+
+    }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        // TODO add your handling code here:
+        try {
+            java.sql.PreparedStatement pstmts = connectDB.prepareStatement("insert into inventory_bulk_breaking (item_code,bulk_unit,qty)values(?,?,?)");
+            pstmts.setObject(1, txtcode.getText());
+            pstmts.setObject(2, cmbulk.getSelectedItem().toString());
+            pstmts.setDouble(3, Double.parseDouble(qty.getText()));
+            pstmts.executeUpdate();
+            javax.swing.JOptionPane.showMessageDialog(this, "Transaction successfully done", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            jButton22.doClick();
+        } catch (java.sql.SQLException sq) {
+            sq.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton22MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton22MouseClicked
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        // TODO add your handling code here:
+        itemName.setText("");
+        txtcategory.setText("");
+        txtcode.setText("");
+        txtsmall.setText("");
+        txtstrength1.setText("");
+        qty.setText("");
+        cmbulk.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void itemNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemNameActionPerformed
+
+    private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
+
+        searchButton11Clicked();
+
+        // Add your handling code here:
+    }//GEN-LAST:event_searchButton1ActionPerformed
+    private void searchButton11Clicked() {
+
+        System.out.println("Showing dialog");
+
+        jSearchDialog11.dispose();
+        java.awt.Point point = this.itemName.getLocationOnScreen();
+
+        jSearchDialog11.setSize(400, 200);
+
+        jSearchDialog11.setLocation(point);
+        jSearchDialog11.setVisible(true);
+
+    }
+    private void jTextField1111CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField1111CaretUpdate
+        jSearchTable1.setModel(dbadmin.TableModel.createTableVectors(connectDB, "SELECT item_name,strength,category,item_code,smallest_unit FROM inventory_items WHERE item_name ILIKE '%" + jTextField1111.getText() + "%' ORDER BY 1"));
+        jSearchScrollPane1.setViewportView(jSearchTable1);
+        // Add your handling code here:
+    }//GEN-LAST:event_jTextField1111CaretUpdate
+
+    private void jTextField1111ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1111ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1111ActionPerformed
+
+    private void jSearchTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSearchTable1MouseClicked
+
+        itemName.setText(jSearchTable1.getValueAt(jSearchTable1.getSelectedRow(), 0).toString());
+        txtcategory.setText(jSearchTable1.getValueAt(jSearchTable1.getSelectedRow(), 2).toString());
+        txtsmall.setText(jSearchTable1.getValueAt(jSearchTable1.getSelectedRow(), 4).toString());
+        txtcode.setText(jSearchTable1.getValueAt(jSearchTable1.getSelectedRow(), 3).toString());
+        txtstrength1.setText(jSearchTable1.getValueAt(jSearchTable1.getSelectedRow(), 1).toString());
+
+        jSearchDialog11.dispose();
+        // Add your handling code here:
+    }//GEN-LAST:event_jSearchTable1MouseClicked
+
+    private void jButton91ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton91ActionPerformed
+        this.jSearchDialog11.dispose();        // Add your handling code here:
+    }//GEN-LAST:event_jButton91ActionPerformed
+
+    private void storeRbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeRbtnActionPerformed
+        // TODO add your handling code here:
+        if (storeRbtn.isSelected()) {
+            cmbSource.enable(true);
+            cmbTarget.enable(true);
+            lblSource.setText("Source Store");
+            cmbSource.setModel(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "Select '-' union select concat(store_name,' - ',store_id) from inventory_stores order by 1"));
+
+        }
+
+    }//GEN-LAST:event_storeRbtnActionPerformed
+
+    private void listRbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listRbtnActionPerformed
+        // TODO add your handling code here:
+        if (listRbtn.isSelected()) {
+            cmbSource.enable(true);
+            cmbTarget.enable(true);
+            lblSource.setText("Source Item Category");
+            cmbSource.setModel(dbadmin.ComboBoxModel.ComboBoxModel(connectDB, "Select '-' union select concat(category_name,' - ',category_id) from inventory_items_category order by 1"));
+
+        }
+    }//GEN-LAST:event_listRbtnActionPerformed
+
+    private void cmbSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSourceActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+
+    }//GEN-LAST:event_cmbSourceActionPerformed
+
+    private void cmbTargetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTargetActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cmbTargetActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       cmbSource.setEnabled(false);
+       cmbTarget.setEnabled(false);
+        if(cmbSource.getSelectedIndex()==0){
+            javax.swing.JOptionPane.showMessageDialog(this,"Please specify the source","Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
+        }else if(cmbTarget.getSelectedIndex()==0){
+            javax.swing.JOptionPane.showMessageDialog(this,"Please specify the Target","Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
+        }else{
+        String source = cmbSource.getSelectedItem().toString();
+        String[] array = source.split("-");
+        source = array[1].trim();
+        
+        target = cmbTarget.getSelectedItem().toString();
+        String[] arrays = target.split("-");
+        target = arrays[1].trim();
+        if(listRbtn.isSelected()){
+         grn2PayablesLinkingTable1.setModel(dbadmin.TableModel.createTableVectors(connectDB, "select item_name,strength,smallest_unit,item_code,false as mark from inventory_items where category='"+source+"' and item_code not in(select item_code from inventory_store_items where store_code='"+target+"') order by 1"));   
+        }else if(storeRbtn.isSelected()){
+         grn2PayablesLinkingTable1.setModel(dbadmin.TableModel.createTableVectors(connectDB, "select item_name,strength,smallest_unit,item_code,false as mark from inventory_items where item_code in (select item_code from inventory_store_items where store_code='"+source+"') and item_code not in(select item_code from inventory_store_items where store_code='"+target+"') order by 1"));   
+        }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        // TODO add your handling code here:
+         for (int i = 0; i < grn2PayablesLinkingTable1.getRowCount(); i++) {
+            if (Boolean.parseBoolean(grn2PayablesLinkingTable1.getModel().getValueAt(i, 4).toString()) == true) {
+
+                try {
+ 
+                    java.sql.PreparedStatement pstmts = connectDB.prepareStatement("insert into inventory_store_items (item_code,store_code) values(?,?)");
+                    pstmts.setObject(1, grn2PayablesLinkingTable1.getValueAt(i, 3).toString());
+                    pstmts.setInt(2, Integer.parseInt(target));
+                    pstmts.executeUpdate();
+
+                } catch (java.sql.SQLException sq) {
+                    sq.printStackTrace();
+                    javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+        }
+        javax.swing.JOptionPane.showMessageDialog(this, "Transaction successfully done", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        jButton23.doClick();
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton23MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton23MouseClicked
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+        cmbSource.setSelectedIndex(0);
+        cmbSource.setEnabled(false);
+        cmbTarget.setSelectedIndex(0);
+        cmbTarget.setEnabled(false);
+         for (int k = 0; k < grn2PayablesLinkingTable1.getRowCount(); k++) {
+            for (int r = 0; r < grn2PayablesLinkingTable1.getColumnCount(); r++) {
+                grn2PayablesLinkingTable1.getModel().setValueAt(null, k, r);
+            }
+        }
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+        if(jCheckBox1.isSelected()){
+        for (int k = 0; k < grn2PayablesLinkingTable1.getRowCount(); k++) {
+                grn2PayablesLinkingTable1.getModel().setValueAt(true, k, 4);
+        } 
+        }else if(!jCheckBox1.isSelected()){
+          for (int k = 0; k < grn2PayablesLinkingTable1.getRowCount(); k++) {
+                grn2PayablesLinkingTable1.getModel().setValueAt(false, k, 4);
+        }   
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel actionsPanel;
     private javax.swing.JLabel branchidLbl1;
-    private javax.swing.JTextField branchidTxt1;
+    private javax.swing.JLabel branchidLbl2;
+    private javax.swing.JLabel branchidLbl3;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel buttonPanel;
-    private javax.swing.JButton clearAction;
-    private javax.swing.JButton deleteAction;
+    private javax.swing.JPanel buttonPanel1;
+    private javax.swing.JComboBox cmbSource;
+    private javax.swing.JComboBox cmbTarget;
+    private javax.swing.JComboBox cmbulk;
     private javax.swing.JPanel fieldsPanel;
     private javax.swing.JPanel fieldsPanel1;
+    private javax.swing.JPanel fieldsPanel2;
+    private javax.swing.JPanel fieldsPanel3;
+    private javax.swing.JPanel fieldsPanel4;
+    private javax.swing.JPanel fieldsPanel5;
     private javax.swing.JLabel geographicallocationLbl1;
+    private javax.swing.JLabel geographicallocationLbl2;
     private javax.swing.JTable grn2PayablesLinkingTable;
     private javax.swing.JTable grn2PayablesLinkingTable1;
-    private javax.swing.JPanel imgPanel;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JTextField initials;
+    private javax.swing.JTextField intials;
+    private javax.swing.JTextField itemName;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    public javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
+    private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButton91;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel61;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JDialog jSearchDialog11;
+    private javax.swing.JPanel jSearchPanel1;
+    private javax.swing.JScrollPane jSearchScrollPane1;
+    private javax.swing.JTable jSearchTable1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JPanel labelPanel;
-    private javax.swing.JButton newAction;
-    private javax.swing.JPanel spacerPanel;
-    private javax.swing.JButton updateAction;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTextField jTextField1111;
+    private javax.swing.JLabel lblSource;
+    private javax.swing.JRadioButton listRbtn;
+    private javax.swing.JTextField mark;
+    private javax.swing.JTextField markupclass;
+    private javax.swing.JTextField name;
+    private javax.swing.JTextField qty;
+    private javax.swing.JButton searchButton1;
+    private javax.swing.JRadioButton storeRbtn;
+    private javax.swing.JTextField txtcategory;
+    private javax.swing.JTextField txtcode;
+    private javax.swing.JTextField txtsmall;
+    private javax.swing.JTextField txtstrength1;
+    private javax.swing.JTextField unit;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package inventory;
 
 import java.sql.Connection;
@@ -13,11 +12,12 @@ import java.sql.Connection;
  * @author System Partners
  */
 public class Level1Inspection extends javax.swing.JInternalFrame {
-   public static Connection connectDB;
+
+    public static Connection connectDB;
     public static String username;
 
     /**
-     * Creates new form Level1Inspection
+     * Creates new form Level1Inspections
      */
     public Level1Inspection(java.sql.Connection conndb, String user) {
         connectDB = conndb;
@@ -35,9 +35,12 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel8 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        orderedItemsTbl =  new com.afrisoftech.dbadmin.JTable();
+        jSearchDialog11 = new javax.swing.JDialog();
+        jSearchPanel2 = new javax.swing.JPanel();
+        jTextField113 = new javax.swing.JTextField();
+        jSearchScrollPane = new javax.swing.JScrollPane();
+        jSearchTable = new dbadmin.JTable();
+        jButton9 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel111 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -45,44 +48,75 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         jLabel112 = new javax.swing.JLabel();
         SupplierTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        TenderTxt1 = new javax.swing.JTextField();
-        jPanel411 = new javax.swing.JPanel();
-        originalSupNametxt = new javax.swing.JTextField();
-        searchButton11 = new javax.swing.JButton();
+        storetxt = new javax.swing.JTextField();
+        jPanel61 = new javax.swing.JPanel();
+        lpoNo = new javax.swing.JTextField();
+        searchButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        lpoDate = new javax.swing.JTextField();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        orderedItemsTbl =  new dbadmin.JTable();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        grn2PayablesLinkingTable = new com.afrisoftech.dbadmin.JTable();
+        grn2PayablesLinkingTable = new javax.swing.JTable();
+        DeliveryNotes = new javax.swing.JLabel();
+        DeliveryNote = new javax.swing.JTextField();
+        Deliverydate = new javax.swing.JTextField();
+        DeliveryNotes1 = new javax.swing.JLabel();
+        DeliveryOfficer = new javax.swing.JTextField();
+        DeliveryNotes2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Save = new javax.swing.JButton();
         cancelbtn = new javax.swing.JButton();
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
-        setTitle("Level 1 Inspection");
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        jSearchDialog11.setModal(true);
+        jSearchDialog11.setUndecorated(true);
+        jSearchDialog11.getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LPO Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 204))); // NOI18N
-        jPanel8.setLayout(new java.awt.GridBagLayout());
+        jSearchPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jSearchPanel2.setLayout(new java.awt.GridBagLayout());
 
-        orderedItemsTbl.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
+        jTextField113.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextField113CaretUpdate(evt);
             }
-        ));
-        jScrollPane4.setViewportView(orderedItemsTbl);
-
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 10.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel8.add(jScrollPane4, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 100);
+        jSearchPanel2.add(jTextField113, gridBagConstraints);
+
+        jSearchTable.setShowHorizontalLines(false);
+        /*    try {
+            searchRowSet.setCommand("select product,selling_price,gl_code FROM st_stock_prices WHERE department = 'Pharmacy' order by product");
+            searchRowSet.setConnectionSource(pConnDB);
+
+            searchRowSet.execute();
+
+            // crset2.setExecuteOnLoad(true);
+            jSearchTable.setModel(new org.netbeans.lib.sql.models.TableModel(searchRowSet, new org.netbeans.lib.sql.models.TableModel.Column[] {
+                new org.netbeans.lib.sql.models.TableModel.Column("product", "Description", false),
+                new org.netbeans.lib.sql.models.TableModel.Column("selling_price", "Amount", false),
+                new org.netbeans.lib.sql.models.TableModel.Column("gl_code", "Gl_code", false)
+
+            }));
+            // jSearchScrollPane.setViewportView(jSearchTable);
+
+        } catch(java.sql.SQLException sqlex){
+            javax.swing.JOptionPane.showMessageDialog(this,sqlex.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
+
+            System.out.println(sqlex.getMessage());
+        }
+        */
+        jSearchTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jSearchTableMouseClicked(evt);
+            }
+        });
+        jSearchScrollPane.setViewportView(jSearchTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -90,8 +124,34 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 2.0;
-        getContentPane().add(jPanel8, gridBagConstraints);
+        gridBagConstraints.weighty = 20.0;
+        jSearchPanel2.add(jSearchScrollPane, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jButton9, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.jButton9.text")); // NOI18N
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jSearchPanel2.add(jButton9, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jSearchDialog11.getContentPane().add(jSearchPanel2, gridBagConstraints);
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle(org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.title")); // NOI18N
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         /*        javax.swing.SpinnerDateModel spinerDate = new javax.swing.SpinnerDateModel();
         dateSpinner = new javax.swing.JSpinner(spinerDate);
@@ -109,7 +169,7 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel111.setText("LPO/Invoice");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel111, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.jLabel111.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -120,7 +180,7 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         jPanel1.add(jLabel111, gridBagConstraints);
 
-        jLabel1.setText("Store Ordered");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.jLabel1.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -131,15 +191,15 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         TenderTxt.setEditable(false);
         TenderTxt.setForeground(new java.awt.Color(0, 204, 204));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 80);
         jPanel1.add(TenderTxt, gridBagConstraints);
 
-        jLabel112.setText("Supplier");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel112, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.jLabel112.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -159,16 +219,16 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel1.add(SupplierTxt, gridBagConstraints);
 
-        jLabel2.setText("Quotation/Tender");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.jLabel2.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        TenderTxt1.setEditable(false);
-        TenderTxt1.setForeground(new java.awt.Color(0, 204, 204));
+        storetxt.setEditable(false);
+        storetxt.setForeground(new java.awt.Color(0, 204, 204));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -176,42 +236,67 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 80);
-        jPanel1.add(TenderTxt1, gridBagConstraints);
+        jPanel1.add(storetxt, gridBagConstraints);
 
-        jPanel411.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel411.setLayout(new java.awt.GridBagLayout());
+        jPanel61.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel61.setMinimumSize(new java.awt.Dimension(82, 37));
+        jPanel61.setLayout(new java.awt.GridBagLayout());
 
-        originalSupNametxt.setEditable(false);
+        lpoNo.setEditable(false);
+        lpoNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lpoNoActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel411.add(originalSupNametxt, gridBagConstraints);
+        jPanel61.add(lpoNo, gridBagConstraints);
 
-        searchButton11.setToolTipText("Search");
-        searchButton11.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        searchButton11.setMaximumSize(new java.awt.Dimension(74, 53));
-        searchButton11.setMinimumSize(new java.awt.Dimension(74, 53));
-        searchButton11.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        searchButton11.addActionListener(new java.awt.event.ActionListener() {
+        searchButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kiwi/images/date.gif"))); // NOI18N
+        searchButton1.setToolTipText(org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.searchButton1.toolTipText")); // NOI18N
+        searchButton1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        searchButton1.setMaximumSize(new java.awt.Dimension(74, 53));
+        searchButton1.setMinimumSize(new java.awt.Dimension(74, 53));
+        searchButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        searchButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButton11ActionPerformed(evt);
+                searchButton1ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        jPanel411.add(searchButton11, gridBagConstraints);
+        gridBagConstraints.gridy = 1;
+        jPanel61.add(searchButton1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 3.0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel1.add(jPanel61, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.jLabel3.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel1.add(jPanel411, gridBagConstraints);
+        jPanel1.add(jLabel3, gridBagConstraints);
+
+        lpoDate.setEditable(false);
+        lpoDate.setForeground(new java.awt.Color(0, 204, 204));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 80);
+        jPanel1.add(lpoDate, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -222,10 +307,10 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Received Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 0, 0))); // NOI18N
-        jPanel5.setLayout(new java.awt.GridBagLayout());
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.jPanel8.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(0, 0, 204))); // NOI18N
+        jPanel8.setLayout(new java.awt.GridBagLayout());
 
-        grn2PayablesLinkingTable.setModel(new javax.swing.table.DefaultTableModel(
+        orderedItemsTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -249,14 +334,76 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Date", "Delivey No", "Item", "Price/Item", "QTY", "Total Amt", "Approve", "Reject", "Remarks"
+                "Items", "units", "qty", "unit_price", "Discount", "Vat", "Net Total", "undelivered qty", "days to deliver"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        orderedItemsTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                orderedItemsTblMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(orderedItemsTbl);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel8.add(jScrollPane4, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 2.0;
+        getContentPane().add(jPanel8, gridBagConstraints);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.jPanel5.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 0, 0))); // NOI18N
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        grn2PayablesLinkingTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Item", "Units Received", "Qty", "Unit Price", "Total Value", "Total Qty In", "Batch No", "Expiry Date", "Approve", "Reject", "Remarks", "Item_code"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true, true
+                false, false, false, false, false, false, false, false, true, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -285,10 +432,70 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(grn2PayablesLinkingTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         jPanel5.add(jScrollPane1, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(DeliveryNotes, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.DeliveryNotes.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel5.add(DeliveryNotes, gridBagConstraints);
+
+        DeliveryNote.setEditable(false);
+        DeliveryNote.setForeground(new java.awt.Color(0, 204, 204));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 80);
+        jPanel5.add(DeliveryNote, gridBagConstraints);
+
+        Deliverydate.setEditable(false);
+        Deliverydate.setForeground(new java.awt.Color(0, 204, 204));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 80);
+        jPanel5.add(Deliverydate, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(DeliveryNotes1, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.DeliveryNotes1.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel5.add(DeliveryNotes1, gridBagConstraints);
+
+        DeliveryOfficer.setEditable(false);
+        DeliveryOfficer.setForeground(new java.awt.Color(0, 204, 204));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 80);
+        jPanel5.add(DeliveryOfficer, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(DeliveryNotes2, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.DeliveryNotes2.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel5.add(DeliveryNotes2, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -306,7 +513,7 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
         Save.setMnemonic('s');
-        Save.setText("Save");
+        org.openide.awt.Mnemonics.setLocalizedText(Save, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.Save.text")); // NOI18N
         Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveActionPerformed(evt);
@@ -320,7 +527,7 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         jPanel4.add(Save, gridBagConstraints);
 
         cancelbtn.setMnemonic('l');
-        cancelbtn.setText("Clear");
+        org.openide.awt.Mnemonics.setLocalizedText(cancelbtn, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.cancelbtn.text")); // NOI18N
         cancelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelbtnActionPerformed(evt);
@@ -345,209 +552,266 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lpoNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lpoNoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lpoNoActionPerformed
+
+    private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
+
+        searchButton11Clicked();
+
+        // Add your handling code here:
+    }//GEN-LAST:event_searchButton1ActionPerformed
+    private void searchButton11Clicked() {
+
+        System.out.println("Showing dialog");
+
+        jSearchDialog11.dispose();
+        java.awt.Point point = this.lpoNo.getLocationOnScreen();
+
+        jSearchDialog11.setSize(400, 200);
+
+        jSearchDialog11.setLocation(point);
+        jSearchDialog11.setVisible(true);
+
+    }
+    private void orderedItemsTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderedItemsTblMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_orderedItemsTblMouseClicked
+
     private void grn2PayablesLinkingTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grn2PayablesLinkingTableMouseClicked
-        //        if (grn2PayablesLinkingTable.getSelectedColumn() == 9) // jCheckBox2.setSelected(false);
-        //        {
-            //            linkGRNToCreditorBtn.setEnabled(false);
-            //        }
-        //        {
-            //            Double totalAmnt = 0.0, qtytotal = 0.0;
-            //            if (Boolean.valueOf(grn2PayablesLinkingTable.getModel().getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 9).toString()) == java.lang.Boolean.TRUE) {
-                //                totalAmnt = 0.0;
-                //                qtytotal = 0.0;
-                //                if (v.contains(grn2PayablesLinkingTable.getSelectedRow())) {
-                    //                    //  v.remove(grn2PayablesLinkingTable.getSelectedRow());
-                    //                } else if (!v.contains(grn2PayablesLinkingTable.getSelectedRow())) {
-                    //                    v.add(grn2PayablesLinkingTable.getSelectedRow());
-                    //                }
-                //            } else if (Boolean.valueOf(grn2PayablesLinkingTable.getModel().getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 9).toString()) == java.lang.Boolean.FALSE) {
-                //                totalAmnt = 0.0;
-                //                qtytotal = 0.0;
-                //                v.remove(grn2PayablesLinkingTable.getSelectedRow());
-                //            }
-            //
-            //            for (int i = 0; i < v.size(); i++) {
-                //                Double total = Double.parseDouble(grn2PayablesLinkingTable.getModel().getValueAt(Integer.parseInt(v.elementAt(i).toString()), 7).toString());
-                //                totalAmnt = totalAmnt + total;
-                //                Double totals = Double.parseDouble(grn2PayablesLinkingTable.getModel().getValueAt(Integer.parseInt(v.elementAt(i).toString()), 6).toString());
-                //                qtytotal = qtytotal + totals;
-                //
-                //            }
-            //
-            //            System.out.println(totalAmnt);
-            //            totalGrnAmountTxt.setText(totalAmnt.toString());
-            //            qtyTtField.setText(qtytotal.toString());
-            //
-            //        }
+        if (grn2PayablesLinkingTable.getSelectedColumn() == 9) {
+            grn2PayablesLinkingTable.setValueAt(false, grn2PayablesLinkingTable.getSelectedRow(), 8);
+        } else if (grn2PayablesLinkingTable.getSelectedColumn() == 8) {
+            grn2PayablesLinkingTable.setValueAt(false, grn2PayablesLinkingTable.getSelectedRow(), 9);
+        }
+
     }//GEN-LAST:event_grn2PayablesLinkingTableMouseClicked
 
     private void grn2PayablesLinkingTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grn2PayablesLinkingTableMouseReleased
         //        if (grn2PayablesLinkingTable.getSelectedColumn() == 1) {
-            //
-            //            if (grn2PayablesLinkingTable.getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 1) != null) {
-                //
-                //                java.awt.Point point = this.lpoNumberTxt.getLocationOnScreen();
-                //
-                //                jSearchDialog2.setSize(900, 200);
-                //
-                //                jSearchDialog2.setLocation(point);
-                //
-                //                jSearchDialog2.setVisible(true);
-                //
-                //                orderNumberTxt.grabFocus();
-                //
-                //                orderNumberTxt.setText(grn2PayablesLinkingTable.getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 1).toString());
-                //            }
-            //        }        // TODO add your handling code here:
+        //
+        //            if (grn2PayablesLinkingTable.getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 1) != null) {
+        //
+        //                java.awt.Point point = this.lpoNumberTxt.getLocationOnScreen();
+        //
+        //                jSearchDialog2.setSize(900, 200);
+        //
+        //                jSearchDialog2.setLocation(point);
+        //
+        //                jSearchDialog2.setVisible(true);
+        //
+        //                orderNumberTxt.grabFocus();
+        //
+        //                orderNumberTxt.setText(grn2PayablesLinkingTable.getValueAt(grn2PayablesLinkingTable.getSelectedRow(), 1).toString());
+        //            }
+        //        }        // TODO add your handling code here:
     }//GEN-LAST:event_grn2PayablesLinkingTableMouseReleased
 
     private void grn2PayablesLinkingTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_grn2PayablesLinkingTableKeyReleased
         /*     double resFloat = 0.00;
-        //  double totalSum = 0.00;
-        double floatTotal = java.lang.Double.parseDouble(jTextField1.getText());
+         //  double totalSum = 0.00;
+         double floatTotal = java.lang.Double.parseDouble(jTextField1.getText());
 
-        if (jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4) != null) {
-            double amtToalloc = java.lang.Double.parseDouble(jTextField2.getText());
-            double floatCol2 = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+         if (jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4) != null) {
+         double amtToalloc = java.lang.Double.parseDouble(jTextField2.getText());
+         double floatCol2 = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
 
-            double floatCol3 = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-            double balance = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
+         double floatCol3 = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+         double balance = java.lang.Double.parseDouble(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
 
-            if (floatCol3 <= amtToalloc && amtToalloc >= 0){
+         if (floatCol3 <= amtToalloc && amtToalloc >= 0){
 
-                double resVal =floatCol2 - floatCol3;
+         double resVal =floatCol2 - floatCol3;
 
-                jTable1.setValueAt(new java.lang.Float(resVal), jTable1.getSelectedRow(), 5);
-            } else
-            if (floatCol3 > amtToalloc && amtToalloc > 0){
-                javax.swing.JOptionPane.showMessageDialog(this,"You cannot allocate amount higher than the amount to allocate","Comfirmation Message!",javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            }
+         jTable1.setValueAt(new java.lang.Float(resVal), jTable1.getSelectedRow(), 5);
+         } else
+         if (floatCol3 > amtToalloc && amtToalloc > 0){
+         javax.swing.JOptionPane.showMessageDialog(this,"You cannot allocate amount higher than the amount to allocate","Comfirmation Message!",javax.swing.JOptionPane.INFORMATION_MESSAGE);
+         }
 
-            this.tableModelTableChanged();
-        }else
-        if (jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4) == null) {
-            jTable1.setValueAt(new java.lang.Double(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString()), jTable1.getSelectedRow(), 5);
-            this.tableModelTableChanged();
-        }
-        */
+         this.tableModelTableChanged();
+         }else
+         if (jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4) == null) {
+         jTable1.setValueAt(new java.lang.Double(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString()), jTable1.getSelectedRow(), 5);
+         this.tableModelTableChanged();
+         }
+         */
         // Add your handling code here:
     }//GEN-LAST:event_grn2PayablesLinkingTableKeyReleased
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-//        String users=null,user=null;
-//        String correct_name=null;
-//        try{
-//            java.sql.Statement pst2v = connectDB.createStatement();
-//            java.sql.ResultSet rsv = pst2v.executeQuery("select current_user");
-//            if (rsv.next()) {
-//                users = rsv.getObject(1).toString();
-//                // Stock = rs.getObject(2).toString();
-//            }
-//            java.sql.Statement pst2v3 = connectDB.createStatement();
-//            java.sql.ResultSet rsv3 = pst2v3.executeQuery("select distinct concat(f_name,' ',l_name) as name from secure_menu_access where login_name='"+users+"'");
-//            if (rsv3.next()) {
-//                user = rsv3.getObject(1).toString();
-//                // Stock = rs.getObject(2).toString();
-//            }
-//            correct_name=user;
-//
-//            if(correct_name.contains("'")){
-//                correct_name=  user.substring(0, user.indexOf("'"));
-//            }
-//            else if(!correct_name.contains("'")){
-//                correct_name= user;
-//            }
-//
-//            System.out.println("the user name is"+user);
-//        }
-//        catch(Exception userex){
-//            System.out.println("user error is "+userex);
-//        }
-//
-//        try {
-//            connectDB.setAutoCommit(false);
-//            for (int k = 0; k < grn2PayablesLinkingTable.getRowCount(); k++) {
-//                if (grn2PayablesLinkingTable.getValueAt(k, 0) != null) {
-//                    if (Boolean.valueOf(grn2PayablesLinkingTable.getModel().getValueAt(k, 6).toString()) == java.lang.Boolean.TRUE) {
-//
-//                        String comment;
-//                        if(grn2PayablesLinkingTable.getValueAt(k, 7)==null ){
-//                            comment="";
-//                        }else{
-//                            comment=grn2PayablesLinkingTable.getValueAt(k, 7).toString();
-//                        }
-//
-//                        java.sql.PreparedStatement pstmt81212 = connectDB.prepareStatement(""
-//                            + "update st_stock_cardex set supplies=true,supplies_name='"+correct_name+"',supplies_date=now(),supplies_remarks='"+comment+"' where supplies=false and approved=false and chairperson=false and technical=false and delivery_note_no='" + grn2PayablesLinkingTable.getValueAt(k, 1).toString() + "' and order_no='" + lpo + "' and item ='"+grn2PayablesLinkingTable.getValueAt(k, 2).toString()+"'");
-//                        //        java.sql.PreparedStatement pstmt8121 = connectDB.prepareStatement("UPDATE ac_ledger SET reconciled = true WHERE cheque_no ILIKE '" + grn2PayablesLinkingTable.getValueAt(i, 1).toString() + "' AND dealer ilike '" + supplierNameTxt.getText().toString() + "' and date = '" + grn2PayablesLinkingTable.getValueAt(i, 0).toString() + "' and transaction_no = '" + grn2PayablesLinkingTable.getValueAt(i, 4).toString() + "'");
-//
-//                        pstmt81212.executeUpdate();
-//                    }
-//                }
-//            }
-//            connectDB.commit();
-//            connectDB.setAutoCommit(true);
-//            // com.afrisoftech.lib.DocumentTracer.setDocumentLocation(connectDB, lpoNumberTxt.getText(), commentsTxt.getText(), "EXPENDITURE_EXAMINATION", "EXPENDITURE_VOTEBOOK");
-//            cancelbtn.doClick();
-//            javax.swing.JOptionPane.showMessageDialog(this, "Well Done !! Approved Done Successfully", "Comfirmation Message!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-//            ApprovalTbl.setModel(com.afrisoftech.dbadmin.TableModel.createTableVectors(connectDB, "SELECT distinct order_no as LPO_LSO_NO,supplier as supplier_name from st_stock_cardex st where (grn_no!='rejected' or grn_no is null) and supplies=false and chairperson=false and technical=false and st.approved=FALSE  and st.transaction_type ilike 'Receiving' and delivered_by!= 'Reversal' group by supplier,order_no  order by supplier_name"));
-//
-//        }  catch (SQLException ex) {
-//            Logger.getLogger(SuppliesGuyApprovalintfr.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
+        try {
+            connectDB.setAutoCommit(false);
+
+            for (int i = 0; i < grn2PayablesLinkingTable.getRowCount(); i++) {
+                if (grn2PayablesLinkingTable.getValueAt(i, 0) != null && (Boolean.getBoolean(grn2PayablesLinkingTable.getValueAt(i, 8).toString())==true || Boolean.getBoolean(grn2PayablesLinkingTable.getValueAt(i, 9).toString())==true)) {
+                    java.sql.PreparedStatement pstmt31 = connectDB.prepareStatement("update inventory_inspection set level1=true,level1_remarks='"+grn2PayablesLinkingTable.getValueAt(i, 10).toString()+"',level1_username=current_user,level1_date=now()::date WHERE lpono = '" + lpoNo.getText() + "' AND delivery_note='"+DeliveryNote.getText()+"' AND item_code='"+grn2PayablesLinkingTable.getValueAt(i, 11).toString()+"' ");
+                    pstmt31.executeUpdate();
+                }
+            }
+
+            connectDB.commit();
+            connectDB.setAutoCommit(true);
+             javax.swing.JOptionPane.showMessageDialog(this, "Data saved successfully", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        cancelbtn.doClick();
+        } catch (java.sql.SQLException sq) {
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            try {
+                connectDB.rollback();
+            } catch (java.sql.SQLException sql) {
+                javax.swing.JOptionPane.showMessageDialog(this, sql.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
     }//GEN-LAST:event_SaveActionPerformed
 
     private void cancelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelbtnActionPerformed
-//        SupplierTxt.setText(null);
-//        lpoTxt.setText(null);
-//
-//        TenderTxt.setText(null);
-//        TenderTxt1.setText(null);
-//        for (int k = 0; k <orderedItemsTbl.getRowCount(); k++) {
-//            for (int r = 0; r < orderedItemsTbl.getColumnCount(); r++) {
-//                orderedItemsTbl.getModel().setValueAt(null, k, r);
-//            }
-//        }
-//
-//        for (int k = 0; k <ApprovalTbl.getRowCount(); k++) {
-//            for (int r = 0; r < ApprovalTbl.getColumnCount(); r++) {
-//                ApprovalTbl.getModel().setValueAt(null, k, r);
-//            }
-//        }
-//
-//        for (int k = 0; k <grn2PayablesLinkingTable.getRowCount(); k++) {
-//            for (int r = 0; r < grn2PayablesLinkingTable.getColumnCount(); r++) {
-//                grn2PayablesLinkingTable.getModel().setValueAt(null, k, r);
-//            }
-//        }
+        SupplierTxt.setText(null);
+        lpoNo.setText(null);
+        lpoDate.setText("");
+        Deliverydate.setText("");
+        DeliveryOfficer.setText("");
+        TenderTxt.setText(null);
+        DeliveryNote.setText(null);
+        SupplierTxt.setText("");
+        for (int k = 0; k < orderedItemsTbl.getRowCount(); k++) {
+            for (int r = 0; r < orderedItemsTbl.getColumnCount(); r++) {
+                orderedItemsTbl.getModel().setValueAt(null, k, r);
+            }
+        }
+
+        for (int k = 0; k < grn2PayablesLinkingTable.getRowCount(); k++) {
+            for (int r = 0; r < grn2PayablesLinkingTable.getColumnCount(); r++) {
+                grn2PayablesLinkingTable.getModel().setValueAt(null, k, r);
+            }
+        }
     }//GEN-LAST:event_cancelbtnActionPerformed
 
-    private void searchButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton11ActionPerformed
-//        searchButton221Clicked();         // Add your handling code here:
+    private void jTextField113CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField113CaretUpdate
+        //if(this.jComboBox2.getSelectedItem().equals("GENERAL STORE")){
+        if (this.jTextField113.getCaretPosition() < 3) {
+            System.out.print("Nothing");
+        } else {
+
+            jSearchTable.setModel(dbadmin.TableModel.createTableVectors(connectDB, "select distinct lpono,delivery_note from inventory_inspection where level1=false and rejected=false AND lpono ilike '" + jTextField113.getText() + "%' order by 1"));
+            jSearchScrollPane.setViewportView(jSearchTable);
+            System.out.println("Cannot sort out");
+
+        }
         // Add your handling code here:
-    }//GEN-LAST:event_searchButton11ActionPerformed
+    }//GEN-LAST:event_jTextField113CaretUpdate
+
+    private void jSearchTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSearchTableMouseClicked
+        String supplierCode = null;
+        lpoNo.setText(jSearchTable.getValueAt(jSearchTable.getSelectedRow(), 0).toString());
+        DeliveryNote.setText(jSearchTable.getValueAt(jSearchTable.getSelectedRow(), 1).toString());
+        try {
+            java.sql.PreparedStatement pstmt = connectDB.prepareStatement("SELECT * from inventory_lpo where order_no='" + jSearchTable.getValueAt(jSearchTable.getSelectedRow(), 0).toString() + "'");
+            java.sql.ResultSet rs = pstmt.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                //item
+                java.sql.PreparedStatement pstmts1 = connectDB.prepareStatement("SELECT item_name from inventory_items where item_code='" + rs.getString("item_code") + "'");
+                java.sql.ResultSet rss1 = pstmts1.executeQuery();
+                while (rss1.next()) {
+                    orderedItemsTbl.setValueAt(rss1.getString(1), i, 0);
+                }
+                TenderTxt.setText(rs.getString("quotation_no"));
+                storetxt.setText(rs.getString("ordering_store"));
+                lpoDate.setText(rs.getString("lpo_date"));
+                supplierCode = rs.getString("supplier");
+                orderedItemsTbl.setValueAt(rs.getString("units"), i, 1);
+                orderedItemsTbl.setValueAt(rs.getString("quantity"), i, 2);
+                orderedItemsTbl.setValueAt(rs.getString("unit_price"), i, 3);
+                orderedItemsTbl.setValueAt(rs.getString("discount_value"), i, 4);
+                orderedItemsTbl.setValueAt(rs.getString("vat_amount"), i, 5);
+                orderedItemsTbl.setValueAt(rs.getString("net_value"), i, 6);
+                orderedItemsTbl.setValueAt(rs.getString("balance"), i, 7);
+                orderedItemsTbl.setValueAt(rs.getString("days_to_deliver"), i, 8);
+                i = i + 1;
+            }
+            //supplier
+            java.sql.PreparedStatement pstmts = connectDB.prepareStatement("SELECT supplier_name from inventory_suppliers where supplier_code='" + supplierCode + "'");
+            java.sql.ResultSet rss = pstmts.executeQuery();
+            while (rss.next()) {
+                SupplierTxt.setText(rss.getString(1));
+            }
+            //supplier end
+            //contents of delivery_note
+            java.sql.PreparedStatement dpstmts = connectDB.prepareStatement("SELECT * from inventory_receiving where d_note='" + jSearchTable.getValueAt(jSearchTable.getSelectedRow(), 1).toString() + "' and supplier_code='" + supplierCode + "' and order_no='" + jSearchTable.getValueAt(jSearchTable.getSelectedRow(), 0).toString() + "' and status=false");
+            java.sql.ResultSet rssd = dpstmts.executeQuery();
+            int j = 0;
+            while (rssd.next()) {
+                //item
+                java.sql.PreparedStatement pstmts1 = connectDB.prepareStatement("SELECT item_name from inventory_items where item_code='" + rssd.getString("item_code") + "'");
+                java.sql.ResultSet rss1 = pstmts1.executeQuery();
+                while (rss1.next()) {
+                    grn2PayablesLinkingTable.setValueAt(rss1.getString(1), j, 0);
+                }
+                Deliverydate.setText(rssd.getString("delivery_date"));
+                DeliveryOfficer.setText(rssd.getString("receivedby"));
+                grn2PayablesLinkingTable.setValueAt(rssd.getString("item_code") , j, 11);
+                grn2PayablesLinkingTable.setValueAt(rssd.getString("bulk_units"), j, 1);
+                grn2PayablesLinkingTable.setValueAt(rssd.getString("bulk_units_qty"), j, 2);
+                grn2PayablesLinkingTable.setValueAt(rssd.getString("unit_price"), j, 3);
+                grn2PayablesLinkingTable.setValueAt(Double.parseDouble(rssd.getString("debit")), j, 4);
+                grn2PayablesLinkingTable.setValueAt(rssd.getString("qty_in"), j, 5);
+                grn2PayablesLinkingTable.setValueAt(rssd.getString("batch_no"), j, 6);
+                grn2PayablesLinkingTable.setValueAt(rssd.getString("expiry_date"), j, 7);
+
+                j = j + 1;
+            }
+            //contents of dNote
+
+        } catch (Exception y) {
+            y.printStackTrace();
+        }
+        jTextField113.setText("");
+        jSearchDialog11.dispose();
+        // Add your handling code here:
+    }//GEN-LAST:event_jSearchTableMouseClicked
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+
+    }//GEN-LAST:event_jButton9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField DeliveryNote;
+    private javax.swing.JLabel DeliveryNotes;
+    private javax.swing.JLabel DeliveryNotes1;
+    private javax.swing.JLabel DeliveryNotes2;
+    private javax.swing.JTextField DeliveryOfficer;
+    private javax.swing.JTextField Deliverydate;
     private javax.swing.JButton Save;
     private javax.swing.JTextField SupplierTxt;
     private javax.swing.JTextField TenderTxt;
-    private javax.swing.JTextField TenderTxt1;
     private javax.swing.JButton cancelbtn;
     private javax.swing.JTable grn2PayablesLinkingTable;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel111;
     private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel411;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel61;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JDialog jSearchDialog11;
+    private javax.swing.JPanel jSearchPanel2;
+    private javax.swing.JScrollPane jSearchScrollPane;
+    private javax.swing.JTable jSearchTable;
+    private javax.swing.JTextField jTextField113;
+    private javax.swing.JTextField lpoDate;
+    private javax.swing.JTextField lpoNo;
     private javax.swing.JTable orderedItemsTbl;
-    private javax.swing.JTextField originalSupNametxt;
-    private javax.swing.JButton searchButton11;
+    private javax.swing.JButton searchButton1;
+    private javax.swing.JTextField storetxt;
     // End of variables declaration//GEN-END:variables
 }

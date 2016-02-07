@@ -5,6 +5,9 @@
  */
 package inventory;
 
+
+import static sys.MainFrame.medicdspane;
+
 /**
  *
  * @author System Partners
@@ -34,6 +37,12 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jSearchDialog11 = new javax.swing.JDialog();
+        jSearchPanel1 = new javax.swing.JPanel();
+        jTextField1111 = new javax.swing.JTextField();
+        jSearchScrollPane1 = new javax.swing.JScrollPane();
+        jSearchTable1 = new dbadmin.JTable();
+        jButton91 = new javax.swing.JButton();
         jPanel52 = new javax.swing.JPanel();
         jLabel572 = new javax.swing.JLabel();
         jLabel582 = new javax.swing.JLabel();
@@ -43,35 +52,117 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
         jLabel622 = new javax.swing.JLabel();
         jLabel642 = new javax.swing.JLabel();
         jLabel652 = new javax.swing.JLabel();
-        jTextField482 = new javax.swing.JTextField();
-        jTextField492 = new javax.swing.JTextField();
-        jTextField561 = new javax.swing.JTextField();
-        jTextField582 = new javax.swing.JTextField();
+        kra_pin = new javax.swing.JTextField();
+        town = new javax.swing.JTextField();
+        business_no = new javax.swing.JTextField();
+        bank_account = new javax.swing.JTextField();
         clearbtn = new javax.swing.JButton();
         jButton252 = new javax.swing.JButton();
         jSeparator71 = new javax.swing.JSeparator();
         saveData = new javax.swing.JButton();
-        jTextField14 = new javax.swing.JTextField();
+        postal_address = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jTextField59 = new javax.swing.JTextField();
+        website = new javax.swing.JTextField();
         jLabel66 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField5412 = new javax.swing.JTextField();
+        contact_person = new javax.swing.JTextField();
         supplierNametxt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        email_address = new javax.swing.JTextField();
+        country = new javax.swing.JTextField();
+        county = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jPanel411 = new javax.swing.JPanel();
-        originalSupNametxt = new javax.swing.JTextField();
-        searchButton11 = new javax.swing.JButton();
         jLabel573 = new javax.swing.JLabel();
-        jTextField5723 = new javax.swing.JTextField();
+        bank_branch = new javax.swing.JTextField();
         jLabel574 = new javax.swing.JLabel();
-        jTextField5724 = new javax.swing.JTextField();
-        jTextField583 = new javax.swing.JTextField();
+        vatno = new javax.swing.JTextField();
+        telephone = new javax.swing.JTextField();
+        jPanel61 = new javax.swing.JPanel();
+        jTextField361 = new javax.swing.JTextField();
+        searchButton1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
+        jSearchDialog11.setModal(true);
+        jSearchDialog11.setUndecorated(true);
+        jSearchDialog11.getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        jSearchPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jSearchPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jTextField1111.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextField1111CaretUpdate(evt);
+            }
+        });
+        jTextField1111.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1111ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 10.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 100);
+        jSearchPanel1.add(jTextField1111, gridBagConstraints);
+
+        jSearchTable1.setShowHorizontalLines(false);
+        /*    try {
+            searchRowSet.setCommand("select product,selling_price,gl_code FROM st_stock_prices WHERE department = 'Pharmacy' order by product");
+            searchRowSet.setConnectionSource(pConnDB);
+
+            searchRowSet.execute();
+
+            // crset2.setExecuteOnLoad(true);
+            jSearchTable.setModel(new org.netbeans.lib.sql.models.TableModel(searchRowSet, new org.netbeans.lib.sql.models.TableModel.Column[] {
+                new org.netbeans.lib.sql.models.TableModel.Column("product", "Description", false),
+                new org.netbeans.lib.sql.models.TableModel.Column("selling_price", "Amount", false),
+                new org.netbeans.lib.sql.models.TableModel.Column("gl_code", "Gl_code", false)
+
+            }));
+            // jSearchScrollPane.setViewportView(jSearchTable);
+
+        } catch(java.sql.SQLException sqlex){
+            javax.swing.JOptionPane.showMessageDialog(this,sqlex.getMessage(),"Error Message!",javax.swing.JOptionPane.ERROR_MESSAGE);
+
+            System.out.println(sqlex.getMessage());
+        }
+        */
+        jSearchTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jSearchTable1MouseClicked(evt);
+            }
+        });
+        jSearchScrollPane1.setViewportView(jSearchTable1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 20.0;
+        jSearchPanel1.add(jSearchScrollPane1, gridBagConstraints);
+
+        jButton91.setText("Dispose");
+        jButton91.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton91ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jSearchPanel1.add(jButton91, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jSearchDialog11.getContentPane().add(jSearchPanel1, gridBagConstraints);
 
         setClosable(true);
         setIconifiable(true);
@@ -153,12 +244,12 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 20);
-        jPanel52.add(jTextField482, gridBagConstraints);
+        jPanel52.add(kra_pin, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel52.add(jTextField492, gridBagConstraints);
+        jPanel52.add(town, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
@@ -166,14 +257,14 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 20);
-        jPanel52.add(jTextField561, gridBagConstraints);
+        jPanel52.add(business_no, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel52.add(jTextField582, gridBagConstraints);
+        jPanel52.add(bank_account, gridBagConstraints);
 
         clearbtn.setMnemonic('l');
         clearbtn.setText("Clear");
@@ -233,7 +324,7 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 20);
-        jPanel52.add(jTextField14, gridBagConstraints);
+        jPanel52.add(postal_address, gridBagConstraints);
 
         jLabel15.setText("County");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -255,7 +346,7 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 20);
-        jPanel52.add(jTextField59, gridBagConstraints);
+        jPanel52.add(website, gridBagConstraints);
 
         jLabel66.setText("KRA PIN");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -277,7 +368,7 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel52.add(jTextField5412, gridBagConstraints);
+        jPanel52.add(contact_person, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -300,22 +391,22 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 20);
-        jPanel52.add(jTextField5, gridBagConstraints);
+        jPanel52.add(email_address, gridBagConstraints);
 
-        jTextField3.setText("Kenya");
+        country.setText("Kenya");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel52.add(jTextField3, gridBagConstraints);
+        jPanel52.add(country, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel52.add(jTextField6, gridBagConstraints);
+        jPanel52.add(county, gridBagConstraints);
 
         jLabel13.setText("Search Name for Editing");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -325,42 +416,6 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 0);
         jPanel52.add(jLabel13, gridBagConstraints);
-
-        jPanel411.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel411.setLayout(new java.awt.GridBagLayout());
-
-        originalSupNametxt.setEditable(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel411.add(originalSupNametxt, gridBagConstraints);
-
-        searchButton11.setToolTipText("Search");
-        searchButton11.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        searchButton11.setMaximumSize(new java.awt.Dimension(74, 53));
-        searchButton11.setMinimumSize(new java.awt.Dimension(74, 53));
-        searchButton11.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        searchButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButton11ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        jPanel411.add(searchButton11, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 3.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel52.add(jPanel411, gridBagConstraints);
 
         jLabel573.setText("Bank/Branch");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -376,7 +431,7 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 20);
-        jPanel52.add(jTextField5723, gridBagConstraints);
+        jPanel52.add(bank_branch, gridBagConstraints);
 
         jLabel574.setText("VAT No");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -392,14 +447,67 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 20);
-        jPanel52.add(jTextField5724, gridBagConstraints);
+        jPanel52.add(vatno, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel52.add(jTextField583, gridBagConstraints);
+        jPanel52.add(telephone, gridBagConstraints);
+
+        jPanel61.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel61.setMinimumSize(new java.awt.Dimension(82, 37));
+        jPanel61.setLayout(new java.awt.GridBagLayout());
+
+        jTextField361.setEditable(false);
+        jTextField361.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField361ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel61.add(jTextField361, gridBagConstraints);
+
+        searchButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kiwi/images/date.gif"))); // NOI18N
+        searchButton1.setToolTipText("Search");
+        searchButton1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        searchButton1.setMaximumSize(new java.awt.Dimension(74, 53));
+        searchButton1.setMinimumSize(new java.awt.Dimension(74, 53));
+        searchButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        searchButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        jPanel61.add(searchButton1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        jPanel52.add(jPanel61, gridBagConstraints);
+
+        jButton1.setText("Suspend/Activate Supplier Account");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        jPanel52.add(jButton1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -412,17 +520,22 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
 
     private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
         supplierNametxt.setText("");
-        jTextField482.setText("");
-        jTextField5412.setText("");
-        jTextField492.setText("");
-        jTextField5722.setText("");
-        //extField482.setText("");
-        jTextField561.setText("");
-        jTextField582.setText("");
-        jTextField59.setText("");
-        jTextField14.setText("");
-        jTextField3.setText("");
-        //      jComboBox2.setSelectedItem(null);
+        kra_pin.setText("");
+        contact_person.setText("");
+        town.setText("");
+        business_no.setText("");
+        bank_account.setText("");
+        website.setText("");
+        postal_address.setText("");
+        country.setText("");
+        jTextField361.setText("");
+        county.setText("");
+        telephone.setText("");
+        email_address.setText("");
+        postal_address.setText("");
+        vatno.setText("");
+        bank_branch.setText("");
+
         // Add your handling code here:
     }//GEN-LAST:event_clearbtnActionPerformed
 
@@ -431,303 +544,182 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton252ActionPerformed
 
     private void saveDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDataActionPerformed
-        String receiptNo = null;
+
+        String creditors_no = null;
+        int count = 0;
         try {
             connectDB.setAutoCommit(false);
-            java.sql.Statement pss = connectDB.createStatement();
-
-            if (this.jCheckBox5.isSelected() && !saveData.getText().equalsIgnoreCase("Update")) {
-                java.sql.ResultSet rsts = pss.executeQuery("select 'CR'||nextval('creditors_seq')");
-                while (rsts.next()) {
-                    // rsts.getObject(1).toString();
-
-                    receiptNo = rsts.getObject(1).toString();
-                }
-            }
-
             if (saveData.getText().equalsIgnoreCase("Update")) {
-                // Updating existing supplier details
-                int exitOption = javax.swing.JOptionPane.showConfirmDialog(this, "You are Updating (a) Record(s) for [" + jTextField582.getText() + "] - [ " + supplierNametxt.getText() + "]. This may take a while. \n Yes to Continue", "Caution before Saving!", javax.swing.JOptionPane.YES_NO_CANCEL_OPTION);
-
-                if (exitOption == javax.swing.JOptionPane.YES_OPTION) {
-
-                    this.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
-
-                    java.sql.PreparedStatement pstmt = connectDB.prepareStatement("UPDATE st_suppliers"
-                            + " SET supplier_name=?, short_name=?, town=?, country=?, district=?, "
-                            + " contact_person=?, tel1=?, tel2=?, fax_no=?, email_address=?, "
-                            + " website=?, postal_address=?, street=?, avenue=?, locality=?, "
-                            + " building_name=?, floor_no=?, category=?, town1=?, pin_no=?, rog_no=?, "
-                            + " gl_code=?, tax_no=?, vat_no=?, bank_name = ?, bank_branch = ?, bank_account_no = ?, bank_transfer_code = ?"
-                            + " WHERE code = '" + jTextField582.getText() + "'");
-
-                    pstmt.setString(1, supplierNametxt.getText());
-                    pstmt.setString(2, jTextField5412.getText());
-                    // pstmt.setString(3,jTextField5412.getText());
-                    pstmt.setString(3, jTextField492.getText());
-                    pstmt.setString(4, jTextField3.getText());
-                    pstmt.setString(5, jTextField6.getText());
-                    pstmt.setString(6, jTextField5.getText());
-                    pstmt.setString(7, jTextField5722.getText());
-                    pstmt.setString(8, jTextField561.getText());
-                    pstmt.setString(9, jTextField14.getText());
-                    pstmt.setString(10, jTextField482.getText());
-                    pstmt.setString(11, jTextField59.getText());
-                    pstmt.setString(12, jTextField58221.getText());
-                    pstmt.setString(13, jTextField50221.getText());
-                    pstmt.setString(14, jTextField53221.getText());
-                    pstmt.setString(15, jTextField1.getText());
-                    pstmt.setString(16, jTextField6021.getText());
-                    pstmt.setString(17, jTextField54121.getText());
-                    pstmt.setString(18, jComboBox1.getSelectedItem().toString());
-                    pstmt.setString(19, serviceType.getSelectedItem().toString());
-                    pstmt.setString(20, jTextField58.getText());
-                    pstmt.setString(21, jTextField50.getText());
-                    pstmt.setString(22, jTextField9.getText());
-                    pstmt.setString(23, jTextField54.getText());
-                    pstmt.setString(24, jTextField49.getText());
-                    pstmt.setString(25, this.bankNameTxt.getText());
-                    pstmt.setString(26, this.bankBranchTxt.getText());
-                    pstmt.setString(27, this.bankAccountTxt.getText());
-                    pstmt.setString(28, this.bankTrasferCodeTxt.getText());
-                    // pstmt.setString(26,jTextPane3.getText());
-
-                    pstmt.executeUpdate();
-                    //3.2
-
-                    pstmt = connectDB.prepareStatement("UPDATE st_sub_stores SET sub_store = '" + supplierNametxt.getText() + "' WHERE trim(sub_store) = '" + originalSupNametxt.getText() + "'  ");
-                    pstmt.executeUpdate();
-
-                    System.err.println("Done==1");
-
-                    pstmt = connectDB.prepareStatement("UPDATE st_stock_cardex SET delivered_by = '" + supplierNametxt.getText() + "', supplier = '" + supplierNametxt.getText() + "' WHERE trim(supplier) = '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-
-                    System.err.println("Done ==2");
-
-                    pstmt = connectDB.prepareStatement("UPDATE st_orders SET supplier = '" + supplierNametxt.getText() + "' WHERE trim(supplier) = '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-                    System.err.println("Done==3");
-
-                    pstmt = connectDB.prepareStatement("UPDATE st_recommendation SET supplier = '" + supplierNametxt.getText() + "' WHERE trim(supplier) ='" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-                    System.err.println("Done==4");
-
-                    pstmt = connectDB.prepareStatement("UPDATE st_floated_quotations SET supplier = '" + supplierNametxt.getText() + "' WHERE trim(supplier) = '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-
-                    System.err.println("Done==5");
-
-                    pstmt = connectDB.prepareStatement("UPDATE ac_accounts_payable SET dealer = '" + supplierNametxt.getText() + "' WHERE trim(dealer) = '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-
-                    System.err.println("Done==6");
-
-                    pstmt = connectDB.prepareStatement("UPDATE ac_accounts_payable SET payee = '" + supplierNametxt.getText() + "' WHERE payee ilike '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-                    System.err.println("Done==7\n\n Skipped 8");
-
-                    pstmt = connectDB.prepareStatement("UPDATE ac_dashboard SET supplier = '" + supplierNametxt.getText() + "' WHERE supplier ilike '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-                    System.err.println("Done==9");
-
-                    pstmt = connectDB.prepareStatement("UPDATE ac_reprinting_vouchers SET payee= '" + supplierNametxt.getText() + "' WHERE payee ilike '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-
-                    System.err.println("Done==10\n\n back to ac_ledger");
-
-                    pstmt = connectDB.prepareStatement("UPDATE ac_ledger SET dealer = '" + supplierNametxt.getText() + "' WHERE dealer = '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-                    System.err.println("Done==8");
-
-                    System.err.println("Funsoft supplier update -Cascaded- version 3.2");
-
-                }
-
-                javax.swing.JOptionPane.showMessageDialog(this, "The update was successful", "Confirmation Message!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                activity = "Creditors name update[" + originalSupNametxt.getText() + "] to [" + supplierNametxt.getText() + "]";
-
-                GetItemInfo.updateTrail(activity, connectDB);
-                this.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-                saveData.setLabel("Save");
+                java.sql.PreparedStatement pstmt311 = connectDB.prepareStatement("UPDATE inventory_suppliers SET "
+                        + "supplier_name = '" + supplierNametxt.getText().toUpperCase() + "',"
+                        + "town = '" + town.getText().toUpperCase() + "',"
+                        + "county = '" + county.getText().toUpperCase() + "',"
+                        + "contact_person = '" + contact_person.getText().toUpperCase() + "',"
+                        + "telephone = '" + telephone.getText().toUpperCase() + "',"
+                        + "bank_account = '" + bank_account.getText().toUpperCase() + "',"
+                        + "business_no = '" + business_no.getText().toUpperCase() + "',"
+                        + "email_address = '" + email_address.getText().toLowerCase() + "',"
+                        + "postal_address = '" + postal_address.getText().toUpperCase() + "',"
+                        + "kra_pin = '" + kra_pin.getText().toUpperCase() + "',"
+                        + "vatno = '" + vatno.getText().toUpperCase() + "',"
+                        + "bank_branch = '" + bank_branch.getText().toUpperCase() + "',"
+                        + "website = '" + website.getText().toLowerCase() + "',"
+                        + "country = '" + country.getText().toUpperCase() + "'"
+                        + "WHERE supplier_code = '" + jTextField361.getText() + "'");
+                pstmt311.executeUpdate();
+                javax.swing.JOptionPane.showMessageDialog(this, "Update Done Successfully","Comfirmation",javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                clearbtn.doClick();
             } else {
 
-                //Inserting new details in suppliers list
-                java.sql.PreparedStatement pstmt = connectDB.prepareStatement("INSERT INTO st_suppliers values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-                if (this.jCheckBox5.isSelected()) {
-                    pstmt.setString(1, receiptNo);
-                } else {
-                    pstmt.setString(1, jTextField582.getText());
+                java.sql.Statement psst = connectDB.createStatement();
+
+                java.sql.ResultSet rstst = psst.executeQuery("select count(*) from inventory_suppliers where lower(supplier_name)='" + supplierNametxt.getText().trim().toLowerCase() + "'");
+                while (rstst.next()) {
+                    count = rstst.getInt(1);
                 }
-                //  pstmt.setString(1,jTextField582.getText());
-                pstmt.setString(2, supplierNametxt.getText().toUpperCase());
-                pstmt.setString(6, jTextField6.getText());
-                pstmt.setString(5, jTextField3.getText());
-                pstmt.setString(3, jTextField5412.getText().toUpperCase());
-                pstmt.setString(4, jTextField492.getText());
-                pstmt.setString(7, jTextField5.getText());
-                pstmt.setString(8, jTextField5722.getText());
-                pstmt.setString(9, jTextField561.getText());
-                pstmt.setString(10, jTextField14.getText());
-                pstmt.setString(11, jTextField482.getText());
-                pstmt.setString(12, jTextField59.getText());
-                pstmt.setString(13, jTextField58221.getText());
-                pstmt.setString(14, jTextField50221.getText());
-                pstmt.setString(15, jTextField53221.getText());
-                pstmt.setString(16, jTextField1.getText());
-                pstmt.setString(17, jTextField6021.getText());
-                pstmt.setString(18, jTextField54121.getText());
-                pstmt.setString(19, jTextField49221.getText());
-                pstmt.setString(20, jComboBox1.getSelectedItem().toString());
-                pstmt.setString(21, jTextField58.getText());
-                pstmt.setString(22, jTextField50.getText());
-                pstmt.setString(23, jTextField11.getText());
-                pstmt.setString(25, jTextField49.getText());
-                pstmt.setString(24, jTextField54.getText());
-                pstmt.setString(26, jTextField60.getText());
-                pstmt.setDate(27, com.afrisoftech.lib.ServerTime.getSQLDate(connectDB));
-                pstmt.setDouble(28, 0.00);
-                pstmt.setString(29, null);
-                pstmt.setString(30, null);
-                pstmt.setBoolean(31, false);
-                pstmt.setDate(32, com.afrisoftech.lib.ServerTime.getSQLDate(connectDB));
-                pstmt.setString(33, jTextField60.getText());
-                pstmt.setString(34, this.bankNameTxt.getText());
-                pstmt.setString(35, this.bankBranchTxt.getText());
-                pstmt.setString(36, this.bankAccountTxt.getText());
-                pstmt.setString(37, this.bankTrasferCodeTxt.getText());
-                pstmt.executeUpdate();
+                if (count != 0) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "The supplier already exists", "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
+                } else if (count == 0) {
+                    java.sql.Statement pss = connectDB.createStatement();
 
-                double Bal = java.lang.Double.parseDouble(this.jTextField8.getText());
-                if (Bal > 0) {
-                    String Stock = null;
-                    String voucNo = null;
-                    String accountCode = null;
-                    String TransNo = null;
-                    String glType = null;
-                    // String glType = null;
-                    String userName = null;
+                    java.sql.ResultSet rsts = pss.executeQuery("select 'CR'||lpad(nextval('supplier_seq')::text,3,0::TEXT)");
+                    while (rsts.next()) {
 
-                    java.sql.Statement pst1 = connectDB.createStatement();
-                    java.sql.ResultSet rs1 = pst1.executeQuery("select code,activity from pb_activity where activity_category ilike 'CP%'");
-                    while (rs1.next()) {
-                        accountCode = rs1.getObject(1).toString();
-                        glType = rs1.getObject(2).toString();
+                        creditors_no = rsts.getObject(1).toString();
                     }
-                    java.sql.Statement ps = connectDB.createStatement();
-                    java.sql.ResultSet rs2 = ps.executeQuery("select nextval('transaction_no_seq'),current_user");
-                    while (rs2.next()) {
-                        TransNo = rs2.getObject(1).toString();
-                        userName = rs2.getObject(2).toString();
-                    }
-                    java.sql.Statement pst2 = connectDB.createStatement();
-                    java.sql.ResultSet rs = pst2.executeQuery("select 'IN'||lpad(nextval('invoice_no_seq'),5,0)");
-                    while (rs.next()) {
-                        voucNo = rs.getObject(1).toString();
-                    }
-                    java.sql.PreparedStatement pstmt2 = connectDB.prepareStatement("insert into ac_ledger values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?)");
-                    pstmt2.setString(1, jTextField9.getText().toString());
-                    pstmt2.setObject(2, serviceType.getSelectedItem());
-                    pstmt2.setString(3, "");
-                    if (supplierNametxt.getText() == null) {
-                        javax.swing.JOptionPane.showMessageDialog(this, "You must Enter Payee!", "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        pstmt2.setObject(4, supplierNametxt.getText().toString());
-                    }
-                    pstmt2.setObject(5, "Opening Balance");
-                    pstmt2.setString(6, "");
-                    pstmt2.setObject(7, supplierNametxt.getText().toString());
-                    pstmt2.setString(8, "");
-                    pstmt2.setString(9, "");
-                    pstmt2.setString(10, "");
-                    pstmt2.setString(11, "");
-                    pstmt2.setString(12, "");
-                    pstmt2.setString(13, "");
-                    pstmt2.setString(14, "Bfwd");
-                    pstmt2.setString(15, "Raise Invoice");
-                    pstmt2.setDouble(17, 0.00);
-                    pstmt2.setDouble(16, java.lang.Double.valueOf(jTextField8.getText().toString()));
-                    pstmt2.setDate(18, com.afrisoftech.lib.SQLDateFormat.getSQLDate(datePicker1.getDate()));
-                    pstmt2.setString(19, TransNo);
-                    pstmt2.setBoolean(20, false);
-                    pstmt2.setBoolean(21, false);
-                    pstmt2.setBoolean(22, false);
-                    pstmt2.setString(23, userName);
-                    pstmt2.executeUpdate();
+                    java.sql.PreparedStatement pstmt = connectDB.prepareStatement("insert into inventory_suppliers (supplier_name,"
+                            + "supplier_code,town,county,"
+                            + "contact_person,telephone,bank_account,business_no,"
+                            + "email_address,postal_address,kra_pin,vatno,"
+                            + "bank_branch,website,country)"
+                            + " values(?,?,?,?,?,"
+                            + "        ?,?,?,?,?,"
+                            + "        ?,?,?,?,?)");
+                    pstmt.setObject(1, supplierNametxt.getText().toUpperCase());
+                    pstmt.setObject(2, creditors_no);
+                    pstmt.setObject(3, town.getText().toUpperCase());
+                    pstmt.setObject(4, county.getText().toUpperCase());
+                    pstmt.setObject(5, contact_person.getText().toUpperCase());
+                    pstmt.setObject(6, telephone.getText());
+                    pstmt.setObject(7, bank_account.getText().toUpperCase());
+                    pstmt.setObject(8, business_no.getText().toUpperCase());
+                    pstmt.setObject(9, email_address.getText().toLowerCase());
+                    pstmt.setObject(10, postal_address.getText().toUpperCase());
+                    pstmt.setObject(11, kra_pin.getText().toUpperCase());
+                    pstmt.setObject(12, vatno.getText().toUpperCase());
+                    pstmt.setObject(13, bank_branch.getText().toUpperCase());
+                    pstmt.setObject(14, website.getText().toLowerCase());
+                    pstmt.setObject(15, country.getText().toUpperCase());
+                    pstmt.executeUpdate();
+                    connectDB.commit();
+                    connectDB.setAutoCommit(true);
 
-                    java.sql.PreparedStatement pstmt1 = connectDB.prepareStatement("insert into ac_accounts_payable values(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?)");
-                    pstmt1.setString(1, accountCode);
-                    pstmt1.setString(2, supplierNametxt.getText().toString());
-                    pstmt1.setObject(3, serviceType.getSelectedItem());
-                    pstmt1.setString(4, "");
-                    pstmt1.setObject(5, supplierNametxt.getText().toString());
-                    pstmt1.setString(6, "Opening Balance");
-                    if (this.jCheckBox5.isSelected()) {
-                        pstmt1.setString(7, receiptNo);
-                    } else {
-                        pstmt1.setString(7, jTextField582.getText());
-                    }
-                    pstmt1.setString(8, "");
-                    pstmt1.setString(9, "");
-                    pstmt1.setString(10, "");
-                    pstmt1.setString(11, TransNo);
-                    pstmt1.setString(12, "Raise Invoice");
-                    pstmt1.setDouble(13, 0.00);
-                    pstmt1.setDouble(14, java.lang.Double.valueOf(jTextField8.getText().toString()));
-                    pstmt1.setDate(15, com.afrisoftech.lib.SQLDateFormat.getSQLDate(datePicker1.getDate()));
-                    pstmt1.setObject(16, voucNo);
-                    pstmt1.setString(17, glType);
-                    pstmt1.setBoolean(18, false);
-                    pstmt1.setBoolean(19, false);
-                    pstmt1.setString(20, userName);
-                    pstmt1.setString(21, "");
-                    pstmt1.setObject(22, datePicker1.getDate().toString());
-                    pstmt1.setDate(23, com.afrisoftech.lib.SQLDateFormat.getSQLDate(datePicker1.getDate()));
-                    pstmt1.setDouble(24, 0.00);
-                    pstmt1.setDouble(25, java.lang.Double.valueOf(jTextField8.getText().toString()));
-                    pstmt1.setDouble(26, 0.00);
-
-                    pstmt1.executeUpdate();
-
+                    javax.swing.JOptionPane.showMessageDialog(this, "Data saved successfully", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    clearbtn.doClick();
                 }
-
-                javax.swing.JOptionPane.showMessageDialog(this, "The supplier was created successfully", "Confirmation Message!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
-                GetItemInfo.updateTrail("Created Creditor " + supplierNametxt.getText() + " -" + jTextField582.getText(), connectDB);
-
-                this.invalidate();
-                this.validate();
-                clearbtn.doClick();
-                //javax.swing.JOptionPane.showMessageDialog(this, "Data Successfully Saved", "Comfirmation Message!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                /////////DailyBedReturnPdf
             }
-
-            connectDB.commit();
-            connectDB.setAutoCommit(true);
-
         } catch (java.sql.SQLException sq) {
             sq.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
             try {
                 connectDB.rollback();
             } catch (java.sql.SQLException sql) {
-                sql.printStackTrace();
                 javax.swing.JOptionPane.showMessageDialog(this, sql.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
-            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
-            System.out.println(sq.getMessage());
-            ///--1199048
-        } // Add your handling code here:
+        }
+
+        // Add your handling code here:
     }//GEN-LAST:event_saveDataActionPerformed
 
-    private void searchButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton11ActionPerformed
-        searchButton221Clicked();         // Add your handling code here:
+    private void jTextField1111CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField1111CaretUpdate
+        jSearchTable1.setModel(dbadmin.TableModel.createTableVectors(connectDB, "SELECT supplier_code,supplier_name FROM inventory_suppliers WHERE supplier_name ILIKE '%" + jTextField1111.getText() + "%' ORDER BY supplier_name"));
+        jSearchScrollPane1.setViewportView(jSearchTable1);
         // Add your handling code here:
-    }//GEN-LAST:event_searchButton11ActionPerformed
+    }//GEN-LAST:event_jTextField1111CaretUpdate
 
+    private void jSearchTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSearchTable1MouseClicked
+        try {
+            java.sql.Statement pstmt = connectDB.createStatement();
+            java.sql.ResultSet rs = pstmt.executeQuery("SELECT * FROM inventory_suppliers WHERE supplier_name = '" + jSearchTable1.getValueAt(jSearchTable1.getSelectedRow(), 1).toString() + "' ORDER BY supplier_name");
+            while (rs.next()) {
+                supplierNametxt.setText(rs.getString("supplier_name"));
+                jTextField361.setText(rs.getString("supplier_code"));
+                town.setText(rs.getString("town"));
+                county.setText(rs.getString("county"));
+                contact_person.setText(rs.getString("contact_person"));
+                telephone.setText(rs.getString("telephone"));
+                bank_account.setText(rs.getString("bank_account"));
+                business_no.setText(rs.getString("business_no"));
+                email_address.setText(rs.getString("email_address"));
+                postal_address.setText(rs.getString("postal_address"));
+                kra_pin.setText(rs.getString("kra_pin"));
+                vatno.setText(rs.getString("vatno"));
+                bank_branch.setText(rs.getString("bank_branch"));
+                website.setText(rs.getString("website"));
+                country.setText(rs.getString("country"));
+            }
+        } catch (java.sql.SQLException sqlex) {
+            System.out.println(sqlex.getMessage());
+
+        }
+        saveData.setLabel("Update");
+        jSearchDialog11.dispose();
+        // Add your handling code here:
+    }//GEN-LAST:event_jSearchTable1MouseClicked
+
+    private void jButton91ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton91ActionPerformed
+        this.jSearchDialog11.dispose();        // Add your handling code here:
+    }//GEN-LAST:event_jButton91ActionPerformed
+
+    private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
+
+        searchButton11Clicked();
+
+        // Add your handling code here:
+    }//GEN-LAST:event_searchButton1ActionPerformed
+
+    private void jTextField1111ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1111ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1111ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     // TODO add your handling code here:
+          this.dispose();
+        inventory.CloseSupplier comp = new inventory.CloseSupplier(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField361ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField361ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField361ActionPerformed
+    private void searchButton11Clicked() {
+
+        System.out.println("Showing dialog");
+
+        jSearchDialog11.dispose();
+        java.awt.Point point = this.jTextField361.getLocationOnScreen();
+
+        jSearchDialog11.setSize(400, 200);
+
+        jSearchDialog11.setLocation(point);
+        jSearchDialog11.setVisible(true);
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField bank_account;
+    private javax.swing.JTextField bank_branch;
+    private javax.swing.JTextField business_no;
     private javax.swing.JButton clearbtn;
+    private javax.swing.JTextField contact_person;
+    private javax.swing.JTextField country;
+    private javax.swing.JTextField county;
+    private javax.swing.JTextField email_address;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton252;
+    private javax.swing.JButton jButton91;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
@@ -744,25 +736,23 @@ public class SupplierRegister extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel642;
     private javax.swing.JLabel jLabel652;
     private javax.swing.JLabel jLabel66;
-    private javax.swing.JPanel jPanel411;
     private javax.swing.JPanel jPanel52;
+    private javax.swing.JPanel jPanel61;
+    private javax.swing.JDialog jSearchDialog11;
+    private javax.swing.JPanel jSearchPanel1;
+    private javax.swing.JScrollPane jSearchScrollPane1;
+    private javax.swing.JTable jSearchTable1;
     private javax.swing.JSeparator jSeparator71;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField482;
-    private javax.swing.JTextField jTextField492;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField5412;
-    private javax.swing.JTextField jTextField561;
-    private javax.swing.JTextField jTextField5723;
-    private javax.swing.JTextField jTextField5724;
-    private javax.swing.JTextField jTextField582;
-    private javax.swing.JTextField jTextField583;
-    private javax.swing.JTextField jTextField59;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField originalSupNametxt;
+    private javax.swing.JTextField jTextField1111;
+    private javax.swing.JTextField jTextField361;
+    private javax.swing.JTextField kra_pin;
+    private javax.swing.JTextField postal_address;
     private javax.swing.JButton saveData;
-    private javax.swing.JButton searchButton11;
+    private javax.swing.JButton searchButton1;
     private javax.swing.JTextField supplierNametxt;
+    private javax.swing.JTextField telephone;
+    private javax.swing.JTextField town;
+    private javax.swing.JTextField vatno;
+    private javax.swing.JTextField website;
     // End of variables declaration//GEN-END:variables
 }
