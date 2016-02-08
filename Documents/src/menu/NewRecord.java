@@ -55,6 +55,11 @@ public class NewRecord extends javax.swing.JInternalFrame {
         storemnit.setForeground(new java.awt.Color(0, 51, 204));
         storemnit.setMnemonic('S');
         storemnit.setText("Store");
+        storemnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                storemnitActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -66,6 +71,11 @@ public class NewRecord extends javax.swing.JInternalFrame {
         itemmnit.setForeground(new java.awt.Color(0, 51, 204));
         itemmnit.setMnemonic('i');
         itemmnit.setText("Item");
+        itemmnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemmnitActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -79,6 +89,11 @@ public class NewRecord extends javax.swing.JInternalFrame {
         suppliermnit.setForeground(new java.awt.Color(0, 51, 204));
         suppliermnit.setMnemonic('S');
         suppliermnit.setText("Supplier");
+        suppliermnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suppliermnitActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -143,6 +158,33 @@ public class NewRecord extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_usermnitActionPerformed
+
+    private void storemnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storemnitActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        inventory.Stores comp = new inventory.Stores(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_storemnitActionPerformed
+
+    private void suppliermnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppliermnitActionPerformed
+        // TODO add your handling code here:
+         this.dispose();
+        inventory.SupplierRegister comp = new inventory.SupplierRegister(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_suppliermnitActionPerformed
+
+    private void itemmnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemmnitActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        inventory.ItemsRegister comp = new inventory.ItemsRegister(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_itemmnitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

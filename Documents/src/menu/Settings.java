@@ -5,10 +5,9 @@
  */
 package menu;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import javax.swing.JButton;
-import sys.MainFrame;
+import java.sql.Connection;
+import static sys.MainFrame.medicdspane;
 
 /**
  *
@@ -70,6 +69,11 @@ public class Settings extends javax.swing.JInternalFrame {
         jButton6.setForeground(new java.awt.Color(0, 51, 204));
         jButton6.setMnemonic('c');
         jButton6.setText("Institution");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -99,6 +103,11 @@ public class Settings extends javax.swing.JInternalFrame {
         jButton4.setForeground(new java.awt.Color(0, 51, 204));
         jButton4.setMnemonic('b');
         jButton4.setText("SMS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -141,6 +150,24 @@ public class Settings extends javax.swing.JInternalFrame {
         String[] fieldsArray = getMainMenus();
         getsubmenus(fieldsArray);
     }//GEN-LAST:event_domainsmnitActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        utility.Logo comp = new utility.Logo(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        sms.AlertSetting comp = new sms.AlertSetting(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void delete() {
         try {

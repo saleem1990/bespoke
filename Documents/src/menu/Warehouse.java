@@ -6,6 +6,7 @@
 package menu;
 
 import java.sql.Connection;
+import static sys.MainFrame.medicdspane;
 
 /**
  *
@@ -59,6 +60,11 @@ public class Warehouse extends javax.swing.JInternalFrame {
         jButton1.setForeground(new java.awt.Color(0, 51, 204));
         jButton1.setMnemonic('r');
         jButton1.setText("Receiving Stock");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -72,6 +78,11 @@ public class Warehouse extends javax.swing.JInternalFrame {
         jButton7.setForeground(new java.awt.Color(0, 51, 204));
         jButton7.setMnemonic('1');
         jButton7.setText("Level 1 Inspection");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -137,6 +148,11 @@ public class Warehouse extends javax.swing.JInternalFrame {
         jButton11.setForeground(new java.awt.Color(0, 51, 204));
         jButton11.setMnemonic('l');
         jButton11.setText("Register LPO");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -176,6 +192,11 @@ public class Warehouse extends javax.swing.JInternalFrame {
         jButton12.setForeground(new java.awt.Color(0, 51, 204));
         jButton12.setMnemonic('l');
         jButton12.setText("Requisitions");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -189,6 +210,11 @@ public class Warehouse extends javax.swing.JInternalFrame {
         jButton13.setForeground(new java.awt.Color(0, 51, 204));
         jButton13.setMnemonic('l');
         jButton13.setText("Requisition Authorization");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -213,6 +239,51 @@ public class Warehouse extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        inventory.RegisterLpo comp = new inventory.RegisterLpo(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         this.dispose();
+        inventory.ReceivingStock comp = new inventory.ReceivingStock(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        inventory.Level1Inspection comp = new inventory.Level1Inspection(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+         this.dispose();
+        inventory.RaiseExternalPrInfr comp = new inventory.RaiseExternalPrInfr(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+         this.dispose();
+        inventory.ApproveRequisitions comp = new inventory.ApproveRequisitions(connectDB, username);
+        medicdspane.add(comp, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        comp.setVisible(true);
+        comp.setSize(medicdspane.getSize());
+    }//GEN-LAST:event_jButton13ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

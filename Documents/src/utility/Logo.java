@@ -3,19 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package utility;
 
 /**
  *
- * @author System Partners
+ * @author Wilson Gitau
  */
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 public class Logo extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Logo
      */
-    public Logo() {
+    public static Connection connectDB;
+    public static String username;
+    String waterMarkFile, imagesDir;
+
+    public Logo(java.sql.Connection conndb, String user) {
+        connectDB = conndb;
+        username = user;
         initComponents();
     }
 
@@ -30,19 +44,22 @@ public class Logo extends javax.swing.JInternalFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel4 = new javax.swing.JPanel();
-        logoBtn = new javax.swing.JButton();
         waterMarkBtn = new javax.swing.JButton();
-        logoPreviewLbl = new javax.swing.JLabel();
         waterMarkPreviewLbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        Slogan = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         saveData = new javax.swing.JButton();
         clearbtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        Tel = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        fax = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        name = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        address = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -54,21 +71,6 @@ public class Logo extends javax.swing.JInternalFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Create a profile"));
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
-        logoBtn.setText("Browse Watermark");
-        logoBtn.setToolTipText("Click to select logo");
-        logoBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoBtnActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel4.add(logoBtn, gridBagConstraints);
-
         waterMarkBtn.setText("Browse Logo");
         waterMarkBtn.setToolTipText("Click to select watermark image");
         waterMarkBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -77,67 +79,40 @@ public class Logo extends javax.swing.JInternalFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel4.add(waterMarkBtn, gridBagConstraints);
 
-        logoPreviewLbl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel4.add(logoPreviewLbl, gridBagConstraints);
-
+        waterMarkPreviewLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Pics.png"))); // NOI18N
         waterMarkPreviewLbl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel4.add(waterMarkPreviewLbl, gridBagConstraints);
 
-        jLabel1.setText("Company Name");
+        jLabel1.setText("Slogan");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel4.add(jLabel1, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel4.add(jTextField1, gridBagConstraints);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder("Company header"));
-        jScrollPane1.setViewportView(jTextArea1);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jScrollPane1, gridBagConstraints);
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setBorder(javax.swing.BorderFactory.createTitledBorder("Company footer"));
-        jScrollPane2.setViewportView(jTextArea2);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jScrollPane2, gridBagConstraints);
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(Slogan, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         jPanel4.add(jSeparator1, gridBagConstraints);
@@ -152,7 +127,7 @@ public class Logo extends javax.swing.JInternalFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         jPanel4.add(saveData, gridBagConstraints);
@@ -166,11 +141,78 @@ public class Logo extends javax.swing.JInternalFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         jPanel4.add(clearbtn, gridBagConstraints);
+
+        jLabel2.setText("Tel");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(jLabel2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(Tel, gridBagConstraints);
+
+        jLabel3.setText("Fax");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(jLabel3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(fax, gridBagConstraints);
+
+        jLabel4.setText("Company Name");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(jLabel4, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(name, gridBagConstraints);
+
+        jLabel5.setText("Postal Address");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(jLabel5, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel4.add(address, gridBagConstraints);
+
+        jButton1.setText("View Current Profile");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        jPanel4.add(jButton1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -185,371 +227,107 @@ public class Logo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoBtnActionPerformed
-
-//        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser(System.getProperty("images.dir"));
-//
-//        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image files (*.jpg, *.png, *.gif)","jpg","png","gif");
-//
-//        fileChooser.setFileFilter(filter);
-//
-//        fileChooser.showOpenDialog(this);
-//
-//        logoPreviewLbl.setIcon(new javax.swing.ImageIcon(fileChooser.getSelectedFile().getPath()));
-//
-//        logoFile = fileChooser.getSelectedFile().getPath();
-//
-//        java.io.File fileName = new java.io.File(logoFile);
-//
-//        imagesDir = fileChooser.getSelectedFile().getParent();
-//
-//        System.setProperty("images.dir", fileChooser.getSelectedFile().getParent());
-//
-//        com.afrisoftech.lib.SaveBytea2DB.insertBytea(com.afrisoftech.hospital.HospitalMain.connectDB, fileName, "JPG", "image/jpeg", "COMPANY_LOGO", fileChooser.getSelectedFile().getPath(), "LOGO_IMAGE");
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_logoBtnActionPerformed
-
     private void waterMarkBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_waterMarkBtnActionPerformed
 
-//        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser(System.getProperty("images.dir"));
-//
-//        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image files (*.jpg, *.png, *.gif)","jpg","png","gif");
-//
-//        fileChooser.setFileFilter(filter);
-//
-//        fileChooser.showOpenDialog(this);
-//
-//        waterMarkPreviewLbl.setIcon(new javax.swing.ImageIcon(fileChooser.getSelectedFile().getPath()));
-//
-//        waterMarkFile = fileChooser.getSelectedFile().getPath();
-//
-//        imagesDir = fileChooser.getSelectedFile().getParent();
-//
-//        System.setProperty("images.dir", fileChooser.getSelectedFile().getParent());
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser(System.getProperty("images.dir"));
 
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image files (*.jpg, *.png, *.gif)", "jpg", "png", "gif");
+
+        fileChooser.setFileFilter(filter);
+
+        fileChooser.showOpenDialog(this);
+
+        waterMarkPreviewLbl.setIcon(new javax.swing.ImageIcon(fileChooser.getSelectedFile().getPath()));
+
+        waterMarkFile = fileChooser.getSelectedFile().getPath();
+
+        imagesDir = fileChooser.getSelectedFile().getParent();
+
+        System.setProperty("images.dir", fileChooser.getSelectedFile().getParent());
+        System.out.println(waterMarkFile);
+        System.out.println(imagesDir);
         // TODO add your handling code here:
     }//GEN-LAST:event_waterMarkBtnActionPerformed
 
     private void saveDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDataActionPerformed
-        String receiptNo = null;
+
         try {
+            File file = new File(waterMarkFile);
+            FileInputStream fis = new FileInputStream(file);
+
             connectDB.setAutoCommit(false);
-            java.sql.Statement pss = connectDB.createStatement();
-
-            if (this.jCheckBox5.isSelected() && !saveData.getText().equalsIgnoreCase("Update")) {
-                java.sql.ResultSet rsts = pss.executeQuery("select 'CR'||nextval('creditors_seq')");
-                while (rsts.next()) {
-                    // rsts.getObject(1).toString();
-
-                    receiptNo = rsts.getObject(1).toString();
-                }
-            }
-
-            if (saveData.getText().equalsIgnoreCase("Update")) {
-                // Updating existing supplier details
-                int exitOption = javax.swing.JOptionPane.showConfirmDialog(this, "You are Updating (a) Record(s) for [" + jTextField582.getText() + "] - [ " + supplierNametxt.getText() + "]. This may take a while. \n Yes to Continue", "Caution before Saving!", javax.swing.JOptionPane.YES_NO_CANCEL_OPTION);
-
-                if (exitOption == javax.swing.JOptionPane.YES_OPTION) {
-
-                    this.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
-
-                    java.sql.PreparedStatement pstmt = connectDB.prepareStatement("UPDATE st_suppliers"
-                        + " SET supplier_name=?, short_name=?, town=?, country=?, district=?, "
-                        + " contact_person=?, tel1=?, tel2=?, fax_no=?, email_address=?, "
-                        + " website=?, postal_address=?, street=?, avenue=?, locality=?, "
-                        + " building_name=?, floor_no=?, category=?, town1=?, pin_no=?, rog_no=?, "
-                        + " gl_code=?, tax_no=?, vat_no=?, bank_name = ?, bank_branch = ?, bank_account_no = ?, bank_transfer_code = ?"
-                        + " WHERE code = '" + jTextField582.getText() + "'");
-
-                    pstmt.setString(1, supplierNametxt.getText());
-                    pstmt.setString(2, jTextField5412.getText());
-                    // pstmt.setString(3,jTextField5412.getText());
-                    pstmt.setString(3, jTextField492.getText());
-                    pstmt.setString(4, jTextField3.getText());
-                    pstmt.setString(5, jTextField6.getText());
-                    pstmt.setString(6, jTextField5.getText());
-                    pstmt.setString(7, jTextField5722.getText());
-                    pstmt.setString(8, jTextField561.getText());
-                    pstmt.setString(9, jTextField14.getText());
-                    pstmt.setString(10, jTextField482.getText());
-                    pstmt.setString(11, jTextField59.getText());
-                    pstmt.setString(12, jTextField58221.getText());
-                    pstmt.setString(13, jTextField50221.getText());
-                    pstmt.setString(14, jTextField53221.getText());
-                    pstmt.setString(15, jTextField1.getText());
-                    pstmt.setString(16, jTextField6021.getText());
-                    pstmt.setString(17, jTextField54121.getText());
-                    pstmt.setString(18, jComboBox1.getSelectedItem().toString());
-                    pstmt.setString(19, serviceType.getSelectedItem().toString());
-                    pstmt.setString(20, jTextField58.getText());
-                    pstmt.setString(21, jTextField50.getText());
-                    pstmt.setString(22, jTextField9.getText());
-                    pstmt.setString(23, jTextField54.getText());
-                    pstmt.setString(24, jTextField49.getText());
-                    pstmt.setString(25, this.bankNameTxt.getText());
-                    pstmt.setString(26, this.bankBranchTxt.getText());
-                    pstmt.setString(27, this.bankAccountTxt.getText());
-                    pstmt.setString(28, this.bankTrasferCodeTxt.getText());
-                    // pstmt.setString(26,jTextPane3.getText());
-
-                    pstmt.executeUpdate();
-                    //3.2
-
-                    pstmt = connectDB.prepareStatement("UPDATE st_sub_stores SET sub_store = '" + supplierNametxt.getText() + "' WHERE trim(sub_store) = '" + originalSupNametxt.getText() + "'  ");
-                    pstmt.executeUpdate();
-
-                    System.err.println("Done==1");
-
-                    pstmt = connectDB.prepareStatement("UPDATE st_stock_cardex SET delivered_by = '" + supplierNametxt.getText() + "', supplier = '" + supplierNametxt.getText() + "' WHERE trim(supplier) = '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-
-                    System.err.println("Done ==2");
-
-                    pstmt = connectDB.prepareStatement("UPDATE st_orders SET supplier = '" + supplierNametxt.getText() + "' WHERE trim(supplier) = '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-                    System.err.println("Done==3");
-
-                    pstmt = connectDB.prepareStatement("UPDATE st_recommendation SET supplier = '" + supplierNametxt.getText() + "' WHERE trim(supplier) ='" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-                    System.err.println("Done==4");
-
-                    pstmt = connectDB.prepareStatement("UPDATE st_floated_quotations SET supplier = '" + supplierNametxt.getText() + "' WHERE trim(supplier) = '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-
-                    System.err.println("Done==5");
-
-                    pstmt = connectDB.prepareStatement("UPDATE ac_accounts_payable SET dealer = '" + supplierNametxt.getText() + "' WHERE trim(dealer) = '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-
-                    System.err.println("Done==6");
-
-                    pstmt = connectDB.prepareStatement("UPDATE ac_accounts_payable SET payee = '" + supplierNametxt.getText() + "' WHERE payee ilike '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-                    System.err.println("Done==7\n\n Skipped 8");
-
-                    pstmt = connectDB.prepareStatement("UPDATE ac_dashboard SET supplier = '" + supplierNametxt.getText() + "' WHERE supplier ilike '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-                    System.err.println("Done==9");
-
-                    pstmt = connectDB.prepareStatement("UPDATE ac_reprinting_vouchers SET payee= '" + supplierNametxt.getText() + "' WHERE payee ilike '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-
-                    System.err.println("Done==10\n\n back to ac_ledger");
-
-                    pstmt = connectDB.prepareStatement("UPDATE ac_ledger SET dealer = '" + supplierNametxt.getText() + "' WHERE dealer = '" + originalSupNametxt.getText() + "' ");
-                    pstmt.executeUpdate();
-                    System.err.println("Done==8");
-
-                    System.err.println("Funsoft supplier update -Cascaded- version 3.2");
-
-                }
-
-                javax.swing.JOptionPane.showMessageDialog(this, "The update was successful", "Confirmation Message!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                activity = "Creditors name update[" + originalSupNametxt.getText() + "] to [" + supplierNametxt.getText() + "]";
-
-                GetItemInfo.updateTrail(activity, connectDB);
-                this.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-                saveData.setLabel("Save");
-            }
-            else {
-
-                //Inserting new details in suppliers list
-                java.sql.PreparedStatement pstmt = connectDB.prepareStatement("INSERT INTO st_suppliers values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-                if (this.jCheckBox5.isSelected()) {
-                    pstmt.setString(1, receiptNo);
-                } else {
-                    pstmt.setString(1, jTextField582.getText());
-                }
-                //  pstmt.setString(1,jTextField582.getText());
-                pstmt.setString(2, supplierNametxt.getText().toUpperCase());
-                pstmt.setString(6, jTextField6.getText());
-                pstmt.setString(5, jTextField3.getText());
-                pstmt.setString(3, jTextField5412.getText().toUpperCase());
-                pstmt.setString(4, jTextField492.getText());
-                pstmt.setString(7, jTextField5.getText());
-                pstmt.setString(8, jTextField5722.getText());
-                pstmt.setString(9, jTextField561.getText());
-                pstmt.setString(10, jTextField14.getText());
-                pstmt.setString(11, jTextField482.getText());
-                pstmt.setString(12, jTextField59.getText());
-                pstmt.setString(13, jTextField58221.getText());
-                pstmt.setString(14, jTextField50221.getText());
-                pstmt.setString(15, jTextField53221.getText());
-                pstmt.setString(16, jTextField1.getText());
-                pstmt.setString(17, jTextField6021.getText());
-                pstmt.setString(18, jTextField54121.getText());
-                pstmt.setString(19, jTextField49221.getText());
-                pstmt.setString(20, jComboBox1.getSelectedItem().toString());
-                pstmt.setString(21, jTextField58.getText());
-                pstmt.setString(22, jTextField50.getText());
-                pstmt.setString(23, jTextField11.getText());
-                pstmt.setString(25, jTextField49.getText());
-                pstmt.setString(24, jTextField54.getText());
-                pstmt.setString(26, jTextField60.getText());
-                pstmt.setDate(27, com.afrisoftech.lib.ServerTime.getSQLDate(connectDB));
-                pstmt.setDouble(28, 0.00);
-                pstmt.setString(29, null);
-                pstmt.setString(30, null);
-                pstmt.setBoolean(31, false);
-                pstmt.setDate(32, com.afrisoftech.lib.ServerTime.getSQLDate(connectDB));
-                pstmt.setString(33, jTextField60.getText());
-                pstmt.setString(34, this.bankNameTxt.getText());
-                pstmt.setString(35, this.bankBranchTxt.getText());
-                pstmt.setString(36, this.bankAccountTxt.getText());
-                pstmt.setString(37, this.bankTrasferCodeTxt.getText());
-                pstmt.executeUpdate();
-
-                double Bal = java.lang.Double.parseDouble(this.jTextField8.getText());
-                if (Bal > 0) {
-                    String Stock = null;
-                    String voucNo = null;
-                    String accountCode = null;
-                    String TransNo = null;
-                    String glType = null;
-                    // String glType = null;
-                    String userName = null;
-
-                    java.sql.Statement pst1 = connectDB.createStatement();
-                    java.sql.ResultSet rs1 = pst1.executeQuery("select code,activity from pb_activity where activity_category ilike 'CP%'");
-                    while (rs1.next()) {
-                        accountCode = rs1.getObject(1).toString();
-                        glType = rs1.getObject(2).toString();
-                    }
-                    java.sql.Statement ps = connectDB.createStatement();
-                    java.sql.ResultSet rs2 = ps.executeQuery("select nextval('transaction_no_seq'),current_user");
-                    while (rs2.next()) {
-                        TransNo = rs2.getObject(1).toString();
-                        userName = rs2.getObject(2).toString();
-                    }
-                    java.sql.Statement pst2 = connectDB.createStatement();
-                    java.sql.ResultSet rs = pst2.executeQuery("select 'IN'||lpad(nextval('invoice_no_seq'),5,0)");
-                    while (rs.next()) {
-                        voucNo = rs.getObject(1).toString();
-                    }
-                    java.sql.PreparedStatement pstmt2 = connectDB.prepareStatement("insert into ac_ledger values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?)");
-                    pstmt2.setString(1, jTextField9.getText().toString());
-                    pstmt2.setObject(2, serviceType.getSelectedItem());
-                    pstmt2.setString(3, "");
-                    if (supplierNametxt.getText() == null) {
-                        javax.swing.JOptionPane.showMessageDialog(this, "You must Enter Payee!", "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        pstmt2.setObject(4, supplierNametxt.getText().toString());
-                    }
-                    pstmt2.setObject(5, "Opening Balance");
-                    pstmt2.setString(6, "");
-                    pstmt2.setObject(7, supplierNametxt.getText().toString());
-                    pstmt2.setString(8, "");
-                    pstmt2.setString(9, "");
-                    pstmt2.setString(10, "");
-                    pstmt2.setString(11, "");
-                    pstmt2.setString(12, "");
-                    pstmt2.setString(13, "");
-                    pstmt2.setString(14, "Bfwd");
-                    pstmt2.setString(15, "Raise Invoice");
-                    pstmt2.setDouble(17, 0.00);
-                    pstmt2.setDouble(16, java.lang.Double.valueOf(jTextField8.getText().toString()));
-                    pstmt2.setDate(18, com.afrisoftech.lib.SQLDateFormat.getSQLDate(datePicker1.getDate()));
-                    pstmt2.setString(19, TransNo);
-                    pstmt2.setBoolean(20, false);
-                    pstmt2.setBoolean(21, false);
-                    pstmt2.setBoolean(22, false);
-                    pstmt2.setString(23, userName);
-                    pstmt2.executeUpdate();
-
-                    java.sql.PreparedStatement pstmt1 = connectDB.prepareStatement("insert into ac_accounts_payable values(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?)");
-                    pstmt1.setString(1, accountCode);
-                    pstmt1.setString(2, supplierNametxt.getText().toString());
-                    pstmt1.setObject(3, serviceType.getSelectedItem());
-                    pstmt1.setString(4, "");
-                    pstmt1.setObject(5, supplierNametxt.getText().toString());
-                    pstmt1.setString(6, "Opening Balance");
-                    if (this.jCheckBox5.isSelected()) {
-                        pstmt1.setString(7, receiptNo);
-                    } else {
-                        pstmt1.setString(7, jTextField582.getText());
-                    }
-                    pstmt1.setString(8, "");
-                    pstmt1.setString(9, "");
-                    pstmt1.setString(10, "");
-                    pstmt1.setString(11, TransNo);
-                    pstmt1.setString(12, "Raise Invoice");
-                    pstmt1.setDouble(13, 0.00);
-                    pstmt1.setDouble(14, java.lang.Double.valueOf(jTextField8.getText().toString()));
-                    pstmt1.setDate(15, com.afrisoftech.lib.SQLDateFormat.getSQLDate(datePicker1.getDate()));
-                    pstmt1.setObject(16, voucNo);
-                    pstmt1.setString(17, glType);
-                    pstmt1.setBoolean(18, false);
-                    pstmt1.setBoolean(19, false);
-                    pstmt1.setString(20, userName);
-                    pstmt1.setString(21, "");
-                    pstmt1.setObject(22, datePicker1.getDate().toString());
-                    pstmt1.setDate(23, com.afrisoftech.lib.SQLDateFormat.getSQLDate(datePicker1.getDate()));
-                    pstmt1.setDouble(24, 0.00);
-                    pstmt1.setDouble(25, java.lang.Double.valueOf(jTextField8.getText().toString()));
-                    pstmt1.setDouble(26, 0.00);
-
-                    pstmt1.executeUpdate();
-
-                }
-
-                javax.swing.JOptionPane.showMessageDialog(this, "The supplier was created successfully", "Confirmation Message!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
-                GetItemInfo.updateTrail("Created Creditor " + supplierNametxt.getText() + " -" + jTextField582.getText(), connectDB);
-
-                this.invalidate();
-                this.validate();
-                clearbtn.doClick();
-                //javax.swing.JOptionPane.showMessageDialog(this, "Data Successfully Saved", "Comfirmation Message!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                /////////DailyBedReturnPdf
-            }
-
+            java.sql.PreparedStatement pstmt311 = connectDB.prepareStatement("delete from institution_profile");
+            pstmt311.executeUpdate();
+            java.sql.PreparedStatement pstmt = connectDB.prepareStatement("insert into institution_profile (name,box_no,main_tel,main_fax,slogan,logo) values(upper(?),upper(?),upper(?),upper(?),upper(?),?)");
+            pstmt.setObject(1, name.getText());
+            pstmt.setObject(2, address.getText());
+            pstmt.setObject(3, Tel.getText());
+            pstmt.setObject(4, fax.getText());
+            pstmt.setObject(5, Slogan.getText());
+            pstmt.setBinaryStream(6, fis, (int) file.length());
+            pstmt.executeUpdate();
             connectDB.commit();
             connectDB.setAutoCommit(true);
 
-        } catch (java.sql.SQLException sq) {
-            sq.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Data saved successfully", "Confirmation Message", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            clearbtn.doClick();
+        } catch (Exception sq) {
+            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
             try {
                 connectDB.rollback();
             } catch (java.sql.SQLException sql) {
-                sql.printStackTrace();
                 javax.swing.JOptionPane.showMessageDialog(this, sql.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
-            javax.swing.JOptionPane.showMessageDialog(this, sq.getMessage(), "Error Message!", javax.swing.JOptionPane.ERROR_MESSAGE);
-            System.out.println(sq.getMessage());
-            ///--1199048
-        } // Add your handling code here:
+        }
+        // Add your handling code here:
     }//GEN-LAST:event_saveDataActionPerformed
 
     private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
-        supplierNametxt.setText("");
-        jTextField482.setText("");
-        jTextField5412.setText("");
-        jTextField492.setText("");
-        jTextField5722.setText("");
-        //extField482.setText("");
-        jTextField561.setText("");
-        jTextField582.setText("");
-        jTextField59.setText("");
-        jTextField14.setText("");
-        jTextField3.setText("");
-        //      jComboBox2.setSelectedItem(null);
+        name.setText("");
+        Tel.setText("");
+        Slogan.setText("");
+        fax.setText("");
+        address.setText("");
+        waterMarkPreviewLbl.setText("");
         // Add your handling code here:
     }//GEN-LAST:event_clearbtnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try {
+           java.sql.PreparedStatement pstmt = connectDB.prepareStatement("SELECT name,logo,box_no,main_tel,main_fax,slogan from institution_profile");
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                InputStream is = rs.getBinaryStream(2);
+                BufferedImage img= ImageIO.read(is);
+                waterMarkPreviewLbl.setIcon(new javax.swing.ImageIcon(img));
+                name.setText(rs.getString("name"));
+                Tel.setText(rs.getString("main_tel"));
+                Slogan.setText(rs.getString("slogan"));
+                fax.setText(rs.getString("main_fax"));
+                address.setText(rs.getString("box_no"));
+            }
+        } catch (Exception y) {
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Slogan;
+    private javax.swing.JTextField Tel;
+    private javax.swing.JTextField address;
     private javax.swing.JButton clearbtn;
+    private javax.swing.JTextField fax;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton logoBtn;
-    private javax.swing.JLabel logoPreviewLbl;
+    private javax.swing.JTextField name;
     private javax.swing.JButton saveData;
     private javax.swing.JButton waterMarkBtn;
     private javax.swing.JLabel waterMarkPreviewLbl;

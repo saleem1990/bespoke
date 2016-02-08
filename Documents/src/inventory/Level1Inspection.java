@@ -513,7 +513,7 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
         Save.setMnemonic('s');
-        org.openide.awt.Mnemonics.setLocalizedText(Save, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.Save.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(Save, "Save");
         Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveActionPerformed(evt);
@@ -527,7 +527,7 @@ public class Level1Inspection extends javax.swing.JInternalFrame {
         jPanel4.add(Save, gridBagConstraints);
 
         cancelbtn.setMnemonic('l');
-        org.openide.awt.Mnemonics.setLocalizedText(cancelbtn, org.openide.util.NbBundle.getMessage(Level1Inspection.class, "Level1Inspection.cancelbtn.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(cancelbtn, "Clear");
         cancelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelbtnActionPerformed(evt);

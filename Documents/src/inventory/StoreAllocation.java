@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package inventory;
 
 /**
@@ -15,7 +14,12 @@ public class StoreAllocation extends javax.swing.JInternalFrame {
     /**
      * Creates new form StoreAllocation
      */
-    public StoreAllocation() {
+    java.sql.Connection connectDB;
+
+    public StoreAllocation(java.sql.Connection conndb) {
+        
+        connectDB = conndb;
+
         initComponents();
     }
 
@@ -658,7 +662,6 @@ public class StoreAllocation extends javax.swing.JInternalFrame {
 
     private void activityChbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityChbxActionPerformed
 
-       
 
     }//GEN-LAST:event_activityChbxActionPerformed
 
